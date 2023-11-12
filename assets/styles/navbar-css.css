@@ -1,0 +1,15 @@
+.active-class {
+    background-color: #f5f5f5 !important;
+}
+
+.active-txt {
+    color: #458bcd !important;
+}
+
+body, .navbar-custom {
+    background-color: #282c34 !important;
+}
+
+.content-page {
+    border-left: 7px solid #282c34 !important;
+}
