@@ -27,11 +27,8 @@
 </head>
 
 <body>
-
      <!-- Begin page -->
      <div id="wrapper">
-
-
           <!-- Topbar Start -->
           <div class="navbar-custom">
                <ul class="list-unstyled topnav-menu float-right mb-0">
@@ -187,26 +184,39 @@
                                         <table class="table">
                                              <thead>
                                                   <tr>
-                                                       <th>Nim</th>
-                                                       <th>Nama</th>
+                                                       <th>NIM</th>
+                                                       <th>Nama Mahasiswa</th>
                                                        <th>Prodi</th>
+                                                       <th>Fakultas</th>
                                                        <th>Jabatan</th>
                                                   </tr>
                                              </thead>
                                              <tbody>
-                                                  <tr>
-                                                       <td>72210465</td>
-                                                       <td>Stefanus Audy</td>
-                                                       <td>Sistem Informasi</td>
-                                                       <td>Ketua</td>
-                                                  </tr>
-                                                  <tr>
-                                                       <td>72210565</td>
-                                                       <td>Jane Smith</td>
-                                                       <td>Sistem Informasi</td>
-                                                       <td>Anggota</td>
-                                                  </tr>
-                                                  <!-- Add more rows as needed -->
+                                                  <?php
+                                                  include 'assets/php/conn.php';
+
+                                                  $nim_target = '72210456';
+
+                                                  $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE dtl_kelompok_kkn.id_kelompok IN ( SELECT dtl_kelompok_kkn.id_kelompok FROM dtl_kelompok_kkn WHERE dtl_kelompok_kkn.nim = '$nim_target')";
+
+                                                  $result = $conn->query($sql);
+
+                                                  if ($result->num_rows > 0) {
+                                                       while ($row = $result->fetch_assoc()) {
+                                                            echo '<tr>';
+                                                            echo '<td>' . $row['nim'] . '</td>';
+                                                            echo '<td>' . $row['nama'] . '</td>';
+                                                            echo '<td>' . $row['prodi'] . '</td>';
+                                                            echo '<td>' . $row['fakultas'] . '</td>';
+                                                            echo '<td>' . $row['jabatan'] . '</td>';
+                                                            echo '</tr>';
+                                                       }
+                                                  } else {
+                                                       echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                  }
+
+                                                  $conn->close();
+                                                  ?>
                                              </tbody>
                                         </table>
                                    </div>
@@ -218,26 +228,44 @@
                                         <table class="table">
                                              <thead>
                                                   <tr>
-                                                       <th>Nim</th>
-                                                       <th>Nama</th>
-                                                       <th>Nomot Telepon</th>
+                                                       <th>NIDN</th>
+                                                       <th>Nama Dosen</th>
                                                        <th>Jabatan</th>
+                                                       <th>Prodi</th>
+                                                       <th>Fakultas</th>
+                                                       <th>Nomor Telepon</th>
+                                                       <th class="text-center">Aksi</th>
                                                   </tr>
                                              </thead>
                                              <tbody>
-                                                  <tr>
-                                                       <td>72210465</td>
-                                                       <td>Stefanus Audy</td>
-                                                       <td>+62812899369869</td>
-                                                       <td>Dosen Pembimbing</td>
-                                                  </tr>
-                                                  <tr>
-                                                       <td>72210565</td>
-                                                       <td>Jane Smith</td>
-                                                       <td>+62812899369869</td>
-                                                       <td>Mahasiswa Pembimbing</td>
-                                                  </tr>
-                                                  <!-- Add more rows as needed -->
+                                                  <?php
+                                                  include 'assets/php/conn.php';
+
+                                                  $nim_target = '72210456';
+
+                                                  $sql = "SELECT dosen.nidn, dosen.nama_dosen, dosen.jabatan, dosen.prodi, dosen.fakultas, dosen.no_telp FROM dsn_pembimbing AS dosen JOIN kelompok_kkn ON dosen.nidn = kelompok_kkn.nidn JOIN dtl_kelompok_kkn ON kelompok_kkn.id_kelompok = dtl_kelompok_kkn.id_kelompok JOIN mahasiswa ON dtl_kelompok_kkn.nim = mahasiswa.nim WHERE mahasiswa.nim = '$nim_target';";
+                                                  $result = $conn->query($sql);
+
+                                                  if ($result->num_rows > 0) {
+                                                       while ($row = $result->fetch_assoc()) {
+                                                            echo '<tr>';
+                                                            echo '<td>' . $row['nidn'] . '</td>';
+                                                            echo '<td>' . $row['nama_dosen'] . '</td>';
+                                                            echo '<td>' . $row['jabatan'] . '</td>';
+                                                            echo '<td>' . $row['prodi'] . '</td>';
+                                                            echo '<td>' . $row['fakultas'] . '</td>';
+                                                            echo '<td>' . $row['no_telp'] . '</td>';
+                                                            echo '<td class="text-center"> <button type="button" class="btn btn-primary" data-nidn="' . $row['nidn'] . '">Hubungi Dosen</button> </td>';
+                                                            echo '</tr>';
+
+                                                       }
+                                                  } else {
+                                                       echo '<tr><td colspan="4">Tidak ada data pembimbing</td></tr>';
+                                                  }
+
+                                                  // Tutup koneksi
+                                                  $conn->close();
+                                                  ?>
                                              </tbody>
                                         </table>
                                    </div>

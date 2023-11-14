@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -185,17 +185,17 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-4">
+                        <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body shadow">
-                                    <h1 class="card-title mt-2">Laporan Harian Mahasiswa</h1>
+                                    <h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>
                                     <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
                                         -mulai- hingga -selesai- </p>
-                                    <a href="#" class="btn btn-primary btn-block">Buat Laporan</a>
+                                    <a href="#" class="btn btn-primary btn-block">Buat laporan</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-8">
+                        <div class="col-8">
                             <!-- Cards go here -->
                             <div class="card-container">
                                 <div class="row">
@@ -203,10 +203,10 @@
                                         <div class="card" style="width: 100%;">
                                             <div class="card-body rounded shadow">
                                                 <div class="row mb-2">
-                                                    <div class="col-2 col-md-1 me-0 pe-0">
+                                                    <div class="col-1">
                                                         <img src="assets/images/ok.webp" alt="Ok.png">
                                                     </div>
-                                                    <div class="col-10 col-md-11">
+                                                    <div class="col-11">
                                                         <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
                                                     </div>
                                                 </div>
@@ -221,7 +221,42 @@
                                                     esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
                                                     qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
                                                     Eius cum quod illum dolorem soluta hic reiciendis!</p>
-                                                <a href="#" class="btn btn-primary btn-block">Lihat Gambar</a>
+
+                                                <hr class="my-3" style="border-width: 2px; border-color: black;">
+
+                                                <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
+                                                </p>
+                                                <p class="card-text">Lorem ipsum dolor sit
+                                                    amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card" style="width: 100%;">
+                                            <div class="card-body rounded shadow">
+                                                <div class="row mb-2">
+                                                    <div class="col-1">
+                                                        <img src="assets/images/ok.webp" alt="Ok.png">
+                                                    </div>
+                                                    <div class="col-11">
+                                                        <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari
+                                                    ini?</p>
+                                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                                    elit. Aliquam sequi quos natus aliquid quis dicta! Porro quidem id
+                                                    consequatur aut minima deleniti nisi numquam quasi! Unde deserunt
+                                                    dolorum veniam iusto ipsa, impedit laudantium illum magni excepturi
+                                                    molestias atque enim totam optio ducimus accusamus neque sint
+                                                    temporibus eaque ipsum ad praesentium. Nemo incidunt deserunt porro
+                                                    esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
+                                                    qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
+                                                    Eius cum quod illum dolorem soluta hic reiciendis!</p>
 
                                                 <hr class="my-3" style="border-width: 2px; border-color: black;">
 
@@ -234,8 +269,42 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card" style="width: 100%;">
+                                            <div class="card-body rounded shadow">
+                                                <div class="row mb-2">
+                                                    <div class="col-1">
+                                                        <img src="assets/images/ok.webp" alt="Ok.png">
+                                                    </div>
+                                                    <div class="col-11">
+                                                        <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari
+                                                    ini?</p>
+                                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                                    elit. Aliquam sequi quos natus aliquid quis dicta! Porro quidem id
+                                                    consequatur aut minima deleniti nisi numquam quasi! Unde deserunt
+                                                    dolorum veniam iusto ipsa, impedit laudantium illum magni excepturi
+                                                    molestias atque enim totam optio ducimus accusamus neque sint
+                                                    temporibus eaque ipsum ad praesentium. Nemo incidunt deserunt porro
+                                                    esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
+                                                    qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
+                                                    Eius cum quod illum dolorem soluta hic reiciendis!</p>
+
+                                                <hr class="my-3" style="border-width: 2px; border-color: black;">
+
+                                                <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :
+                                                </p>
+                                                <p class="card-text">Lorem ipsum dolor sit
+                                                    amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <!-- Pagination -->
                             <nav aria-label="Page navigation">
                                 <ul class="pagination justify-content-center mt-3">
@@ -304,7 +373,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
-    <script src="assets/js/logbook.js"></script>
+    <script src="assets/js/laporan.js"></script>
 
 </body>
 
