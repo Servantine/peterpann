@@ -36,6 +36,12 @@ $(document).ready(function () {
         }
     }
 
+    function getCurrentDate() {
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return today.toLocaleDateString('id-ID', options);
+    }
+
     $('#prev-page').on('click', function (e) {
         e.preventDefault();
         if (currentPage > 1) {
@@ -57,4 +63,47 @@ $(document).ready(function () {
 
     showPage(currentPage);
     updatePagination();
+
+    // Isi Laporan
+    $('#buatLaporan').click(function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: `Isi Laporan Kegiatan <p class="text-muted m-0 p-0" style="font-size:14">${getCurrentDate()}</p>`,
+            html:
+                `
+                <form action="" method="POST" id="orderForm">
+                    <div class="mb-3 text-start">
+                        <label for="judul" class="form-label">Bagaimana Rencana Kegiatan kelompok Hari Ini?</label>    
+                        <input class="form-control" type="text" name="judul" id="judul" placeholder="Tuliskan judul kegiatan" required>
+                    </div>
+                    
+                    <div class="mb-3 text-start">
+                        <label for="logbookTextarea" class="form-label">Bagaimana Rencana Kegiatan kelompok Hari Ini?</label>
+                        <textarea class="form-control" id="laporanTextarea" name="logbookTextarea" placeholder="Tuliskan rencana kelompok..." rows="3" required></textarea>
+                    </div>
+                </form>`,
+            focusConfirm: false,
+            showCancel : true,
+
+            preConfirm: () => {
+                const isiLaporan = Swal.getPopup().querySelector('#laporanTextarea').value;
+                const judulLaporan = Swal.getPopup().querySelector('#judul').value;
+                const nim = '72210456';
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'assets/php/isi_laporan.php',
+                    data: { nim: nim, judulLaporan:judulLaporan, isiLaporan: isiLaporan },
+                    success: function (response) {
+                        Swal.fire('Laporan disimpan!', '', 'success');
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        Swal.fire('Terjadi kesalahan. Silakan coba lagi.', '', 'error');
+                    }
+                });
+            }
+        });
+    });
 });

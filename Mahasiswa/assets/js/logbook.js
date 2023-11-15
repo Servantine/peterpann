@@ -36,6 +36,12 @@ $(document).ready(function () {
         }
     }
 
+    function getCurrentDate() {
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return today.toLocaleDateString('id-ID', options);
+    }
+
     $('#prev-page').on('click', function (e) {
         e.preventDefault();
         if (currentPage > 1) {
@@ -57,4 +63,41 @@ $(document).ready(function () {
 
     showPage(currentPage);
     updatePagination();
+
+    // Buat Logbook
+    $('#buatLogbook').click(function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: `Isi Logbook Harian <p class="text-muted m-0 p-0" style="font-size:14">${getCurrentDate()}</p>`,
+            html:
+                `
+                <form action="" method="POST" id="orderForm">
+                    <div class="mb-3 text-start">
+                        <label for="logbookTextarea" class="form-label">Bagaimana Kegiatanmu hari ini?</label>
+                        <textarea class="form-control" id="logbookTextarea" name="logbookTextarea" placeholder="Tuliskan kegiatan Anda hari ini..." rows="3" required></textarea>
+                    </div>
+                </form>`,
+            focusConfirm: false,
+            showCancel : true,
+
+            preConfirm: () => {
+                const isiLogbook = Swal.getPopup().querySelector('#logbookTextarea').value;
+                const nim = '72210456';
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'assets/php/isi_logbook.php',
+                    data: { nim: nim, isiLogbook: isiLogbook },
+                    success: function (response) {
+                        Swal.fire('Logbook disimpan!', '', 'success');
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        Swal.fire('Terjadi kesalahan. Silakan coba lagi.', '', 'error');
+                    }
+                });
+            }
+        });
+    });
 });

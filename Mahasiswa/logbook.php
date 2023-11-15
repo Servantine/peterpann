@@ -185,253 +185,105 @@
                     </div>
 
                     <div class="row">
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>
-                                            <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023
-                                                Periode -mulai- hingga -selesai- </p>
-                                            <a href="#" class="btn btn-primary btn-block">Buat Logbook</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-8">
-                                    <!-- Cards go here -->
-                                    <div class="card-container">
-
-                                        <!-- Card Mulai -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card" style="width: 100%;">
-                                                    <div class="card-body rounded shadow">
-                                                        <div class="row mb-2">
-                                                            <div class="col-1">
-                                                                <img src="assets/images/ok.webp" alt="Ok.png">
-                                                            </div>
-                                                            <div class="col-11">
-                                                                <h1 class="card-title m-0 p-0">Senin<br>13 November 2023
-                                                                </h1>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan
-                                                            hari ini?</p>
-                                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Aliquam sequi quos natus aliquid quis
-                                                            dicta! Porro quidem id consequatur aut minima deleniti nisi
-                                                            numquam quasi! Unde deserunt dolorum veniam iusto ipsa,
-                                                            impedit laudantium illum magni excepturi molestias atque
-                                                            enim totam optio ducimus accusamus neque sint temporibus
-                                                            eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                            esse cupiditate hic consequuntur libero harum et laboriosam
-                                                            vitae ab qui nobis animi, voluptates suscipit numquam autem
-                                                            iusto enim ipsum? Eius cum quod illum dolorem soluta hic
-                                                            reiciendis!</p>
-
-                                                        <hr class="my-3"
-                                                            style="border-width: 2px; border-color: black;">
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing
-                                                            Kegiatan :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card Selesai -->
-
-                                        <!-- Card Mulai -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card" style="width: 100%;">
-                                                    <div class="card-body rounded shadow">
-                                                        <div class="row mb-2">
-                                                            <div class="col-1">
-                                                                <img src="assets/images/ok.webp" alt="Ok.png">
-                                                            </div>
-                                                            <div class="col-11">
-                                                                <h1 class="card-title m-0 p-0">Senin<br>13 November 2023
-                                                                </h1>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan
-                                                            hari ini?</p>
-                                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Aliquam sequi quos natus aliquid quis
-                                                            dicta! Porro quidem id consequatur aut minima deleniti nisi
-                                                            numquam quasi! Unde deserunt dolorum veniam iusto ipsa,
-                                                            impedit laudantium illum magni excepturi molestias atque
-                                                            enim totam optio ducimus accusamus neque sint temporibus
-                                                            eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                            esse cupiditate hic consequuntur libero harum et laboriosam
-                                                            vitae ab qui nobis animi, voluptates suscipit numquam autem
-                                                            iusto enim ipsum? Eius cum quod illum dolorem soluta hic
-                                                            reiciendis!</p>
-
-                                                        <hr class="my-3"
-                                                            style="border-width: 2px; border-color: black;">
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing
-                                                            Kegiatan :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card Selesai -->
-
-                                        <!-- Card Mulai -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card" style="width: 100%;">
-                                                    <div class="card-body rounded shadow">
-                                                        <div class="row mb-2">
-                                                            <div class="col-1">
-                                                                <img src="assets/images/ok.webp" alt="Ok.png">
-                                                            </div>
-                                                            <div class="col-11">
-                                                                <h1 class="card-title m-0 p-0">Senin<br>13 November 2023
-                                                                </h1>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan
-                                                            hari ini?</p>
-                                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Aliquam sequi quos natus aliquid quis
-                                                            dicta! Porro quidem id consequatur aut minima deleniti nisi
-                                                            numquam quasi! Unde deserunt dolorum veniam iusto ipsa,
-                                                            impedit laudantium illum magni excepturi molestias atque
-                                                            enim totam optio ducimus accusamus neque sint temporibus
-                                                            eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                            esse cupiditate hic consequuntur libero harum et laboriosam
-                                                            vitae ab qui nobis animi, voluptates suscipit numquam autem
-                                                            iusto enim ipsum? Eius cum quod illum dolorem soluta hic
-                                                            reiciendis!</p>
-
-                                                        <hr class="my-3"
-                                                            style="border-width: 2px; border-color: black;">
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing
-                                                            Kegiatan :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card Selesai -->
-
-                                        <!-- Card Mulai -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card" style="width: 100%;">
-                                                    <div class="card-body rounded shadow">
-                                                        <div class="row mb-2">
-                                                            <div class="col-1">
-                                                                <img src="assets/images/ok.webp" alt="Ok.png">
-                                                            </div>
-                                                            <div class="col-11">
-                                                                <h1 class="card-title m-0 p-0">Senin<br>13 November 2023
-                                                                </h1>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan
-                                                            hari ini?</p>
-                                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Aliquam sequi quos natus aliquid quis
-                                                            dicta! Porro quidem id consequatur aut minima deleniti nisi
-                                                            numquam quasi! Unde deserunt dolorum veniam iusto ipsa,
-                                                            impedit laudantium illum magni excepturi molestias atque
-                                                            enim totam optio ducimus accusamus neque sint temporibus
-                                                            eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                            esse cupiditate hic consequuntur libero harum et laboriosam
-                                                            vitae ab qui nobis animi, voluptates suscipit numquam autem
-                                                            iusto enim ipsum? Eius cum quod illum dolorem soluta hic
-                                                            reiciendis!</p>
-
-                                                        <hr class="my-3"
-                                                            style="border-width: 2px; border-color: black;">
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing
-                                                            Kegiatan :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-
-                                                        <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
-                                                        </p>
-                                                        <p class="card-text">Lorem ipsum dolor sit
-                                                            amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                                                            incididunt
-                                                            ut labore et dolore magna aliqua.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card Selesai -->
-
-                                    </div>
-
-                                    <!-- Pagination -->
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination justify-content-center mt-3">
-                                            <li class="page-item" id="prev-page">
-                                                <a class="page-link" href="#" tabindex="-1"
-                                                    aria-disabled="true">Previous</a>
-                                            </li>
-                                            <!-- Page indicators will be dynamically added here -->
-                                            <li class="page-item" id="next-page">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                        <div class="col-4">
+                            <div class="card" style="width: 22rem;">
+                                <div class="card-body shadow">
+                                    <h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>
+                                    <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
+                                        -mulai- hingga -selesai- </p>
+                                    <a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat Logbook</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
+                        <div class="col-8">
+                            <!-- Cards go here -->
+                            <div class="card-container">
 
+                                <!-- Card Mulai -->
+                                <?php
+                                include 'assets/php/conn.php';
+
+                                $nama_hari_inggris = array(
+                                    'Monday' => 'Senin',
+                                    'Tuesday' => 'Selasa',
+                                    'Wednesday' => 'Rabu',
+                                    'Thursday' => 'Kamis',
+                                    'Friday' => 'Jumat',
+                                    'Saturday' => 'Sabtu',
+                                    'Sunday' => 'Minggu'
+                                );
+
+                                $nim_pengguna = '72210456';
+
+                                $sql = "SELECT * FROM logbook WHERE nim = '$nim_pengguna'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
+
+
+                                        echo '<div class="row">';
+                                        echo '<div class="col-12">';
+                                        echo '<div class="card" style="width: 100%;">';
+                                        echo '<div class="card-body rounded shadow">';
+                                        echo '<div class="row mb-2">';
+                                        echo '<div class="col-1">';
+                                        echo '<img src="assets/images/ok.webp" alt="Ok.png">';
+                                        echo '</div>';
+                                        echo '<div class="col-11">';
+                                        echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari ini?</p>';
+                                        echo '<p class="card-text">' . $row['isi_logbook'] . '</p>';
+                                        echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
+                                        echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :</p>';
+                                        echo '<p class="card-text">' . $row['komentar_admin'] . '</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                    }
+                                } else {
+                                    echo 'Tidak ada data logbook';
+                                }
+
+
+                                // Menutup koneksi
+                                $conn->close();
+                                ?>
+
+
+                                <!-- Card Selesai -->
+
+                            </div>
+
+                            <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mt-3">
+                                    <li class="page-item" id="prev-page">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <!-- Page indicators will be dynamically added here -->
+                                    <li class="page-item" id="next-page">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                    <!-- end container-fluid -->
+                    <!-- end row -->
+
+                </div>
+                <!-- end container-fluid -->
 
 
 
-                    <!-- Footer Start -->
-                    <!-- {{-- <footer class="footer"> --}}
+                <!-- Footer Start -->
+                <!-- {{-- <footer class="footer"> --}}
                 {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -440,40 +292,40 @@
                     </div>
                 </div> --}}
                 {{-- </footer> --}} -->
-                    <!-- end Footer -->
-
-                </div>
-                <!-- end content -->
+                <!-- end Footer -->
 
             </div>
-            <!-- END content-page -->
+            <!-- end content -->
+
         </div>
-        <!-- END wrapper -->
+        <!-- END content-page -->
+    </div>
+    <!-- END wrapper -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-            </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-            </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 
-        <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
 
-        <script src="assets/libs/morris-js/morris.min.js"></script>
-        <script src="assets/libs/raphael/raphael.min.js"></script>
+    <script src="assets/libs/morris-js/morris.min.js"></script>
+    <script src="assets/libs/raphael/raphael.min.js"></script>
 
-        <script src="assets/js/pages/dashboard.init.js"></script>
+    <script src="assets/js/pages/dashboard.init.js"></script>
 
-        <!-- App js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="assets/js/app.min.js"></script>
-        <script src="assets/js/laporan.js"></script>
+    <!-- App js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/logbook.js"></script>
 
 </body>
 

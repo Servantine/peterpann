@@ -186,125 +186,79 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card" style="width: 22rem;">
                                 <div class="card-body shadow">
                                     <h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>
                                     <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
                                         -mulai- hingga -selesai- </p>
-                                    <a href="#" class="btn btn-primary btn-block">Buat laporan</a>
+                                    <a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-8">
                             <!-- Cards go here -->
                             <div class="card-container">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card" style="width: 100%;">
-                                            <div class="card-body rounded shadow">
-                                                <div class="row mb-2">
-                                                    <div class="col-1">
-                                                        <img src="assets/images/ok.webp" alt="Ok.png">
-                                                    </div>
-                                                    <div class="col-11">
-                                                        <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
-                                                    </div>
-                                                </div>
-                                                <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari
-                                                    ini?</p>
-                                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit. Aliquam sequi quos natus aliquid quis dicta! Porro quidem id
-                                                    consequatur aut minima deleniti nisi numquam quasi! Unde deserunt
-                                                    dolorum veniam iusto ipsa, impedit laudantium illum magni excepturi
-                                                    molestias atque enim totam optio ducimus accusamus neque sint
-                                                    temporibus eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                    esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
-                                                    qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
-                                                    Eius cum quod illum dolorem soluta hic reiciendis!</p>
 
-                                                <hr class="my-3" style="border-width: 2px; border-color: black;">
+                                <!-- Card Mulai -->
+                                <?php
+                                include 'assets/php/conn.php';
 
-                                                <p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :
-                                                </p>
-                                                <p class="card-text">Lorem ipsum dolor sit
-                                                    amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                $nama_hari_inggris = array(
+                                    'Monday' => 'Senin',
+                                    'Tuesday' => 'Selasa',
+                                    'Wednesday' => 'Rabu',
+                                    'Thursday' => 'Kamis',
+                                    'Friday' => 'Jumat',
+                                    'Saturday' => 'Sabtu',
+                                    'Sunday' => 'Minggu'
+                                );
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card" style="width: 100%;">
-                                            <div class="card-body rounded shadow">
-                                                <div class="row mb-2">
-                                                    <div class="col-1">
-                                                        <img src="assets/images/ok.webp" alt="Ok.png">
-                                                    </div>
-                                                    <div class="col-11">
-                                                        <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
-                                                    </div>
-                                                </div>
-                                                <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari
-                                                    ini?</p>
-                                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit. Aliquam sequi quos natus aliquid quis dicta! Porro quidem id
-                                                    consequatur aut minima deleniti nisi numquam quasi! Unde deserunt
-                                                    dolorum veniam iusto ipsa, impedit laudantium illum magni excepturi
-                                                    molestias atque enim totam optio ducimus accusamus neque sint
-                                                    temporibus eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                    esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
-                                                    qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
-                                                    Eius cum quod illum dolorem soluta hic reiciendis!</p>
+                                $nim_pengguna = '72210456';
 
-                                                <hr class="my-3" style="border-width: 2px; border-color: black;">
+                                $sql = "SELECT laporan_kegiatan.* FROM laporan_kegiatan JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'";
 
-                                                <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :
-                                                </p>
-                                                <p class="card-text">Lorem ipsum dolor sit
-                                                    amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                $result = $conn->query($sql);
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card" style="width: 100%;">
-                                            <div class="card-body rounded shadow">
-                                                <div class="row mb-2">
-                                                    <div class="col-1">
-                                                        <img src="assets/images/ok.webp" alt="Ok.png">
-                                                    </div>
-                                                    <div class="col-11">
-                                                        <h1 class="card-title m-0 p-0">Senin<br>13 November 2023</h1>
-                                                    </div>
-                                                </div>
-                                                <p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari
-                                                    ini?</p>
-                                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit. Aliquam sequi quos natus aliquid quis dicta! Porro quidem id
-                                                    consequatur aut minima deleniti nisi numquam quasi! Unde deserunt
-                                                    dolorum veniam iusto ipsa, impedit laudantium illum magni excepturi
-                                                    molestias atque enim totam optio ducimus accusamus neque sint
-                                                    temporibus eaque ipsum ad praesentium. Nemo incidunt deserunt porro
-                                                    esse cupiditate hic consequuntur libero harum et laboriosam vitae ab
-                                                    qui nobis animi, voluptates suscipit numquam autem iusto enim ipsum?
-                                                    Eius cum quod illum dolorem soluta hic reiciendis!</p>
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
 
-                                                <hr class="my-3" style="border-width: 2px; border-color: black;">
+                                        echo '<div class="row">';
+                                        echo '<div class="col-12">';
+                                        echo '<div class="card" style="width: 100%;">';
+                                        echo '<div class="card-body rounded shadow">';
+                                        echo '<div class="row mb-2">';
+                                        echo '<div class="col-1">';
+                                        echo '<img src="assets/images/ok.webp" alt="Ok.png">';
+                                        echo '</div>';
+                                        echo '<div class="col-11">';
+                                        echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Judul Kegiatan:</p>';
+                                        echo '<p class="card-text">' . $row['judul_laporan'] . '</p>';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Isi Kegiatan:</p>';
+                                        echo '<p class="card-text">' . $row['laporan_kegiatan'] . '</p>';
+                                        echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
+                                        echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
+                                        echo '<p class="card-text">' . $row['komentar'] . '</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                    }
+                                } else {
+                                    echo 'Tidak ada data laporan kegiatan';
+                                }
 
-                                                <p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :
-                                                </p>
-                                                <p class="card-text">Lorem ipsum dolor sit
-                                                    amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                // Menutup koneksi
+                                $conn->close();
+                                ?>
+
+                                <!-- Card Selesai -->
+
+                            </div>
+
                             <!-- Pagination -->
                             <nav aria-label="Page navigation">
                                 <ul class="pagination justify-content-center mt-3">
