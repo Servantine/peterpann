@@ -3,7 +3,7 @@
 
 <head>
      <meta charset="utf-8" />
-     <title>Dashboard</title>
+     <title>SIKKN - Kelompok</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta content="MoneyTrash!" name="description" />
      <meta content="MoneyTrash!" name="author" />
@@ -116,7 +116,6 @@
                                    <i class="bi bi-people"></i>
                                    <span class=""> Kelompok
                                    </span>
-                                   <span class="badge badge-primary float-right">11</span>
                               </a>
                          </li>
 
@@ -248,20 +247,19 @@
 
                                                   if ($result->num_rows > 0) {
                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo '<tr>';
-                                                            echo '<td>' . $row['nidn'] . '</td>';
-                                                            echo '<td>' . $row['nama_dosen'] . '</td>';
-                                                            echo '<td>' . $row['jabatan'] . '</td>';
-                                                            echo '<td>' . $row['prodi'] . '</td>';
-                                                            echo '<td>' . $row['fakultas'] . '</td>';
-                                                            echo '<td>' . $row['no_telp'] . '</td>';
-                                                            echo '<td class="text-center"> <button type="button" class="btn btn-primary" data-nidn="' . $row['nidn'] . '">Hubungi Dosen</button> </td>';
-                                                            echo '</tr>';
-
+                                                           echo '<tr>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['nidn'] . '</td>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['nama_dosen'] . '</td>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['jabatan'] . '</td>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['prodi'] . '</td>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['fakultas'] . '</td>';
+                                                           echo '<td style="vertical-align: middle;">' . $row['no_telp'] . '</td>';
+                                                           echo '<td class="text-center" style="vertical-align: middle;"> <a href="https://wa.me/'.$row['no_telp'].'"><button type="button" class="btn btn-primary">Hubungi Dosen</button> </td>';
+                                                           echo '</tr>';
                                                        }
-                                                  } else {
+                                                   } else {
                                                        echo '<tr><td colspan="4">Tidak ada data pembimbing</td></tr>';
-                                                  }
+                                                   }
 
                                                   // Tutup koneksi
                                                   $conn->close();
@@ -302,6 +300,9 @@
      </div>
      <!-- END wrapper -->
 
+     <!-- Script -->
+     
+     <!-- Script -->
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
           integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
           </script>

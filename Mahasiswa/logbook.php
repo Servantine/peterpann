@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Logbook</title>
+    <title>SIKKN - Logbook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -120,7 +120,6 @@
                             <i class="bi bi-people"></i>
                             <span class=""> Kelompok
                             </span>
-                            <span class="badge badge-primary float-right">11</span>
                         </a>
                     </li>
 
@@ -191,7 +190,7 @@
                                     <h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>
                                     <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
                                         -mulai- hingga -selesai- </p>
-                                    <a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat Logbook</a>
+                                    <a href="#" class="btn btn-primary btn-block" id="buatLogbook">Buat Logbook</a>
                                 </div>
                             </div>
                         </div>

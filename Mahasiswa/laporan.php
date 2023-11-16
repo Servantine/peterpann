@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Laporan</title>
+    <title>SIKKN - Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -120,7 +120,6 @@
                             <i class="bi bi-people"></i>
                             <span class=""> Kelompok
                             </span>
-                            <span class="badge badge-primary float-right">11</span>
                         </a>
                     </li>
 

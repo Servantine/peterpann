@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>SIKKN - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -70,14 +70,12 @@
             <div class="logo-box">
                 <a href="/" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                        <img src="assets/images/lppm-2.png"
-                            alt="Logo_LPPM.png" height="43">
+                        <img src="assets/images/lppm-2.png" alt="Logo_LPPM.png" height="43">
                         <!-- <span class="logo-lg-text-dark">Simple</span> -->
                     </span>
                     <span class="logo-sm">
                         <!-- <span class="logo-lg-text-dark">S</span> -->
-                        <img src="assets/images/lppm-1.png" alt=""
-                            height="43">
+                        <img src="assets/images/lppm-1.png" alt="" height="43">
                     </span>
                 </a>
             </div>
@@ -119,16 +117,15 @@
 
                     <li class="">
                         <a href="../Mahasiswa/kelompok.php">
-                        <i class="bi bi-people"></i>
+                            <i class="bi bi-people"></i>
                             <span class=""> Kelompok
                             </span>
-                            <span class="badge badge-primary float-right">11</span>
                         </a>
                     </li>
 
                     <li class="">
                         <a href="../Mahasiswa/logbook.php">
-                        <i class="bi bi-book"></i>
+                            <i class="bi bi-book"></i>
                             <span class=""> Logbook </span>
                         </a>
                     </li>
@@ -186,6 +183,41 @@
                         </div>
                     </div>
                     <!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="card-box">
+                                <h5 class="mt-0 font-14">Lokasi KKN</h5>
+                                <div class="row m-0 p-0 border">
+                                    <div id="map" style="width: 100%; height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        include 'assets/php/conn.php';
+
+                        $nim_pengguna = '72210456';
+
+                        $sql = "SELECT kelompok_kkn.lokasi, kelompok_kkn.alamat
+                                    FROM kelompok_kkn 
+                                    INNER JOIN dtl_kelompok_kkn ON kelompok_kkn.id_kelompok = dtl_kelompok_kkn.id_kelompok 
+                                    INNER JOIN mahasiswa ON dtl_kelompok_kkn.nim = mahasiswa.nim 
+                                    WHERE mahasiswa.nim = '$nim_pengguna';";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            $lokasiKelompokKKN = $row['lokasi'];
+                            $alamatkelompokKKN = $row['alamat'];
+                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
+                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
+                        } else {
+                            echo 'Data kelompok KKN tidak ditemukan';
+                        }
+
+                        // Menutup koneksi
+                        $conn->close();
+                        ?>
+                    </div>
 
                     <!-- End of col -->
                 </div>
@@ -216,6 +248,11 @@
     </div>
     <!-- END wrapper -->
 
+    <!-- Script -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
+        </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>
@@ -236,6 +273,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/gps.js"></script>
 
 </body>
 
