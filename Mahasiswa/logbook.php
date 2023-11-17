@@ -233,7 +233,11 @@
                                         echo '<div class="card-body rounded shadow">';
                                         echo '<div class="row mb-2">';
                                         echo '<div class="col-1">';
-                                        echo '<img src="assets/images/ok.webp" alt="Ok.png">';
+                                        if ($row['acc_dosen'] == true && $row['acc_admin'] == true) {
+                                            echo '<img src="assets/images/ok.webp" alt="Ok.png" width ="40">';
+                                        } else {
+                                            echo '<img src="assets/images/warning.png" alt="warning.png" width ="40">';
+                                        }
                                         echo '</div>';
                                         echo '<div class="col-11">';
                                         echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';

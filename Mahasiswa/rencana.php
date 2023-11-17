@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>SIKKN - Laporan</title>
+    <title>SIKKN - Rencana Kegiatan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -130,13 +130,13 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Mahasiswa/laporan.php" class="active-class active-txt">
+                        <a href="../Mahasiswa/laporan.php">
                             <i class="bi bi-journal-text"></i>
                             <span class=""> Laporan Kegiatan</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Mahasiswa/rencana.php">
+                        <a href="../Mahasiswa/rencana.php" class="active-class active-txt">
                             <i class="bi bi-pencil-square"></i>
                             <span class=""> Rencana Kegiatan</span>
                         </a>
@@ -156,7 +156,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent !important">
                     <li class="breadcrumb-item"><a href="../Mahasiswa/dashboard.php">Mahasiswa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Laporan</li>
+                    <li class="breadcrumb-item active" aria-current="page">Rencana Kegiatan</li>
                 </ol>
             </nav>
             <!-- End Breadcrumb -->
@@ -193,7 +193,7 @@
                         <div class="col-4">
                             <div class="card" style="width: 22rem;">
                                 <div class="card-body shadow">
-                                    <h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>
+                                    <h1 class="card-title mt-2">Rencana Kegiatan Mahasiswa</h1>
                                     <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
                                         -mulai- hingga -selesai- </p>
                                     <a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>
@@ -220,7 +220,12 @@
 
                                 $nim_pengguna = '72210456';
 
-                                $sql = "SELECT laporan_kegiatan.*, rencana_kegiatan.judul_kegiatan FROM rencana_kegiatan JOIN laporan_kegiatan ON rencana_kegiatan.id_rencana_kegiatan = laporan_kegiatan.id_rencana_kegiatan JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'";
+                                $sql = "SELECT DISTINCT rencana_kegiatan.*
+                                            FROM rencana_kegiatan
+                                            JOIN laporan_kegiatan ON rencana_kegiatan.id_kelompok = laporan_kegiatan.id_kelompok
+                                            JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok
+                                            JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok
+                                            WHERE dtl_kelompok_kkn.nim = '$nim_pengguna';";
 
                                 $result = $conn->query($sql);
 
@@ -247,12 +252,12 @@
                                         echo '<p class="card-text text-muted mb-0 pb-0">Judul Kegiatan:</p>';
                                         echo '<p class="card-text">' . $row['judul_kegiatan'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Isi Kegiatan:</p>';
-                                        echo '<p class="card-text">' . $row['laporan_kegiatan'] . '</p>';
+                                        echo '<p class="card-text">' . $row['rencana_kegiatan'] . '</p>';
                                         echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
                                         echo '<p class="card-text">' . $row['komentar'] . '</p>';
                                         if ($row['fileupload']) {
-                                            echo '<a href="assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan']. '/' . $row['fileupload'] . '" class="float-end btn btn-primary download" download>Download File</a>';
+                                            echo '<a href="assets/uploads/rencanaKegiatan/' . $row['judul_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download" download>Download File</a>';
                                         }
                                         echo '</div>';
                                         echo '</div>';
@@ -339,7 +344,7 @@
     <!-- App js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
-    <script src="assets/js/laporan.js"></script>
+    <script src="assets/js/rencana.js"></script>
 
 </body>
 
