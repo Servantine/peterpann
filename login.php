@@ -24,12 +24,11 @@
             <div class="card">
                 <h2 class="mb-0">Login</h2>
                 <p>Silahkan Masukan NIM dan Password</p>
-                <form method="post">
+                <form method="post" action="ceklogin.php">
                     <label for="username">NIM</label>
-                    <input type="text" id="nim" placeholder="Masukan NIM">
-
+                    <input type="text" id="username" name="username" placeholder="Masukan NIM">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Masukan Password" name="password" class="mb-3">
+                    <input type="password" id="password" name="password" placeholder="Masukan Password" name="password" class="mb-3">
 
                     <button type="submit">Login</button>
                 </form>
