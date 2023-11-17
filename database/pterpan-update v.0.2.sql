@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2023 at 12:56 PM
+-- Generation Time: Nov 17, 2023 at 02:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,238 +18,365 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rpl`
+-- Database: `pterpan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Table structure for table `dsn_pembimbing`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `dsn_pembimbing` (
+  `nidn` varchar(8) NOT NULL,
+  `nama_dosen` varchar(25) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
+  `prodi` varchar(30) NOT NULL,
+  `fakultas` varchar(30) NOT NULL,
+  `no_telp` varchar(20) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data for table `dsn_pembimbing`
 --
 
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(10, '2023_11_02_125139_create_useremail_table', 1),
-(11, '2023_11_06_052605_create_user_transaksi', 2),
-(12, '2023_11_10_091725_create_transaksi_bank', 3),
-(13, '2023_11_15_113108_create_pengambilmail_table', 4);
+INSERT INTO `dsn_pembimbing` (`nidn`, `nama_dosen`, `jabatan`, `prodi`, `fakultas`, `no_telp`, `username`, `password`) VALUES
+('72210000', 'Tika', 'Dosen Tetap', 'Sistem Informasi', 'Teknologi Informasi', '08128888888', 'Tika', '123');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengambilmail`
+-- Table structure for table `dtl_kelompok_kkn`
 --
 
-CREATE TABLE `pengambilmail` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `berat` varchar(255) NOT NULL,
-  `namaLengkap` varchar(100) DEFAULT NULL,
-  `nomor` varchar(16) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `kecamatan` varchar(50) DEFAULT NULL,
-  `kota` varchar(50) DEFAULT NULL,
-  `provinsi` varchar(50) DEFAULT NULL,
-  `kodePos` varchar(50) DEFAULT NULL,
-  `catatan` text DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `dtl_kelompok_kkn` (
+  `id_dtl_kelompok_kkn` int(11) NOT NULL,
+  `nim` char(8) NOT NULL,
+  `id_kelompok` int(11) NOT NULL,
+  `jabatan` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pengambilmail`
+-- Dumping data for table `dtl_kelompok_kkn`
 --
 
-INSERT INTO `pengambilmail` (`id`, `name`, `email`, `email_verified_at`, `berat`, `namaLengkap`, `nomor`, `alamat`, `kecamatan`, `kota`, `provinsi`, `kodePos`, `catatan`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Niko', 'bara@gmail.com', NULL, 'medium', 'Niko', '081289934392', 'Jalan Bumijo Kulon', 'Jetis', 'Yogyakarta', 'Daerah Istimewa Yogyakarta', '55231', 'JT1/1100', 'eIJu0MItwXv2h4YHon10WQLBDCnwLZk5JbqHjea2c5pI3ZO0JBejw2GVwVEP', '2023-11-16 02:04:29', '2023-11-16 02:04:29');
+INSERT INTO `dtl_kelompok_kkn` (`id_dtl_kelompok_kkn`, `nim`, `id_kelompok`, `jabatan`) VALUES
+(1, '72210456', 1, 'Anggota Kelompok');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_bank`
+-- Table structure for table `kelompok_kkn`
 --
 
-CREATE TABLE `transaksi_bank` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `idPemilik` bigint(20) UNSIGNED NOT NULL,
-  `jenisSampah` varchar(255) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `nomor` varchar(255) NOT NULL,
-  `catatanTambahan` text DEFAULT NULL,
-  `bukti` varchar(255) DEFAULT NULL,
-  `approved` tinyint(1) NOT NULL,
-  `terkirim` tinyint(1) NOT NULL,
-  `bankSampah` varchar(255) DEFAULT NULL,
-  `alamat` varchar(255) DEFAULT NULL,
-  `lang` varchar(255) DEFAULT NULL,
-  `long` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `kelompok_kkn` (
+  `id_kelompok` int(11) NOT NULL,
+  `id_kkn` int(11) NOT NULL,
+  `nidn` varchar(25) NOT NULL,
+  `nama_kelompok` varchar(25) NOT NULL,
+  `lokasi` varchar(59) NOT NULL,
+  `alamat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kelompok_kkn`
+--
+
+INSERT INTO `kelompok_kkn` (`id_kelompok`, `id_kkn`, `nidn`, `nama_kelompok`, `lokasi`, `alamat`) VALUES
+(1, 1, '72210000', 'GG', 'Bantul', 'Jalan Bantul');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `useremail`
+-- Table structure for table `kkn`
 --
 
-CREATE TABLE `useremail` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `status` varchar(25) NOT NULL,
-  `baru` tinyint(1) NOT NULL,
-  `namaLengkap` varchar(100) DEFAULT NULL,
-  `nomor` varchar(16) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `kecamatan` varchar(50) DEFAULT NULL,
-  `kota` varchar(50) DEFAULT NULL,
-  `provinsi` varchar(50) DEFAULT NULL,
-  `kodePos` varchar(50) DEFAULT NULL,
-  `catatan` text DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `kkn` (
+  `id_kkn` int(11) NOT NULL,
+  `id_lppm` varchar(75) NOT NULL,
+  `nama_kkn` varchar(100) NOT NULL,
+  `tema` varchar(50) NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `tanggal_selesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `useremail`
+-- Dumping data for table `kkn`
 --
 
-INSERT INTO `useremail` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `baru`, `namaLengkap`, `nomor`, `alamat`, `kecamatan`, `kota`, `provinsi`, `kodePos`, `catatan`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Niko', 'bara@gmail.com', NULL, '$2y$10$iYAaGn1CuaI0XtEk9pgaIuFyVVXHoNIQMrXEWX9zrR2gu3Y7cos86', 'pemilik', 0, 'Nikolaus Pastika Bara Satyaradi', '081289934392', 'Jalan Bumijo Kulon', 'Jetis', 'Yogyakarta', 'Daerah Istimewa Yogyakarta', '55231', 'JT1/1100', 'iHnXBBDVwQOWtYDyktLUFNkZL1O5nEI7PhXs7GTNA3LBzzpJAkWV60sClGws', '2023-11-16 01:59:21', '2023-11-16 02:00:11');
+INSERT INTO `kkn` (`id_kkn`, `id_lppm`, `nama_kkn`, `tema`, `tanggal_mulai`, `tanggal_selesai`) VALUES
+(1, '72210450', 'KKN Anjay', 'Lestari Lingkungan', '2023-11-14', '2024-02-29');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_transaksi`
+-- Table structure for table `laporan_kegiatan`
 --
 
-CREATE TABLE `user_transaksi` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `idPemilik` bigint(20) UNSIGNED NOT NULL,
-  `jenisSampah` varchar(255) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `nomor` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `kecamatan` varchar(255) NOT NULL,
-  `kota` varchar(255) NOT NULL,
-  `provinsi` varchar(255) NOT NULL,
-  `kodePos` int(11) NOT NULL,
-  `catatan` text DEFAULT NULL,
-  `berat` varchar(255) NOT NULL,
-  `bukti` varchar(255) DEFAULT NULL,
-  `buktibayar` varchar(255) DEFAULT NULL,
-  `terbayar` tinyint(1) NOT NULL,
-  `approved` tinyint(1) NOT NULL,
-  `terambil` tinyint(1) NOT NULL,
-  `lang` varchar(255) DEFAULT NULL,
-  `long` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `laporan_kegiatan` (
+  `id_laporan_kegiatan` int(11) NOT NULL,
+  `id_rencana_kegiatan` int(11) NOT NULL,
+  `id_kelompok` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `judul_laporan` varchar(100) NOT NULL,
+  `laporan_kegiatan` text NOT NULL,
+  `fileupload` text DEFAULT NULL,
+  `komentar` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `laporan_kegiatan`
+--
+
+INSERT INTO `laporan_kegiatan` (`id_laporan_kegiatan`, `id_rencana_kegiatan`, `id_kelompok`, `tanggal`, `judul_laporan`, `laporan_kegiatan`, `fileupload`, `komentar`) VALUES
+(12, 1, 1, '2023-11-17', '', 'sadasda', '1_PTERPAN_GASAL_2023-Andreas.pdf', NULL),
+(13, 1, 1, '2023-11-17', '', 'iasdasd', '1_PTERPAN_GASAL_2023-Andreas.pdf', NULL),
+(14, 1, 1, '2023-11-17', '', 'assadsa', '1_Presensi Asdos Jerry Oktober 2023.pdf', NULL),
+(15, 1, 1, '2023-11-17', '', 'dasdadasda', NULL, NULL),
+(16, 1, 1, '2023-11-17', '', 'werwerwerwdsada', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logbook`
+--
+
+CREATE TABLE `logbook` (
+  `id_logbook` int(11) NOT NULL,
+  `nim` char(8) NOT NULL,
+  `tanggal` date NOT NULL,
+  `isi_logbook` text NOT NULL,
+  `acc_dosen` tinyint(1) DEFAULT NULL,
+  `acc_admin` tinyint(1) DEFAULT NULL,
+  `komentar_dosen` text DEFAULT NULL,
+  `komentar_admin` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `logbook`
+--
+
+INSERT INTO `logbook` (`id_logbook`, `nim`, `tanggal`, `isi_logbook`, `acc_dosen`, `acc_admin`, `komentar_dosen`, `komentar_admin`) VALUES
+(3, '72210456', '2023-11-15', 'asdsadsad', NULL, NULL, NULL, NULL),
+(8, '72210456', '2023-11-29', 'asfsdfs', NULL, NULL, NULL, NULL),
+(9, '72210456', '2023-11-21', 'asdsad', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lppm`
+--
+
+CREATE TABLE `lppm` (
+  `id_lppm` char(8) NOT NULL,
+  `nama_lppm` varchar(75) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lppm`
+--
+
+INSERT INTO `lppm` (`id_lppm`, `nama_lppm`, `username`, `password`) VALUES
+('72210450', 'Tori', 'Tori', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mahasiswa`
+--
+
+CREATE TABLE `mahasiswa` (
+  `nim` char(8) NOT NULL,
+  `nama` varchar(75) NOT NULL,
+  `prodi` varchar(30) NOT NULL,
+  `fakultas` varchar(30) NOT NULL,
+  `angkatan` int(11) NOT NULL,
+  `status_persyaratan` tinyint(1) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `nilai` int(11) DEFAULT NULL,
+  `catatan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`nim`, `nama`, `prodi`, `fakultas`, `angkatan`, `status_persyaratan`, `username`, `password`, `nilai`, `catatan`) VALUES
+('72210456', 'Nikolaus Pastika Bara Satyaradi', 'Sistem Informasi', 'Teknologi Informasi', 2021, 1, 'Niko', '123', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rencana_kegiatan`
+--
+
+CREATE TABLE `rencana_kegiatan` (
+  `id_rencana_kegiatan` int(11) NOT NULL,
+  `id_kelompok` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `judul_kegiatan` varchar(200) NOT NULL,
+  `rencana_kegiatan` text NOT NULL,
+  `fileupload` text DEFAULT NULL,
+  `komentar` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rencana_kegiatan`
+--
+
+INSERT INTO `rencana_kegiatan` (`id_rencana_kegiatan`, `id_kelompok`, `tanggal`, `judul_kegiatan`, `rencana_kegiatan`, `fileupload`, `komentar`) VALUES
+(1, 1, '2023-11-17', 'asdsada', 'adsadsa', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `migrations`
+-- Indexes for table `dsn_pembimbing`
 --
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `dsn_pembimbing`
+  ADD PRIMARY KEY (`nidn`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `pengambilmail`
+-- Indexes for table `dtl_kelompok_kkn`
 --
-ALTER TABLE `pengambilmail`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pengambilmail_email_unique` (`email`);
+ALTER TABLE `dtl_kelompok_kkn`
+  ADD PRIMARY KEY (`id_dtl_kelompok_kkn`),
+  ADD KEY `fk_detail-nim_mahasiswa-nim` (`nim`),
+  ADD KEY `fk_detail-id-kelompok_mahasiswa-id-kelompok` (`id_kelompok`);
 
 --
--- Indexes for table `transaksi_bank`
+-- Indexes for table `kelompok_kkn`
 --
-ALTER TABLE `transaksi_bank`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `transaksi_bank_idpemilik_foreign` (`idPemilik`);
+ALTER TABLE `kelompok_kkn`
+  ADD PRIMARY KEY (`id_kelompok`),
+  ADD KEY `fk_kelompok-id-kkn_kkn-id-kkn` (`id_kkn`),
+  ADD KEY `fk_kelompok-nidn_dosen-nidn` (`nidn`);
 
 --
--- Indexes for table `useremail`
+-- Indexes for table `kkn`
 --
-ALTER TABLE `useremail`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `useremail_email_unique` (`email`);
+ALTER TABLE `kkn`
+  ADD PRIMARY KEY (`id_kkn`),
+  ADD KEY `fk_kkn-id-lppm_lppm-id-lppm` (`id_lppm`);
 
 --
--- Indexes for table `user_transaksi`
+-- Indexes for table `laporan_kegiatan`
 --
-ALTER TABLE `user_transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_transaksi_idpemilik_foreign` (`idPemilik`);
+ALTER TABLE `laporan_kegiatan`
+  ADD PRIMARY KEY (`id_laporan_kegiatan`),
+  ADD KEY `fk_laporan-id-kelompok_kelompok-id-kelompok` (`id_kelompok`),
+  ADD KEY `fk_rencana-id-rencana_laporan-id-rencana` (`id_rencana_kegiatan`);
+
+--
+-- Indexes for table `logbook`
+--
+ALTER TABLE `logbook`
+  ADD PRIMARY KEY (`id_logbook`),
+  ADD KEY `fk_logbook-nim_mahasiswa-nim` (`nim`);
+
+--
+-- Indexes for table `lppm`
+--
+ALTER TABLE `lppm`
+  ADD PRIMARY KEY (`id_lppm`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`nim`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `rencana_kegiatan`
+--
+ALTER TABLE `rencana_kegiatan`
+  ADD PRIMARY KEY (`id_rencana_kegiatan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT for table `dtl_kelompok_kkn`
 --
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `dtl_kelompok_kkn`
+  MODIFY `id_dtl_kelompok_kkn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pengambilmail`
+-- AUTO_INCREMENT for table `kelompok_kkn`
 --
-ALTER TABLE `pengambilmail`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `kelompok_kkn`
+  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `transaksi_bank`
+-- AUTO_INCREMENT for table `kkn`
 --
-ALTER TABLE `transaksi_bank`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `kkn`
+  MODIFY `id_kkn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `useremail`
+-- AUTO_INCREMENT for table `laporan_kegiatan`
 --
-ALTER TABLE `useremail`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `laporan_kegiatan`
+  MODIFY `id_laporan_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `user_transaksi`
+-- AUTO_INCREMENT for table `logbook`
 --
-ALTER TABLE `user_transaksi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `logbook`
+  MODIFY `id_logbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `rencana_kegiatan`
+--
+ALTER TABLE `rencana_kegiatan`
+  MODIFY `id_rencana_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `transaksi_bank`
+-- Constraints for table `dtl_kelompok_kkn`
 --
-ALTER TABLE `transaksi_bank`
-  ADD CONSTRAINT `transaksi_bank_idpemilik_foreign` FOREIGN KEY (`idPemilik`) REFERENCES `useremail` (`id`);
+ALTER TABLE `dtl_kelompok_kkn`
+  ADD CONSTRAINT `fk_detail-id-kelompok_mahasiswa-id-kelompok` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok_kkn` (`id_kelompok`),
+  ADD CONSTRAINT `fk_detail-nim_mahasiswa-nim` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`);
 
 --
--- Constraints for table `user_transaksi`
+-- Constraints for table `kelompok_kkn`
 --
-ALTER TABLE `user_transaksi`
-  ADD CONSTRAINT `user_transaksi_idpemilik_foreign` FOREIGN KEY (`idPemilik`) REFERENCES `useremail` (`id`);
+ALTER TABLE `kelompok_kkn`
+  ADD CONSTRAINT `fk_kelompok-id-kkn_kkn-id-kkn` FOREIGN KEY (`id_kkn`) REFERENCES `kkn` (`id_kkn`),
+  ADD CONSTRAINT `fk_kelompok-nidn_dosen-nidn` FOREIGN KEY (`nidn`) REFERENCES `dsn_pembimbing` (`nidn`);
+
+--
+-- Constraints for table `kkn`
+--
+ALTER TABLE `kkn`
+  ADD CONSTRAINT `fk_kkn-id-lppm_lppm-id-lppm` FOREIGN KEY (`id_lppm`) REFERENCES `lppm` (`id_lppm`);
+
+--
+-- Constraints for table `laporan_kegiatan`
+--
+ALTER TABLE `laporan_kegiatan`
+  ADD CONSTRAINT `fk_laporan-id-kelompok_kelompok-id-kelompok` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok_kkn` (`id_kelompok`),
+  ADD CONSTRAINT `fk_rencana-id-rencana_laporan-id-rencana` FOREIGN KEY (`id_rencana_kegiatan`) REFERENCES `rencana_kegiatan` (`id_rencana_kegiatan`);
+
+--
+-- Constraints for table `logbook`
+--
+ALTER TABLE `logbook`
+  ADD CONSTRAINT `fk_logbook-nim_mahasiswa-nim` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
