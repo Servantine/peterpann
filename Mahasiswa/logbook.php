@@ -132,7 +132,13 @@
                     <li class="">
                         <a href="../Mahasiswa/laporan.php">
                             <i class="bi bi-journal-text"></i>
-                            <span class=""> Laporan </span>
+                            <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Mahasiswa/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -214,13 +220,12 @@
 
                                 $nim_pengguna = '72210456';
 
-                                $sql = "SELECT * FROM logbook WHERE nim = '$nim_pengguna'";
+                                $sql = "SELECT * FROM logbook WHERE nim = '$nim_pengguna' ORDER BY tanggal DESC";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
-
 
                                         echo '<div class="row">';
                                         echo '<div class="col-12">';
@@ -246,16 +251,13 @@
                                         echo '</div>';
                                         echo '</div>';
                                     }
+
                                 } else {
                                     echo 'Tidak ada data logbook';
                                 }
-
-
                                 // Menutup koneksi
                                 $conn->close();
                                 ?>
-
-
                                 <!-- Card Selesai -->
 
                             </div>

@@ -68,41 +68,69 @@ $(document).ready(function () {
     $('#buatLaporan').click(function (e) {
         e.preventDefault();
 
-        Swal.fire({
-            title: `Isi Laporan Kegiatan <p class="text-muted m-0 p-0" style="font-size:14">${getCurrentDate()}</p>`,
-            html:
-                `
-                <form action="" method="POST" id="orderForm">
-                    <div class="mb-3 text-start">
-                        <label for="judul" class="form-label">Bagaimana Rencana Kegiatan kelompok Hari Ini?</label>    
-                        <input class="form-control" type="text" name="judul" id="judul" placeholder="Tuliskan judul kegiatan" required>
-                    </div>
-                    
-                    <div class="mb-3 text-start">
-                        <label for="logbookTextarea" class="form-label">Bagaimana Rencana Kegiatan kelompok Hari Ini?</label>
-                        <textarea class="form-control" id="laporanTextarea" name="logbookTextarea" placeholder="Tuliskan rencana kelompok..." rows="3" required></textarea>
-                    </div>
-                </form>`,
-            focusConfirm: false,
-            showCancel : true,
+        const nim = '72210456';
+        $.ajax({
+            type: 'POST',
+            url: 'assets/php/dapatRencanaKegiatan.php',
+            data: { nim: nim },
+            success: function (activities) {
+                activities = JSON.parse(activities);
+                Swal.fire({
+                    title: `Isi Laporan Kegiatan <p class="text-muted m-0 p-0" style="font-size:14">${getCurrentDate()}</p>`,
+                    html: `
+                        <form action="" method="POST" id="orderForm" enctype="multipart/form-data">
+                            <div class="mb-3 text-start">
+                                <label for="judul" class="form-label">Pilih Nama Kegiatan</label>
+                                <select class="form-select" id="idRencanaKegiatan" name="idRencanaKegiatan" required>
+                                    ${activities.map(activity => `<option value="${activity.id}">${activity.judul}</option>`).join('')}
+                                </select>
+                            </div>
+    
+                            <div class="mb-3 text-start">
+                                <label for="laporanTextarea" class="form-label">Bagaimana Rencana Kegiatan kelompok Hari Ini?</label>
+                                <textarea class="form-control" id="laporanTextarea" name="logbookTextarea" placeholder="Tuliskan rencana kelompok..." rows="3" required></textarea>
+                            </div>
+    
+                            <div class="mb-3 text-start">
+                                <label for="fileUpload" class="form-label">Upload File</label>
+                                <input type="file" class="form-control" id="fileUpload" name="fileUpload">
+                            </div>
+                        </form>`,
+                    focusConfirm: false,
+                    showCancel: true,
 
-            preConfirm: () => {
-                const isiLaporan = Swal.getPopup().querySelector('#laporanTextarea').value;
-                const judulLaporan = Swal.getPopup().querySelector('#judul').value;
-                const nim = '72210456';
+                    preConfirm: () => {
+                        const idRencanaKegiatan = Swal.getPopup().querySelector('#idRencanaKegiatan').value;
+                        const isiLaporan = Swal.getPopup().querySelector('#laporanTextarea').value;
+                        const fileUpload = Swal.getPopup().querySelector('#fileUpload').files[0];
+                        const nim = '72210456';
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'assets/php/isi_laporan.php',
-                    data: { nim: nim, judulLaporan:judulLaporan, isiLaporan: isiLaporan },
-                    success: function (response) {
-                        Swal.fire('Laporan disimpan!', '', 'success');
-                    },
-                    error: function (error) {
-                        console.error('Error:', error);
-                        Swal.fire('Terjadi kesalahan. Silakan coba lagi.', '', 'error');
+                        const formData = new FormData();
+                        formData.append('nim', nim);
+                        formData.append('idRencanaKegiatan', idRencanaKegiatan);
+                        formData.append('isiLaporan', isiLaporan);
+                        formData.append('fileUpload', fileUpload);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'assets/php/isi_laporan.php',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                Swal.fire('Laporan disimpan!', '', 'success');
+                                console.log(response)
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                                Swal.fire('Terjadi kesalahan. Silakan coba lagi.', '', 'error');
+                            }
+                        });
                     }
                 });
+            },
+            error: function (error) {
+                console.error('Error:', error);
             }
         });
     });

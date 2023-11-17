@@ -132,7 +132,13 @@
                     <li class="">
                         <a href="../Mahasiswa/laporan.php" class="active-class active-txt">
                             <i class="bi bi-journal-text"></i>
-                            <span class=""> Laporan </span>
+                            <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Mahasiswa/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -241,6 +247,7 @@
                                         echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
                                         echo '<p class="card-text">' . $row['komentar'] . '</p>';
+                                        echo '<button class="float-end btn btn-primary download">Download File</button>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</div>';
@@ -303,6 +310,7 @@
     </div>
     <!-- END wrapper -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>
@@ -323,7 +331,6 @@
     <script src="assets/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
     <script src="assets/js/laporan.js"></script>

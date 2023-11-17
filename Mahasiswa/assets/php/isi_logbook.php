@@ -4,7 +4,7 @@ include 'conn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nimMahasiswa = $_POST['nim'];
     $logbookContent = $_POST['isiLogbook'];
-    $tanggal = date('Y-m-d');
+    $tanggal = $_POST['tanggalLogbook'];
 
     $sql = "INSERT INTO logbook (nim, tanggal, isi_logbook) VALUES ('$nimMahasiswa', '$tanggal', '$logbookContent')";
 

@@ -132,7 +132,13 @@
                     <li class="">
                         <a href="../Mahasiswa/laporan.php">
                             <i class="bi bi-journal-text"></i>
-                            <span class=""> Laporan </span>
+                            <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Mahasiswa/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
