@@ -24,7 +24,7 @@
             <div class="card">
                 <h2 class="mb-0">Login</h2>
                 <p>Silahkan Masukan NIM dan Password</p>
-                <form>
+                <form method="post">
                     <label for="username">NIM</label>
                     <input type="text" id="nim" placeholder="Masukan NIM">
 
