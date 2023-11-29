@@ -1,20 +1,25 @@
+<?php
+session_start();
+if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
+     header("Location:../mahasiswa/logout.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
      <meta charset="utf-8" />
-     <title>Dashboard</title>
+     <title>Kelompok</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta content="MoneyTrash!" name="description" />
      <meta content="MoneyTrash!" name="author" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <!-- App favicon -->
-     <link rel="shortcut icon"
-          href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+     <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
      <!-- App css -->
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -28,6 +33,10 @@
 
 <body>
 
+     <?php
+     $namaPendek = explode(' ', trim($_SESSION['nama']))[0];
+     ?>
+
      <!-- Begin page -->
      <div id="wrapper">
 
@@ -36,17 +45,16 @@
           <div class="navbar-custom">
                <ul class="list-unstyled topnav-menu float-right mb-0">
                     <li class="dropdown notification-list">
-                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
-                              aria-haspopup="false" aria-expanded="false">
+                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                               <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                               <span class="pro-user-name ml-1" style="color: white;">
-                                   Niko <i class="mdi mdi-chevron-down"></i>
+                                   <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
                               </span>
                          </a>
                          <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                               <!-- item-->
                               <div class="dropdown-header noti-title">
-                                   <h6 class="text-overflow m-0">Welcome Niko!</h6>
+                                   <h6 class="text-overflow m-0">Welcome <?php echo $namaPendek; ?>!</h6>
                               </div>
 
                               <!-- item-->
@@ -58,7 +66,7 @@
                               <div class="dropdown-divider"></div>
 
                               <!-- item-->
-                              <a href="/logout" class="dropdown-item notify-item">
+                              <a href="../mahasiswa/logout.php"" class="dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -68,7 +76,7 @@
 
                <!-- LOGO -->
                <div class="logo-box">
-                    <a href="/" class="logo text-center logo-dark">
+                    <a href="./dashboard.php" class="logo text-center logo-dark">
                          <span class="logo-lg">
                               <img src="assets/images/lppm-2.png" alt="Logo_LPPM.png" height="43">
                               <!-- <span class="logo-lg-text-dark">Simple</span> -->
@@ -96,9 +104,9 @@
                          <img src="assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                     </div>
                     <div class="user-info">
-                         <a href="#">Niko</a>
+                         <a href="#"><?php echo $namaPendek; ?></a>
                          <p class="text-muted m-0">
-                              Mahasiswa
+                              Dosen
                          </p>
                     </div>
                </div>
@@ -109,31 +117,42 @@
                     <ul class="metismenu" id="side-menu">
                          <li class="menu-title">Navigasi</li>
                          <li>
-                              <a href="/pemilik/dashboard" class="active-class active-txtmb-0">
+                              <a href="../Dosen/dashboard.php">
                                    <i class="bi bi-house"></i>
                                    <span> Beranda</span>
                               </a>
                          </li>
 
                          <li class="">
-                              <a href="/pemilik/pembayaran">
+                              <a href="../Dosen/kelompok.php" class="active-class active-txt">
                                    <i class="bi bi-people"></i>
                                    <span class=""> Kelompok
                                    </span>
-                                   <span class="badge badge-primary float-right">11</span>
                               </a>
                          </li>
 
                          <li class="">
-                              <a href="/pemilik/riwayat">
+                              <a href="../Dosen/logbook.php">
                                    <i class="bi bi-book"></i>
                                    <span class=""> Logbook </span>
                               </a>
                          </li>
                          <li class="">
-                              <a href="/pemilik/akun">
+                              <a href="../Dosen/laporan.php">
+                                   <i class="bi bi-list-check"></i>
+                                   <span class=""> Laporan Kegiatan</span>
+                              </a>
+                         </li>
+                         <li class="">
+                              <a href="../Dosen/rencana.php">
+                                   <i class="bi bi-pencil-square"></i>
+                                   <span class=""> Rencana Kegiatan</span>
+                              </a>
+                         </li>
+                         <li class="">
+                              <a href="../Dosen/nilai.php">
                                    <i class="bi bi-journal-text"></i>
-                                   <span class=""> Laporan </span>
+                                   <span class=""> Nilai</span>
                               </a>
                          </li>
                     </ul>
@@ -150,8 +169,8 @@
                <!-- Start Breadcrumb -->
                <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" style="background-color: transparent !important">
-                         <li class="breadcrumb-item"><a href="/">Mahasiswa</a></li>
-                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                         <li class="breadcrumb-item"><a href="/">Dosen</a></li>
+                         <li class="breadcrumb-item active" aria-current="page">Kelompok</li>
                     </ol>
                </nav>
                <!-- End Breadcrumb -->
@@ -178,36 +197,49 @@
                                              }
 
                                              echo $waktu;
-                                             ?>, Niko
+                                             ?>, <?php echo $_SESSION["nama"]; ?>
                                         </h4>
                                    </div>
                               </div>
                               <div class="row">
                                    <div class="col-12">
-                                        <h1>Daftar Anggota</h1>
+                                        <h1>Daftar Kelompok</h1>
                                         <table class="table">
                                              <thead>
                                                   <tr>
                                                        <th>Nim</th>
                                                        <th>Name</th>
                                                        <th>Prodi</th>
+                                                       <th>Fakultas</th>
                                                        <th>Jabatan</th>
                                                   </tr>
                                              </thead>
                                              <tbody>
-                                                  <tr>
-                                                       <td>72210465</td>
-                                                       <td>Stefanus Audy</td>
-                                                       <td>Sistem Informasi</td>
-                                                       <td>Ketua</td>
-                                                  </tr>
-                                                  <tr>
-                                                       <td>72210565</td>
-                                                       <td>Jane Smith</td>
-                                                       <td>Sistem Informasi</td>
-                                                       <td>Anggota</td>
-                                                  </tr>
-                                                  <!-- Add more rows as needed -->
+                                                  <?php
+                                                  include 'assets/php/conn.php';
+
+                                                  $nidn_target = $_SESSION['nidn'];
+
+                                                  $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
+
+                                                  $result = $conn->query($sql);
+
+                                                  if ($result->num_rows > 0) {
+                                                       while ($row = $result->fetch_assoc()) {
+                                                            echo '<tr>';
+                                                            echo '<td>' . $row['nim'] . '</td>';
+                                                            echo '<td>' . $row['nama'] . '</td>';
+                                                            echo '<td>' . $row['prodi'] . '</td>';
+                                                            echo '<td>' . $row['fakultas'] . '</td>';
+                                                            echo '<td>' . $row['jabatan'] . '</td>';
+                                                            echo '</tr>';
+                                                       }
+                                                  } else {
+                                                       echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                  }
+
+                                                  $conn->close();
+                                                  ?>
                                              </tbody>
                                         </table>
                                    </div>
@@ -244,13 +276,11 @@
      </div>
      <!-- END wrapper -->
 
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-          integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-          </script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+     </script>
 
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-          integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-          </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+     </script>
 
      <!-- Vendor js -->
      <script src="assets/js/vendor.min.js"></script>

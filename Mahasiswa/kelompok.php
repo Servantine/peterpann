@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['nama'] == null) {
+     header("Location:../mahasiswa/logout.php");
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +16,10 @@
      <meta content="MoneyTrash!" name="author" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <!-- App favicon -->
-     <link rel="shortcut icon"
-          href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+     <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
      <!-- App css -->
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -27,23 +32,26 @@
 </head>
 
 <body>
+
+     <?php
+     $namaPendek = explode(' ', trim($_SESSION['nama']))[0];
+     ?>
      <!-- Begin page -->
      <div id="wrapper">
           <!-- Topbar Start -->
           <div class="navbar-custom">
                <ul class="list-unstyled topnav-menu float-right mb-0">
                     <li class="dropdown notification-list">
-                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
-                              aria-haspopup="false" aria-expanded="false">
+                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                               <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                               <span class="pro-user-name ml-1" style="color: white;">
-                                   Niko <i class="mdi mdi-chevron-down"></i>
+                              <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
                               </span>
                          </a>
                          <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                               <!-- item-->
                               <div class="dropdown-header noti-title">
-                                   <h6 class="text-overflow m-0">Welcome Niko!</h6>
+                                   <h6 class="text-overflow m-0">Welcome  <?php echo $namaPendek; ?>!</h6>
                               </div>
 
                               <!-- item-->
@@ -55,7 +63,7 @@
                               <div class="dropdown-divider"></div>
 
                               <!-- item-->
-                              <a href="../Mahasiswa/logout" class="dropdown-item notify-item">
+                              <a href="../Mahasiswa/logout.php" class="dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -93,7 +101,7 @@
                          <img src="assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                     </div>
                     <div class="user-info">
-                         <a href="#">Niko</a>
+                         <a href="#"> <?php echo $namaPendek; ?></a>
                          <p class="text-muted m-0">
                               Mahasiswa
                          </p>
@@ -179,7 +187,7 @@
                                              }
 
                                              echo $waktu;
-                                             ?>, Niko
+                                             ?>, <?php echo $_SESSION["nama"]; ?>
                                         </h4>
                                    </div>
                               </div>
@@ -200,7 +208,7 @@
                                                   <?php
                                                   include 'assets/php/conn.php';
 
-                                                  $nim_target = '72210456';
+                                                  $nim_target = $_SESSION['nim'];
 
                                                   $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE dtl_kelompok_kkn.id_kelompok IN ( SELECT dtl_kelompok_kkn.id_kelompok FROM dtl_kelompok_kkn WHERE dtl_kelompok_kkn.nim = '$nim_target')";
 
@@ -239,7 +247,13 @@
                                                        <th>Prodi</th>
                                                        <th>Fakultas</th>
                                                        <th>Nomor Telepon</th>
+                                                       <?php
+                                                       if($_SESSION['status'] == 'Ketua Kelompok') {
+                                                       ?>
                                                        <th class="text-center">Aksi</th>
+                                                       <?php
+                                                       }
+                                                       ?>
                                                   </tr>
                                              </thead>
                                              <tbody>
@@ -260,7 +274,9 @@
                                                             echo '<td style="vertical-align: middle;">' . $row['prodi'] . '</td>';
                                                             echo '<td style="vertical-align: middle;">' . $row['fakultas'] . '</td>';
                                                             echo '<td style="vertical-align: middle;">' . $row['no_telp'] . '</td>';
+                                                            if($_SESSION['status'] == 'Ketua Kelompok') {
                                                             echo '<td class="text-center" style="vertical-align: middle;"> <a href="https://wa.me/' . $row['no_telp'] . '"><button type="button" class="btn btn-primary">Hubungi Dosen</button> </td>';
+                                                            }
                                                             echo '</tr>';
                                                        }
                                                   } else {
@@ -309,13 +325,11 @@
      <!-- Script -->
 
      <!-- Script -->
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-          integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-          </script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+     </script>
 
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-          integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-          </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+     </script>
 
      <!-- Vendor js -->
      <script src="assets/js/vendor.min.js"></script>

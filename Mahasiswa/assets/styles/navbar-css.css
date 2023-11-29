@@ -11,5 +11,5 @@ body, .navbar-custom {
 }
 
 .content-page {
-    border-left: 7px solid #282c34 !important;
+    border-color: #282c34 !important;
 }
