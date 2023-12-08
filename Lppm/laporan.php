@@ -293,7 +293,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                             echo '</div>';
                                                             echo '</div>';
                                                             if ($row['fileupload']) {
-                                                                 echo '<a href="assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1 mr-2" download>Download File</a>';
+                                                                 echo '<a href="../Mahasiswa/assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1 mr-2" download>Download File</a>';
                                                             }
                                                             echo '</div>';
                                                             echo '</div>';

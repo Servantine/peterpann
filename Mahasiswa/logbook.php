@@ -138,15 +138,15 @@ if($_SESSION['nama'] == null) {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Mahasiswa/laporan.php">
-                            <i class="bi bi-journal-text"></i>
-                            <span class=""> Laporan Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Mahasiswa/rencana.php">
                             <i class="bi bi-pencil-square"></i>
                             <span class=""> Rencana Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Mahasiswa/laporan.php">
+                            <i class="bi bi-journal-text"></i>
+                            <span class=""> Laporan Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -257,7 +257,7 @@ if($_SESSION['nama'] == null) {
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
                                         echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :</p>';
-                                        echo '<p class="card-text">' . $row['komentar_lppm'] . '</p>';
+                                        echo '<p class="card-text">' . $row['komentar_admin'] . '</p>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</div>';

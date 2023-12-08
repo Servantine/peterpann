@@ -5,7 +5,7 @@ include("conn.php");
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-$cek = mysqli_query($conn, "SELECT mahasiswa.nama, dtl_kelompok_kkn.jabatan AS 'status' FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE mahasiswa.nim='$username' AND mahasiswa.password='$password'");
+$cek = mysqli_query($conn, "SELECT mahasiswa.nama, mahasiswa.nim, dtl_kelompok_kkn.jabatan AS 'status' FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE mahasiswa.nim='$username' AND mahasiswa.password='$password'");
 $cek2 = mysqli_query($conn, "SELECT * FROM `dsn_pembimbing` WHERE nidn='$username' AND password='$password'");
 $cek3 = mysqli_query($conn, "SELECT * FROM `lppm` WHERE id_lppm='$username' AND password='$password'");
 $datamahasiswa = mysqli_fetch_array($cek);
@@ -30,6 +30,7 @@ else if (mysqli_num_rows($cek2) > 0) {
 else if(mysqli_num_rows($cek3) > 0) {
      session_start();
      $_SESSION['nama'] = $datalppm['nama_lppm'];
+     $_SESSION['id_lppm'] = $datalppm['id_lppm'];
      $_SESSION['status'] = "lppm";
      header('Location: ./Lppm/dashboard.php');
 } else {

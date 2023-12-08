@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
+if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
     header("Location:../mahasiswa/logout.php");
 }
 ?>
@@ -10,7 +10,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>KKN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
@@ -66,7 +66,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="../mahasiswa/logout.php" class="dropdown-item notify-item">
+                        <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -106,7 +106,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                 <div class="user-info">
                     <a href="#"><?php echo $namaPendek; ?></a>
                     <p class="text-muted m-0">
-                        Dosen
+                        LPPM
                     </p>
                 </div>
             </div>
@@ -117,14 +117,35 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigasi</li>
                     <li>
-                        <a href="../Dosen/dashboard.php" class="active-class active-txt">
+                        <a href="../Lppm/dashboard.php">
                             <i class="bi bi-house"></i>
                             <span> Beranda</span>
                         </a>
                     </li>
 
+                    <li>
+                        <a href="../Lppm/kkn.php" class="active-class active-txt">
+                            <i class="bi bi-pin-map"></i>
+                            <span> KKN</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../Lppm/mahasiswa.php">
+                            <i class="bi bi-mortarboard"></i>
+                            <span> Mahasiswa</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../Lppm/dosen.php">
+                            <i class="bi bi-person"></i>
+                            <span> Dosen</span>
+                        </a>
+                    </li>
+
                     <li class="">
-                        <a href="../Dosen/kelompok.php">
+                        <a href="../Lppm/kelompok.php">
                             <i class="bi bi-people"></i>
                             <span class=""> Kelompok
                             </span>
@@ -132,27 +153,21 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                     </li>
 
                     <li class="">
-                        <a href="../Dosen/logbook.php">
+                        <a href="../Lppm/logbook.php">
                             <i class="bi bi-book"></i>
                             <span class=""> Logbook </span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Dosen/rencana.php">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class=""> Rencana Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="../Dosen/laporan.php">
+                        <a href="../Lppm/laporan.php">
                             <i class="bi bi-list-check"></i>
                             <span class=""> Laporan Kegiatan</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Dosen/nilai.php">
-                            <i class="bi bi-journal-text"></i>
-                            <span class=""> Nilai</span>
+                        <a href="../Lppm/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -169,8 +184,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
             <!-- Start Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent !important">
-                    <li class="breadcrumb-item"><a href="/">Dosen</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">KKN</li>
                 </ol>
             </nav>
             <!-- End Breadcrumb -->
@@ -203,43 +218,126 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         </div>
                     </div>
                     <!-- end row -->
+                    <?php if (isset($_GET['success'])) {
+                        if ($_GET['success'] == true) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <i class="bi bi-exclamation-circle"></i>
+                                Berhasil menambahkan data KKN!
+                            </div>
+                        <?php } else { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <i class="bi bi-exclamation-circle"></i>
+                                Gagal menambahkan data KKN!
+                            </div>
+                    <?php }
+                    } ?>
 
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <h5 class="mt-0 font-14">Lokasi KKN</h5>
-                                <div class="row m-0 p-0 border">
-                                    <div id="map" style="width: 100%; height: 400px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                        include 'assets/php/conn.php';
-
-                        $nidn = $_SESSION['nidn'];
-
-                        $sql = "SELECT kelompok_kkn.lokasi, kelompok_kkn.alamat FROM kelompok_kkn INNER JOIN dsn_pembimbing ON kelompok_kkn.nidn = dsn_pembimbing.nidn
-                                    WHERE dsn_pembimbing.nidn = '$nidn';";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $lokasiKelompokKKN = $row['lokasi'];
-                            $alamatkelompokKKN = $row['alamat'];
-                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
-                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
-                        } else {
-                            echo '<div>Data kelompok KKN tidak ditemukan</div>';
-                        }
-
-                        // Menutup koneksi
-                        $conn->close();
-                        ?>
                     </div>
+                    <div class="col-`12">
+                        <!-- Cards go here -->
+                        <div class="card-container">
 
-                    <!-- End of col -->
+                            <!-- Card Mulai -->
+                            <?php
+                            if (isset($_GET["add"])) {
+                                include 'assets/php/conn.php';
+
+                                $id_lppm = $_SESSION['id_lppm'];
+
+                                $nama_hari_inggris = array(
+                                    'Monday' => 'Senin',
+                                    'Tuesday' => 'Selasa',
+                                    'Wednesday' => 'Rabu',
+                                    'Thursday' => 'Kamis',
+                                    'Friday' => 'Jumat',
+                                    'Saturday' => 'Sabtu',
+                                    'Sunday' => 'Minggu'
+                                );
+                            ?>
+                                <form action="./method/addkkn.php" method="post">
+                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>"/>
+                                    <div class="form-group">
+                                        <label for="kode_kkn">Kode KKN</label>
+                                        <input type="text" class="form-control" id="kode_kkn" name="kode_kkn" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama_kkn">Nama KKN</label>
+                                        <input type="text" class="form-control" id="nama_kkn" name="nama_kkn" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tema_kkn">Tema KKN</label>
+                                        <input type="text" class="form-control" id="tema_kkn" name="tema_kkn" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mulai_kkn">Tanggal Mulai KKN</label>
+                                        <input type="date" class="form-control" id="mulai_kkn" name="mulai_kkn" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selesai_kkn">Tanggal Selesai KKN</label>
+                                        <input type="date" class="form-control" id="selesai_kkn" name="selesai_kkn" placeholder="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                </form>
+
+                        </div>
+
+                    </div>
+                <?php
+                                $conn->close();
+                            } else {
+
+                ?>
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Daftar KKN</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Tema</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    include 'assets/php/conn.php';
+
+                                    $sql = "SELECT * from kkn";
+
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<tr style="transform: rotate(0);">';
+                                            echo '<td>' . $row['kode'] . '</td>';
+                                            echo '<td>' . $row['nama_kkn'] . '</td>';
+                                            echo '<td>' . $row['tema'] . '</td>';
+                                            echo '<td>' . $row['tanggal_mulai'] . '</td>';
+                                            echo '<td>' . $row['tanggal_selesai'] . '</td>';
+                                            echo '</tr>';
+                                        }
+                                    } else {
+                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                    }
+
+                                    $conn->close();
+                                    ?>
+                                </tbody>
+                            </table>
+                            <a href="./kkn.php?add=true" class="btn btn-info btn-lg"> Tambah KKN </a>
+                        </div>
+                    </div>
+                <?php
+                            }
+                ?>
+
                 </div>
                 <!-- end row -->
+
+
 
             </div>
             <!-- end container-fluid -->
@@ -267,7 +365,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     <!-- END wrapper -->
 
     <!-- Script -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
+if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     header("Location:../mahasiswa/logout.php");
 }
 ?>
@@ -16,10 +16,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     <meta content="MoneyTrash!" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+    <link rel="shortcut icon"
+        href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
     <!-- App css -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -45,7 +47,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
-                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1" style="color: white;">
                             <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
@@ -54,7 +57,9 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome <?php echo $namaPendek; ?>!</h6>
+                            <h6 class="text-overflow m-0">Welcome
+                                <?php echo $namaPendek; ?>!
+                            </h6>
                         </div>
 
                         <!-- item-->
@@ -66,7 +71,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="../mahasiswa/logout.php"" class="dropdown-item notify-item">
+                        <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -104,7 +109,9 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                     <img src="assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
-                    <a href="#"><?php echo $namaPendek; ?></a>
+                    <a href="#">
+                        <?php echo $namaPendek; ?>
+                    </a>
                     <p class="text-muted m-0">
                         Dosen
                     </p>
@@ -138,15 +145,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Dosen/laporan.php">
-                            <i class="bi bi-list-check"></i>
-                            <span class=""> Laporan Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Dosen/rencana.php">
                             <i class="bi bi-pencil-square"></i>
                             <span class=""> Rencana Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Dosen/laporan.php">
+                            <i class="bi bi-list-check"></i>
+                            <span class=""> Laporan Kegiatan</span>
                         </a>
                     </li>
                     <li class="">
@@ -188,22 +195,23 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                                     $jam = date('H');
 
-                                    if ($jam >= 5 && $jam < 12) {
+                                    if($jam >= 5 && $jam < 12) {
                                         $waktu = 'Pagi';
-                                    } elseif ($jam >= 12 && $jam < 18) {
+                                    } elseif($jam >= 12 && $jam < 18) {
                                         $waktu = 'Siang';
                                     } else {
                                         $waktu = 'Malam';
                                     }
 
                                     echo $waktu;
-                                    ?>, <?php echo $_SESSION["nama"]; ?>
+                                    ?>,
+                                    <?php echo $_SESSION["nama"]; ?>
                                 </h4>
                             </div>
                         </div>
                     </div>
-                    <?php if (isset($_GET['success'])) {
-                        if ($_GET['success'] == true) { ?>
+                    <?php if(isset($_GET['success'])) {
+                        if($_GET['success'] == true) { ?>
                             <div class="alert alert-success" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
                                 Berhasil menambahkan komentar!
@@ -213,7 +221,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                 <i class="bi bi-exclamation-circle"></i>
                                 Gagal menambahkan komentar!
                             </div>
-                    <?php }
+                        <?php }
                     } ?>
 
                     <div class="row">
@@ -224,7 +232,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                             <!-- Card Mulai -->
                             <?php
-                            if (isset($_GET["nim"])) {
+                            if(isset($_GET["nim"])) {
                                 include 'assets/php/conn.php';
 
                                 $nama_hari_inggris = array(
@@ -242,8 +250,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                 $sql = "SELECT * FROM logbook WHERE nim = '$nim_pengguna'";
                                 $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
+                                if($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
                                         $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
 
 
@@ -253,27 +261,31 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         echo '<div class="card-body rounded shadow">';
                                         echo '<div class="row mb-2">';
                                         echo '<div class="col-1">';
-                                        echo '<img src="assets/images/ok.webp" alt="Ok.png">';
+                                        if($row['acc_dosen'] == true && $row['acc_admin']) {
+                                            echo '<img src="assets/images/ok.webp" alt="Ok.png" width ="40">';
+                                        } else {
+                                            echo '<img src="assets/images/warning.png" alt="warning.png" width ="40">';
+                                        }
                                         echo '</div>';
                                         echo '<div class="col-11">';
-                                        echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';
+                                        echo '<h1 class="card-title m-0 p-0">'.$nama_hari.'<br>'.date('j F Y', strtotime($row['tanggal'])).'</h1>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Apa yang kamu kerjakan hari ini?</p>';
-                                        echo '<p class="card-text">' . $row['isi_logbook'] . '</p>';
+                                        echo '<p class="card-text">'.$row['isi_logbook'].'</p>';
                                         echo '<form action="./method/komentar_logbook.php" method="post">';
-                                        echo '<input type="hidden" id="id_logbook" name="id_logbook" value="' . $row["id_logbook"] . '">';
-                                        echo '<input type="hidden" id="nim" name="nim" value="' . $nim_pengguna . '">';
+                                        echo '<input type="hidden" id="id_logbook" name="id_logbook" value="'.$row["id_logbook"].'">';
+                                        echo '<input type="hidden" id="nim" name="nim" value="'.$nim_pengguna.'">';
                                         echo '<div class="m-0 p-0">';
                                         echo '<label class="form-label" for="komentar">Komentar :</label> <br>
-                                              <textarea class="form-control w-100" id="komentar" name="komentar" placeholder="Masukan Komentar" rows="3">' . $row['komentar_dosen'] . '</textarea>';
+                                              <textarea class="form-control w-100" id="komentar" name="komentar" placeholder="Masukan Komentar" rows="3">'.$row['komentar_dosen'].'</textarea>';
                                         echo '<div>';
                                         echo '<button class="btn btn-success mt-1 float-end"> Simpan </button>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</form>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Admin LPPM :</p>';
-                                        echo '<p class="card-text">' . $row['komentar_admin'] . '</p>';
+                                        echo '<p class="card-text">'.$row['komentar_admin'].'</p>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</div>';
@@ -282,79 +294,79 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                 } else {
                                     echo 'Tidak ada data logbook';
                                 }
-                            ?>
+                                ?>
 
 
 
                                 <!-- Card Selesai -->
 
-                        </div>
+                            </div>
 
-                        <!-- Pagination -->
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center mt-3">
-                                <li class="page-item" id="prev-page">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <!-- Page indicators will be dynamically added here -->
-                                <li class="page-item" id="next-page">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <a href="./logbook.php" class="btn btn-info btn-lg"> Kembali </a>
-                    </div>
-                <?php
-                                $conn->close();
+                            <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mt-3">
+                                    <li class="page-item" id="prev-page">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <!-- Page indicators will be dynamically added here -->
+                                    <li class="page-item" id="next-page">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <a href="./logbook.php" class="btn btn-info btn-lg"> Kembali </a>
+                        </div>
+                        <?php
+                        $conn->close();
                             } else {
 
-                ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <h1>Daftar Anggota</h1>
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Nim</th>
-                                        <th>Name</th>
-                                        <th>Prodi</th>
-                                        <th>Fakultas</th>
-                                        <th>Jabatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    include 'assets/php/conn.php';
+                                ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <h1>Daftar Anggota</h1>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nim</th>
+                                            <th>Name</th>
+                                            <th>Prodi</th>
+                                            <th>Fakultas</th>
+                                            <th>Jabatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include 'assets/php/conn.php';
 
-                                    $nidn_target = $_SESSION['nidn'];
+                                        $nidn_target = $_SESSION['nidn'];
 
-                                    $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
+                                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
 
-                                    $result = $conn->query($sql);
+                                        $result = $conn->query($sql);
 
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<tr style="transform: rotate(0);">';
-                                            echo '<td><a href="logbook.php?nim=' . $row['nim'] . '" class="stretched-link">' . $row['nim'] . '</td>';
-                                            echo '<td>' . $row['nama'] . '</td>';
-                                            echo '<td>' . $row['prodi'] . '</td>';
-                                            echo '<td>' . $row['fakultas'] . '</td>';
-                                            echo '<td>' . $row['jabatan'] . '</td>';
-                                            echo '</tr>';
+                                        if($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) {
+                                                echo '<tr style="transform: rotate(0);">';
+                                                echo '<td><a href="logbook.php?nim='.$row['nim'].'" class="stretched-link">'.$row['nim'].'</td>';
+                                                echo '<td>'.$row['nama'].'</td>';
+                                                echo '<td>'.$row['prodi'].'</td>';
+                                                echo '<td>'.$row['fakultas'].'</td>';
+                                                echo '<td>'.$row['jabatan'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
                                         }
-                                    } else {
-                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
-                                    }
 
-                                    $conn->close();
-                                    ?>
-                                </tbody>
-                            </table>
+                                        $conn->close();
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                <?php
+                        <?php
                             }
-                ?>
+                            ?>
                 </div>
                 <!-- end row -->
 
@@ -384,11 +396,13 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     <!-- END wrapper -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
@@ -404,7 +418,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     <!-- App js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
-    <script src="assets/js/logbook.js"></script>
+    <script src="assets/js/pagination.js"></script>
 
 </body>
 

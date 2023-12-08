@@ -20,7 +20,7 @@
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/styles/navbar-css.css">
+    <link rel="stylesheet" href="assets/styles/navbar-css.css">
 
     <!-- CSS per Page-->
 
@@ -225,17 +225,17 @@
         </script>
 
     <!-- Vendor js -->
-    <script src="/assets/js/vendor.min.js"></script>
+    <script src="assets/js/vendor.min.js"></script>
 
-    <script src="/assets/libs/morris-js/morris.min.js"></script>
-    <script src="/assets/libs/raphael/raphael.min.js"></script>
+    <script src="assets/libs/morris-js/morris.min.js"></script>
+    <script src="assets/libs/raphael/raphael.min.js"></script>
 
-    <script src="/assets/js/pages/dashboard.init.js"></script>
+    <script src="assets/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/assets/js/app.min.js"></script>
+    <script src="assets/js/app.min.js"></script>
 
 </body>
 
