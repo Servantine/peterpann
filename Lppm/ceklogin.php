@@ -16,7 +16,7 @@ if(mysqli_num_rows($cek3) > 0) {
      $_SESSION['status'] = "lppm";
      header('Location: ./dashboard.php');
 } else {
-     header('Location: ./login.php?login=failed');
+     header('Location: ./?login=failed');
 }
 
 ?>
