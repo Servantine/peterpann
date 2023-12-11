@@ -218,7 +218,35 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
                     </div>
                     <!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <h5 class="mt-0 font-14">Lokasi KKN</h5>
+                                <div class="row m-0 p-0 border">
+                                    <div id="map" style="width: 100%; height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        include 'assets/php/conn.php';
 
+                        $sql = "SELECT kelompok_kkn.lokasi, kelompok_kkn.alamat FROM kelompok_kkn;";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            $lokasiKelompokKKN = $row['lokasi'];
+                            $alamatkelompokKKN = $row['alamat'];
+                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
+                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
+                        } else {
+                            echo '<div>Data kelompok KKN tidak ditemukan</div>';
+                        }
+
+                        // Menutup koneksi
+                        $conn->close();
+                        ?>
+                    </div>
                 </div>
                 <!-- end row -->
 
@@ -248,8 +276,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
     <!-- END wrapper -->
 
     <!-- Script -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
-    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
