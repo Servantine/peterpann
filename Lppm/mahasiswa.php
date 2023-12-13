@@ -256,7 +256,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 );
                             ?>
                                 <form action="./method/addmahasiswa.php" method="post">
-                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>"/>
+                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
                                     <div class="form-group">
                                         <label for="nim">NIM</label>
                                         <input type="text" class="form-control" id="nim" name="nim" placeholder="">
@@ -278,6 +278,33 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                         <input type="text" class="form-control" id="angkatan" name="angkatan" placeholder="">
                                     </div>
                                     <div class="form-group">
+                                        <label for="kelompok">Kelompok</label>
+                                        <select class="form-control" id="kelompok" name="kelompok">
+                                            <?php
+                                            include 'assets/php/conn.php';
+
+                                            $sql = "SELECT id_kelompok, nama_kelompok FROM `kelompok_kkn` ORDER BY nama_kelompok;";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<option value="' . $row['id_kelompok'] . '">' . $row['nama_kelompok'] . '</option>';
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jabatan">Jabatan</label>
+                                        <select class="form-control" id="jabatan" name="jabatan">
+                                            <option value="Ketua Kelompok">Ketua Kelompok</option>
+                                            <option value="Anggota Kelompok">Anggota Kelompok</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" name="password" placeholder="">
                                     </div>
@@ -294,7 +321,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                 ?>
                     <div class="row">
                         <div class="col-12">
-                            <h1>Daftar Dosen</h1>
+                            <h1>Daftar Mahasiswa</h1>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -303,13 +330,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                         <th>Prodi</th>
                                         <th>Fakultas</th>
                                         <th>Angkatan</th>
+                                        <th>Kelompok</th>
+                                        <th>Jabatan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     include 'assets/php/conn.php';
 
-                                    $sql = "SELECT * from mahasiswa";
+                                    $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, kelompok_kkn.nama_kelompok, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
 
                                     $result = $conn->query($sql);
 
@@ -321,6 +350,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             echo '<td>' . $row['prodi'] . '</td>';
                                             echo '<td>' . $row['fakultas'] . '</td>';
                                             echo '<td>' . $row['angkatan'] . '</td>';
+                                            echo '<td>' . $row['nama_kelompok'] . '</td>';
+                                            echo '<td>' . $row['jabatan'] . '</td>';
                                             echo '</tr>';
                                         }
                                     } else {

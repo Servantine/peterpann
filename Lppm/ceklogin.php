@@ -5,7 +5,7 @@ include("conn.php");
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-$cek3 = mysqli_query($conn, "SELECT * FROM `lppm` WHERE id_lppm='$username' AND password='$password'");
+$cek3 = mysqli_query($conn, "SELECT * FROM `lppm` WHERE username='$username' AND password='$password'");
 $datalppm = mysqli_fetch_array($cek3);
 
 

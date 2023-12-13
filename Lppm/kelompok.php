@@ -266,11 +266,43 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             </div>
                                             <div class="form-group">
                                                 <label for="kode">Kode KKN</label>
-                                                <input type="text" class="form-control" id="kode" name="kode" placeholder="">
+                                                <select class="form-control" id="kode" name="kode">
+                                                    <?php
+                                                    include 'assets/php/conn.php';
+
+                                                    $sql = "SELECT kode FROM `kkn` ORDER BY kode;";
+
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo '<option value="' . $row['kode'] . '">' . $row['kode'] . '</option>';
+                                                        }
+                                                    } else {
+                                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="nidn">NIDN</label>
-                                                <input type="text" class="form-control" id="nidn" name="nidn" placeholder="">
+                                                <select class="form-control" id="nidn" name="nidn">
+                                                    <?php
+                                                    include 'assets/php/conn.php';
+
+                                                    $sql = "SELECT nidn, nama_dosen FROM `dsn_pembimbing` ORDER BY nama_dosen;";
+
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo '<option value="' . $row['nidn'] . '">' . $row['nama_dosen'] . ' - ' . $row['nidn'] . '</option>';
+                                                        }
+                                                    } else {
+                                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Kirim</button>
                                         </form>
