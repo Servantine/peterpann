@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-    header("Location:../mahasiswa/logout.php");
+    header("Location:logout.php");
 }
 ?>
 
@@ -58,15 +58,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
 
                         <!-- item-->
-                        <a href="/pemilik/akun" class="dropdown-item notify-item">
-                            <i class="mdi mdi-settings-outline"></i>
-                            <span>Akun</span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <!-- item-->
-                        <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
+                        <a href="logout.php" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -159,15 +151,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Lppm/laporan.php">
-                            <i class="bi bi-list-check"></i>
-                            <span class=""> Laporan Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Lppm/rencana.php">
                             <i class="bi bi-pencil-square"></i>
                             <span class=""> Rencana Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Lppm/laporan.php">
+                            <i class="bi bi-list-check"></i>
+                            <span class=""> Laporan Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -227,25 +219,6 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        include 'assets/php/conn.php';
-
-                        $sql = "SELECT kelompok_kkn.lokasi, kelompok_kkn.alamat FROM kelompok_kkn;";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $lokasiKelompokKKN = $row['lokasi'];
-                            $alamatkelompokKKN = $row['alamat'];
-                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
-                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
-                        } else {
-                            echo '<div>Data kelompok KKN tidak ditemukan</div>';
-                        }
-
-                        // Menutup koneksi
-                        $conn->close();
-                        ?>
                     </div>
                 </div>
                 <!-- end row -->
