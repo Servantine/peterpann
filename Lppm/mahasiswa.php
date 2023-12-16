@@ -457,8 +457,29 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     <div class="form-group">
                                         <label for="jabatan">Jabatan</label>
                                         <select class="form-control" id="jabatan" name="jabatan" required>
-                                            <option value="Ketua Kelompok">Ketua Kelompok</option>
-                                            <option value="Anggota Kelompok">Anggota Kelompok</option>
+                                            <?php
+                                            include 'assets/php/conn.php';
+                                            $jabatanOptions = array(
+                                                "Ketua Kelompok", "Anggota Kelompok"
+                                            );
+
+                                            // Menambahkan logika untuk mengecek apakah sudah ada Ketua Kelompok
+                                            $sudahAdaKetua = false;
+                                            // Query untuk mengecek ketua kelompok
+                                            $query = "SELECT COUNT(*) AS jumlah_ketua FROM dtl_kelompok_kkn WHERE jabatan = 'Ketua Kelompok' AND id_kelompok = '" . $row['id_kelompok'] . "'";
+                                            $result3 = mysqli_query($conn, $query); // Asumsi $koneksi adalah variabel koneksi database Anda
+                                            if ($row = mysqli_fetch_assoc($result3)) {
+                                                if ($row['jumlah_ketua'] > 0) {
+                                                    $sudahAdaKetua = true;
+                                                }
+                                            }
+
+                                            foreach ($jabatanOptions as $jabatan) {
+                                                $selected = ($jabatan == $row['jabatan']) ? 'selected' : '';
+                                                $disabled = ($sudahAdaKetua && $jabatan == "Ketua Kelompok") ? 'disabled' : '';
+                                                echo "<option value=\"$jabatan\" $selected $disabled>$jabatan</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
 

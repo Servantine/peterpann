@@ -367,13 +367,13 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                 <label for="jabatan">Jabatan</label>
                                                 <select class="form-control" id="jabatan" name="jabatan" required>
                                                     <?php
-                                                    $prodiOptions = array(
+                                                    $jabatanOptions = array(
                                                         "Dosen Tetap", "Dosen Tidak Tetap"
                                                     );
 
-                                                    foreach ($prodiOptions as $prodi) {
-                                                        $selected = ($prodi == $row['jabatan']) ? 'selected' : '';
-                                                        echo "<option value=\"$prodi\" $selected>$prodi</option>";
+                                                    foreach ($jabatanOptions as $jabatan) {
+                                                        $selected = ($jabatan == $row['jabatan']) ? 'selected' : '';
+                                                        echo "<option value=\"$jabatan\" $selected>$jabatan</option>";
                                                     }
                                                     ?>
                                                 </select>
