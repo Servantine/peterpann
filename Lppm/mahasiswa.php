@@ -372,7 +372,6 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                echo "Debug: " . $row['password']; 
                                 ?>
 
                                 <form action="./method/updatemahasiswa.php" method="post">
@@ -432,11 +431,11 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                             $sql = "SELECT id_kkn, nama_kkn FROM `kkn` ORDER BY nama_kkn;";
 
-                                            $result = $conn->query($sql);
+                                            $result2 = $conn->query($sql);
 
-                                            if ($result->num_rows > 0) {
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo '<option value="' . $row['id_kkn'] . '">' . $row['nama_kkn'] . '</option>';
+                                            if ($result2->num_rows > 0) {
+                                                while ($row2 = $result2->fetch_assoc()) {
+                                                    echo '<option value="' . $row2['id_kkn'] . '">' . $row2['nama_kkn'] . '</option>';
                                                 }
                                             } else {
                                                 echo '<option value="">Tidak ada data KKN</option>';
@@ -444,6 +443,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             ?>
                                         </select>
                                     </div>
+
                                     <script>
                                         var kelompokFromDb = "<?php echo $row['id_kelompok']; ?>"; // Pastikan ini adalah ID kelompok yang benar
                                     </script>
@@ -461,11 +461,11 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             <option value="Anggota Kelompok">Anggota Kelompok</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="password" required>Password</label>
-                                        <?php echo $row['password']; ?>
                                         <input type="password" class="form-control" id="password" name="password" placeholder=""
-                                        value="<?php echo isset($row['password']) ? $row['password'] : '' ?>">
+                                            value="<?php echo $row['password'] ?>">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Kirim</button>
                                 </form>
