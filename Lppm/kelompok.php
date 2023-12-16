@@ -285,7 +285,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="nidn">NIDN</label>
+                                                <label for="nidn">Dosen Pendamping</label>
                                                 <select class="form-control" id="nidn" name="nidn" required>
                                                     <?php
                                                     include 'assets/php/conn.php';
@@ -296,10 +296,10 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo '<option value="' . $row['nidn'] . '">' . $row['nama_dosen'] . ' - ' . $row['nidn'] . '</option>';
+                                                            echo '<option value="' . $row['nidn'] . '">'  . $row['nidn'] . ' - '. $row['nama_dosen'] . '</option>';
                                                         }
                                                     } else {
-                                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                        echo '<option value="" disabled selected>Tidak ada data Dosen</option>';
                                                     }
                                                     ?>
                                                 </select>

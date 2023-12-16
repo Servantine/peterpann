@@ -16,10 +16,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
      <meta content="MoneyTrash!" name="author" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <!-- App favicon -->
-     <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+     <link rel="shortcut icon"
+          href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
      <!-- App css -->
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -45,7 +47,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
           <div class="navbar-custom">
                <ul class="list-unstyled topnav-menu float-right mb-0">
                     <li class="dropdown notification-list">
-                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                              aria-haspopup="false" aria-expanded="false">
                               <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                               <span class="pro-user-name ml-1" style="color: white;">
                                    <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
@@ -54,7 +57,9 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                          <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                               <!-- item-->
                               <div class="dropdown-header noti-title">
-                                   <h6 class="text-overflow m-0">Welcome <?php echo $namaPendek; ?>!</h6>
+                                   <h6 class="text-overflow m-0">Welcome
+                                        <?php echo $namaPendek; ?>!
+                                   </h6>
                               </div>
 
                               <!-- item-->
@@ -104,7 +109,9 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                          <img src="assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                     </div>
                     <div class="user-info">
-                         <a href="#"><?php echo $namaPendek; ?></a>
+                         <a href="#">
+                              <?php echo $namaPendek; ?>
+                         </a>
                          <p class="text-muted m-0">
                               LPPM
                          </p>
@@ -212,7 +219,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                              }
 
                                              echo $waktu;
-                                             ?>, <?php echo $_SESSION["nama"]; ?>
+                                             ?>,
+                                             <?php echo $_SESSION["nama"]; ?>
                                         </h4>
                                    </div>
                               </div>
@@ -227,7 +235,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                              <i class="bi bi-exclamation-circle"></i>
                                              Gagal menambahkan komentar!
                                         </div>
-                              <?php }
+                                   <?php }
                               } ?>
                               <div class="row">
                                    <div class="col-12">
@@ -250,7 +258,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                                   $id_kelompok = $_GET["id"];
 
-                                                  $sql = "SELECT rencana_kegiatan.* FROM rencana_kegiatan WHERE id_kelompok = '".$id_kelompok."'";
+                                                  $sql = "SELECT rencana_kegiatan.* FROM rencana_kegiatan WHERE id_kelompok = '" . $id_kelompok . "'";
 
                                                   $result = $conn->query($sql);
 
@@ -277,8 +285,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                             echo '<p class="card-text text-muted mb-0 pb-0">Judul Kegiatan:</p>';
                                                             echo '<p class="card-text">' . $row['judul_kegiatan'] . '</p>';
                                                             echo '<p class="card-text text-muted mb-0 pb-0">Rencana Kegiatan:</p>';
-                                                            echo '<p class="card-text">' . $row['rencana_kegiatan'] . '</p>';
-                                                            echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
+                                                            echo '<p class="card-text">' . $row['rencana_kegiatan'];
+                                                            if ($row['fileupload']) {
+                                                                 echo '<a href="../Mahasiswa/assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
+                                                            }
+                                                            echo '</p>';
+                                                            echo '<hr class="my-3 mt-4" style="border-width: 2px; border-color: black;">';
                                                             echo '<div class="m-0 p-0">';
                                                             echo '<form action="./method/komentar_rencana.php" method="post">';
                                                             echo '<input type="hidden" id="id_rencana_kegiatan" name="id_rencana_kegiatan" value="' . $row["id_rencana_kegiatan"] . '">';
@@ -287,92 +299,103 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                               <textarea class="form-control w-100" id="komentar" name="komentar" placeholder="Masukan Komentar" rows="3">' . $row['komentar_lppm'] . '</textarea>';
                                                             echo '<div>';
                                                             echo '<p class="card-text text-muted mb-0 pb-0">Komentar Dosen :</p>';
-                                        echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
+                                                            echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
                                                             echo '<button class="btn btn-success mt-1 float-end"> Simpan </button>';
                                                             echo '</form>';
                                                             echo '</div>';
                                                             echo '</div>';
-                                                            if ($row['fileupload']) {
-                                                                 echo '<a href="../Mahasiswa/assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1 mr-2" download>Download File</a>';
-                                                            }
                                                             echo '</div>';
                                                             echo '</div>';
                                                             echo '</div>';
                                                             echo '</div>';
                                                        }
-                                                       echo '<a href="./rencana.php" class="btn btn-info btn-lg"> Kembali </a>';
                                                   } else {
                                                        echo 'Tidak ada data laporan kegiatan';
                                                   }
-
-                                                  // Menutup koneksi
-                                                  $conn->close();
+                                                  ?>
+                                             </div>
+                                             <!-- Pagination -->
+                                             <nav aria-label="Page navigation">
+                                                  <ul class="pagination justify-content-center mt-3">
+                                                       <li class="page-item" id="prev-page">
+                                                            <a class="page-link" href="#" tabindex="-1"
+                                                                 aria-disabled="true">Previous</a>
+                                                       </li>
+                                                       <!-- Page indicators will be dynamically added here -->
+                                                       <li class="page-item" id="next-page">
+                                                            <a class="page-link" href="#">Next</a>
+                                                       </li>
+                                                  </ul>
+                                             </nav>
+                                             <a href="./rencana.php" class="btn btn-info btn-lg"> Kembali </a>
+                                        </div>
+                                        <?php
+                                        // Menutup koneksi
+                                        $conn->close();
                                              } else {
-                                             ?>
-                                                  <div class="row">
-                                                       <div class="col-12">
-                                                            <h1>Daftar Kelompok</h1>
-                                                            <table class="table table-hover">
-                                                                 <thead>
-                                                                      <tr>
-                                                                           <th>Nama Kelompok</th>
-                                                                           <th>Kode KKN</th>
-                                                                           <th>Nama KKN</th>
-                                                                           <th>Tema</th>
-                                                                           <th>Lokasi</th>
-                                                                      </tr>
-                                                                 </thead>
-                                                                 <tbody>
-                                                                      <?php
-                                                                      include 'assets/php/conn.php';
+                                                  ?>
+                                        <div class="row">
+                                             <div class="col-12">
+                                                  <h1>Daftar Kelompok</h1>
+                                                  <table class="table table-hover">
+                                                       <thead>
+                                                            <tr>
+                                                                 <th>Nama Kelompok</th>
+                                                                 <th>Kode KKN</th>
+                                                                 <th>Nama KKN</th>
+                                                                 <th>Tema</th>
+                                                                 <th>Lokasi</th>
+                                                            </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                            <?php
+                                                            include 'assets/php/conn.php';
 
 
-                                                                      $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn;";
+                                                            $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn;";
 
-                                                                      $result = $conn->query($sql);
+                                                            $result = $conn->query($sql);
 
-                                                                      if ($result->num_rows > 0) {
-                                                                           while ($row = $result->fetch_assoc()) {
-                                                                                echo '<tr style="transform: rotate(0);">';
-                                                                                echo '<td><a href="./rencana.php?id=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
-                                                                                echo '<td>' . $row['kode'] . '</td>';
-                                                                                echo '<td>' . $row['nama_kkn'] . '</td>';
-                                                                                echo '<td>' . $row['tema'] . '</td>';
-                                                                                echo '<td>' . $row['lokasi'] . '</td>';
-                                                                                echo '</tr>';
-                                                                           }
-                                                                      } else {
-                                                                           echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
-                                                                      }
+                                                            if ($result->num_rows > 0) {
+                                                                 while ($row = $result->fetch_assoc()) {
+                                                                      echo '<tr style="transform: rotate(0);">';
+                                                                      echo '<td><a href="./rencana.php?id=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
+                                                                      echo '<td>' . $row['kode'] . '</td>';
+                                                                      echo '<td>' . $row['nama_kkn'] . '</td>';
+                                                                      echo '<td>' . $row['tema'] . '</td>';
+                                                                      echo '<td>' . $row['lokasi'] . '</td>';
+                                                                      echo '</tr>';
+                                                                 }
+                                                            } else {
+                                                                 echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                            }
 
-                                                                      $conn->close();
-                                                                      ?>
-                                                                 </tbody>
-                                                            </table>
-                                                       </div>
-                                                  </div>
-                                             <?php
+                                                            $conn->close();
+                                                            ?>
+                                                       </tbody>
+                                                  </table>
+                                             </div>
+                                        </div>
+                                        <?php
                                              }
                                              ?>
 
-                                             <!-- Card Selesai -->
+                                   <!-- Card Selesai -->
 
-                                        </div>
-
-                                   </div>
-                                   <!-- end row -->
-
-                                   <!-- End of col -->
                               </div>
                               <!-- end row -->
 
+                              <!-- End of col -->
                          </div>
-                         <!-- end container-fluid -->
+                         <!-- end row -->
+
+                    </div>
+                    <!-- end container-fluid -->
 
 
 
-                         <!-- Footer Start -->
-                         <!-- {{-- <footer class="footer"> --}}
+                    <!-- Footer Start -->
+                    <!-- {{-- <footer class="footer"> --}}
                 {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -381,34 +404,37 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                     </div>
                 </div> --}}
                 {{-- </footer> --}} -->
-                         <!-- end Footer -->
-
-                    </div>
-                    <!-- end content -->
+                    <!-- end Footer -->
 
                </div>
-               <!-- END content-page -->
+               <!-- end content -->
+
           </div>
-          <!-- END wrapper -->
+          <!-- END content-page -->
+     </div>
+     <!-- END wrapper -->
 
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+          integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
           </script>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+          integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
           </script>
 
-          <!-- Vendor js -->
-          <script src="assets/js/vendor.min.js"></script>
+     <!-- Vendor js -->
+     <script src="assets/js/vendor.min.js"></script>
 
-          <script src="assets/libs/morris-js/morris.min.js"></script>
-          <script src="assets/libs/raphael/raphael.min.js"></script>
+     <script src="assets/libs/morris-js/morris.min.js"></script>
+     <script src="assets/libs/raphael/raphael.min.js"></script>
 
-          <script src="assets/js/pages/dashboard.init.js"></script>
+     <script src="assets/js/pages/dashboard.init.js"></script>
 
-          <!-- App js -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-          <script src="assets/js/app.min.js"></script>
+     <!-- App js -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script src="assets/js/app.min.js"></script>
+     <script src="assets/js/pagination.js"></script>
 
 </body>
 

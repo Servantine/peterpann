@@ -260,15 +260,17 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
-
-
                                         echo '<div class="row">';
                                         echo '<div class="col-12">';
                                         echo '<div class="card" style="width: 100%;">';
                                         echo '<div class="card-body rounded shadow">';
                                         echo '<div class="row mb-2">';
                                         echo '<div class="col-1">';
-                                        echo '<img src="assets/images/ok.webp" alt="Ok.png">';
+                                        if($row['komentar_dosen']) {
+                                             echo '<img src="assets/images/ok.webp" alt="Ok.png" width ="40">';
+                                         } else {
+                                             echo '<img src="assets/images/warning.png" alt="warning.png" width ="40">';
+                                         }
                                         echo '</div>';
                                         echo '<div class="col-11">';
                                         echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';
@@ -423,7 +425,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
     <!-- App js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
-    <script src="assets/js/logbook.js"></script>
+    <script src="assets/js/pagination.js"></script>
 
 </body>
 

@@ -264,18 +264,23 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 );
                                 ?>
                                 <form action="./method/adddosen.php" method="post">
-                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" required/>
+                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" required />
                                     <div class="form-group">
                                         <label for="nidn">NIDN</label>
-                                        <input type="text" class="form-control" id="nidn" name="nidn" placeholder="" required>
+                                        <input type="number" class="form-control" id="nidn" name="nidn" placeholder=""
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="" required>
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder=""
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="jabatan">Jabatan</label>
-                                        <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="" required>
+                                        <select class="form-control" id="jabatan" name="jabatan" required>
+                                            <option value="Dosen Tetap">Dosen Tetap</option>
+                                            <option value="Dosen Tidak Tetap">Dosen Tidak Tetap</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="fakultas">Fakultas</label>
@@ -311,10 +316,11 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     </div>
                                     <div class="form-group">
                                         <label for="nomor">Nomor Telp.</label>
-                                        <input type="text" class="form-control" id="nomor" name="nomor" placeholder="" required>
+                                        <input type="text" class="form-control" id="nomor" name="nomor" placeholder=""
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">password</label>
+                                        <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="" required>
                                     </div>
@@ -349,7 +355,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
                                             <div class="form-group">
                                                 <label for="nidn">NIDN</label>
-                                                <input type="text" class="form-control" id="nidn" name="nidn" placeholder=""
+                                                <input type="number" class="form-control" id="nidn" name="nidn" placeholder=""
                                                     value="<?php echo $row['nidn'] ?>" required>
                                             </div>
                                             <div class="form-group">
@@ -359,8 +365,18 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             </div>
                                             <div class="form-group">
                                                 <label for="jabatan">Jabatan</label>
-                                                <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder=""
-                                                    value="<?php echo $row['jabatan'] ?>" required>
+                                                <select class="form-control" id="jabatan" name="jabatan" required>
+                                                    <?php
+                                                    $prodiOptions = array(
+                                                        "Dosen Tetap", "Dosen Tidak Tetap"
+                                                    );
+
+                                                    foreach ($prodiOptions as $prodi) {
+                                                        $selected = ($prodi == $row['jabatan']) ? 'selected' : '';
+                                                        echo "<option value=\"$prodi\" $selected>$prodi</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="fakultas">Fakultas</label>
@@ -401,7 +417,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                     value="<?php echo $row['no_telp'] ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="password">password</label>
+                                                <label for="password">Password</label>
                                                 <input type="password" class="form-control" id="password" name="password"
                                                     placeholder="" value="<?php echo $row['password'] ?>" required>
                                             </div>
