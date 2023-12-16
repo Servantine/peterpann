@@ -201,9 +201,39 @@ if($_SESSION['nama'] == null) {
                         <div class="col-12 col-sm-4">
                             <div class="card" style="max-width: 22rem;">
                                 <div class="card-body shadow" style="max-width: 22rem;">
-                                    <h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>
-                                    <p class="card-text">Kegiatan Kuliah Kerja Nyata -nama kkn- Tahun 2023 Periode
-                                        -mulai- hingga -selesai- </p>
+                                <?php 
+                                    include 'assets/php/conn.php';
+                                    $nim_pengguna = $_SESSION['nim'];
+
+                                    $sql = "SELECT a.* FROM dtl_kelompok_kkn as a WHERE a.nim = $nim_pengguna";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $idkelompok = $row['id_kelompok'];
+                                    }
+                                    $sql = "SELECT * FROM kelompok_kkn WHERE id_kelompok = $idkelompok";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $idkkn = $row['id_kkn'];
+                                    }
+                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $tglmulai = $row['tanggal_mulai'];
+                                    }
+                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $tglselesai = $row['tanggal_selesai'];
+                                    }
+                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $namakkn = $row['nama_kkn'];
+                                    }
+                                    echo '<h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>';
+                                    echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn .  ' </b>Tahun 2023 Periode';
+                                    echo   '<b>' . $tglmulai . ' </b> hingga <b>' .$tglselesai . '</b></p>';
+                                    ?>
                                     <a href="#" class="btn btn-primary btn-block" id="buatLogbook">Buat Logbook</a>
                                 </div>
                             </div>
