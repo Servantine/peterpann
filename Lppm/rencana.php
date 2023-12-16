@@ -66,7 +66,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               <div class="dropdown-divider"></div>
 
                               <!-- item-->
-                              <a href="./logout.php"" class=" dropdown-item notify-item">
+                              <a href="./logout.php" class=" dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -230,7 +230,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               <?php }
                               } ?>
                               <div class="row">
-                                   <div class="col-8">
+                                   <div class="col-12">
                                         <!-- Cards go here -->
                                         <div class="card-container">
                                              <!-- Card Mulai -->
