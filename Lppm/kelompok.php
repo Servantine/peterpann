@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-    header("Location:logout.php");
+    header("Location:./logout.php");
 }
 ?>
 
@@ -58,7 +58,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
 
                         <!-- item-->
-                        <a href="logout.php" class=" dropdown-item notify-item">
+                        <a href="/pemilik/akun" class="dropdown-item notify-item">
+                            <i class="mdi mdi-settings-outline"></i>
+                            <span>Akun</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a href="./logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -151,15 +159,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Lppm/rencana.php">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class=""> Rencana Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Lppm/laporan.php">
                             <i class="bi bi-list-check"></i>
                             <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Lppm/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -176,7 +184,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
             <!-- Start Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent !important">
-                    <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                    <li class="breadcrumb-item"><a href="../Lppm/dashboard.php">LPPM</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Kelompok</li>
                 </ol>
             </nav>
@@ -212,12 +220,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                             if ($_GET['success'] == true) { ?>
                                 <div class="alert alert-success" role="alert">
                                     <i class="bi bi-exclamation-circle"></i>
-                                    Berhasil menambahkan data dosen!
+                                    Berhasil menambahkan/update data kelompok!
                                 </div>
                             <?php } else { ?>
                                 <div class="alert alert-danger" role="alert">
                                     <i class="bi bi-exclamation-circle"></i>
-                                    Gagal menambahkan data dosen!
+                                    Gagal menambahkan/update data kelompok!
                                 </div>
                         <?php }
                         } ?>
@@ -246,29 +254,29 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="">
+                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="lokasi">Lokasi</label>
-                                                <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="">
+                                                <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="alamat">Alamat</label>
-                                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="">
+                                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="kode">Kode KKN</label>
-                                                <select class="form-control" id="kode" name="kode">
+                                                <select class="form-control" id="kode" name="kode" required>
                                                     <?php
                                                     include 'assets/php/conn.php';
 
-                                                    $sql = "SELECT kode FROM `kkn` ORDER BY kode;";
+                                                    $sql = "SELECT kode, nama_kkn FROM `kkn` ORDER BY kode;";
 
                                                     $result = $conn->query($sql);
 
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo '<option value="' . $row['kode'] . '">' . $row['kode'] . '</option>';
+                                                            echo '<option value="' . $row['kode'] . '">' . $row['kode'] . ' - ' . $row['nama_kkn'] . '</option>';
                                                         }
                                                     } else {
                                                         echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
@@ -278,7 +286,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             </div>
                                             <div class="form-group">
                                                 <label for="nidn">NIDN</label>
-                                                <select class="form-control" id="nidn" name="nidn">
+                                                <select class="form-control" id="nidn" name="nidn" required>
                                                     <?php
                                                     include 'assets/php/conn.php';
 
@@ -302,78 +310,208 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 </div>
 
                             </div>
-                        <?php
-                                        $conn->close();
-                                    } else {
 
+                        <?php
+                                    } elseif (isset($_GET["details"])) {
+                                        include 'assets/php/conn.php';
                         ?>
                             <div class="row">
                                 <div class="col-12">
-                                    <h1>Daftar Kelompok</h1>
-                                    <table class="table table-hover">
+                                    <h1>Daftar Anggota</h1>
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Nama Kelompok</th>
-                                                <th>Kode KKN</th>
-                                                <th>Nama KKN</th>
-                                                <th>Tema</th>
-                                                <th>Lokasi</th>
-                                                <th>NIDN Pendamping</th>
+                                                <th>NIM</th>
+                                                <th>Nama Mahasiswa</th>
+                                                <th>Prodi</th>
+                                                <th>Fakultas</th>
+                                                <th>Jabatan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             include 'assets/php/conn.php';
 
+                                            $kelompok_target = $_GET['details'];
 
-                                            $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn;";
+                                            $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE dtl_kelompok_kkn.id_kelompok  = '$kelompok_target'";
 
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
                                                 while ($row = $result->fetch_assoc()) {
-                                                    echo '<tr style="transform: rotate(0);">';
-                                                    echo '<td>' . $row['nama_kelompok'] . '</td>';
-                                                    echo '<td>' . $row['kode'] . '</td>';
-                                                    echo '<td>' . $row['nama_kkn'] . '</td>';
-                                                    echo '<td>' . $row['tema'] . '</td>';
-                                                    echo '<td>' . $row['lokasi'] . '</td>';
-                                                    echo '<td>' . $row['nidn'] . '</td>';
+                                                    echo '<tr>';
+                                                    echo '<td>' . $row['nim'] . '</td>';
+                                                    echo '<td>' . $row['nama'] . '</td>';
+                                                    echo '<td>' . $row['prodi'] . '</td>';
+                                                    echo '<td>' . $row['fakultas'] . '</td>';
+                                                    echo '<td>' . $row['jabatan'] . '</td>';
                                                     echo '</tr>';
                                                 }
                                             } else {
                                                 echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
                                             }
-
-                                            $conn->close();
                                             ?>
                                         </tbody>
                                     </table>
-                                    <a href="./kelompok.php?add=true" class="btn btn-info btn-lg"> Tambah Kelompok </a>
+                                    <a href="./kelompok.php" class="btn btn-info btn-lg"> Kembali </a>
                                 </div>
                             </div>
+
                         <?php
-                                    }
+                                    } elseif (isset($_GET['update'])) {
+
                         ?>
 
-                        <!-- Card Selesai -->
+                            <?php
+                                        include 'assets/php/conn.php';
+                                        $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kelompok_kkn.alamat, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn WHERE kelompok_kkn.id_kelompok = '".$_GET['update']."';";
 
+                                        $result = $conn->query($sql);
+
+                                        $id_lppm = $_SESSION['id_lppm'];
+
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                            ?>
+
+                                    <form action="./method/updatekelompok.php" method="post">
+                                        <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
+                                        <input type="hidden" name="id_kelompok" value="<?php echo $_GET['update'] ?>" />
+                                        <div class="form-group">
+                                            <label for="nama">Nama</label>
+                                            <input type="text" class="form-control" id="nama" name="nama" placeholder="" value="<?php echo $row['nama_kelompok']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lokasi">Lokasi</label>
+                                            <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="" value="<?php echo $row['lokasi']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat">Alamat</label>
+                                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="" value="<?php echo $row['alamat']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kode">Kode KKN</label>
+                                            <select class="form-control" id="kode" name="kode">
+                                                <?php
+                                                include 'assets/php/conn.php';
+
+                                                $sql = "SELECT kode, nama_kkn FROM `kkn` ORDER BY kode;";
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<option value="' . $row['kode'] . '">' . $row['kode'] . ' - ' . $row['nama_kkn'] . '</option>';
+                                                    }
+                                                } else {
+                                                    echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nidn">NIDN</label>
+                                            <select class="form-control" id="nidn" name="nidn">
+                                                <?php
+                                                include 'assets/php/conn.php';
+
+                                                $sql = "SELECT nidn, nama_dosen FROM `dsn_pembimbing` ORDER BY nama_dosen;";
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<option value="' . $row['nidn'] . '">' . $row['nama_dosen'] . ' - ' . $row['nidn'] . '</option>';
+                                                    }
+                                                } else {
+                                                    echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </form>
+
+                            <?php
+                                            }
+                                        }
+                            ?>
+
+                    <?php
+                                        $conn->close();
+                                    } else {
+
+                    ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <h1>Daftar Kelompok</h1>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Kelompok</th>
+                                            <th>Kode KKN</th>
+                                            <th>Nama KKN</th>
+                                            <th>Tema</th>
+                                            <th>Lokasi</th>
+                                            <th>NIDN Pendamping</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include 'assets/php/conn.php';
+
+
+                                        $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn;";
+
+                                        $result = $conn->query($sql);
+
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<tr style="transform: rotate(0);">';
+                                                echo '<td> <a href="kelompok.php?details=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
+                                                echo '<td>' . $row['kode'] . '</td>';
+                                                echo '<td>' . $row['nama_kkn'] . '</td>';
+                                                echo '<td>' . $row['tema'] . '</td>';
+                                                echo '<td>' . $row['lokasi'] . '</td>';
+                                                echo '<td>' . $row['nidn'] . '</td>';
+                                                echo '<td> <a href="./kelompok.php?update=' . $row['id_kelompok'] . '" class="btn btn-warning" style="z-index:2; position:relative"> Update Kelompok </a> </td>';
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                        }
+
+                                        $conn->close();
+                                        ?>
+                                    </tbody>
+                                </table>
+                                <a href="./kelompok.php?add=true" class="btn btn-info btn-lg"> Tambah Kelompok </a>
+                            </div>
                         </div>
+                    <?php
+                                    }
+                    ?>
+
+                    <!-- Card Selesai -->
 
                     </div>
-                    <!-- end row -->
 
-                    <!-- End of col -->
                 </div>
                 <!-- end row -->
 
+                <!-- End of col -->
             </div>
-            <!-- end container-fluid -->
+            <!-- end row -->
+
+        </div>
+        <!-- end container-fluid -->
 
 
 
-            <!-- Footer Start -->
-            <!-- {{-- <footer class="footer"> --}}
+        <!-- Footer Start -->
+        <!-- {{-- <footer class="footer"> --}}
                 {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -382,10 +520,10 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                     </div>
                 </div> --}}
                 {{-- </footer> --}} -->
-            <!-- end Footer -->
+        <!-- end Footer -->
 
-        </div>
-        <!-- end content -->
+    </div>
+    <!-- end content -->
 
     </div>
     <!-- END content-page -->

@@ -30,7 +30,7 @@
                     <input type="password" id="password" name="password" placeholder="Masukan Password" name="password" class="mb-3">
                     <?php
                     if (isset($_GET['login'])) { ?>
-                        <div class="loginFailed text-center">*username atau password salah</div>
+                        <div class="loginFailed">*username atau password salah</div>
                     <?php
                     }
                     ?>

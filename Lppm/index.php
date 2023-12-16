@@ -23,7 +23,7 @@
             <div class="card">
                 <h2 class="mb-0">Login LPPM</h2>
                 <p>Silahkan Masukan Username dan Password</p>
-                <form method="post" action="ceklogin.php">
+                <form method="post" action="./ceklogin.php">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Masukan Username">
                     <label for="password">Password</label>

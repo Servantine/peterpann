@@ -1,7 +1,30 @@
 <?php
 session_start();
-if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
-    header("Location:../mahasiswa/logout.php");
+if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
+    header("Location:../logout.php");
+}
+
+function getGrade($nilai)
+{
+    if ($nilai >= 85) {
+        return 'A';
+    } elseif ($nilai >= 80) {
+        return 'A-';
+    } elseif ($nilai >= 75) {
+        return 'B+';
+    } elseif ($nilai >= 70) {
+        return 'B';
+    } elseif ($nilai >= 65) {
+        return 'B-';
+    } elseif ($nilai >= 60) {
+        return 'C+';
+    } elseif ($nilai >= 55) {
+        return 'C';
+    } elseif ($nilai >= 45) {
+        return 'D';
+    } else {
+        return 'E';
+    }
 }
 ?>
 
@@ -16,12 +39,10 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     <meta content="MoneyTrash!" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon"
-        href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+    <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
     <!-- App css -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -47,8 +68,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
-                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1" style="color: white;">
                             <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
@@ -71,7 +91,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
+                        <a href="../logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -186,8 +206,8 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    <?php if(isset($_GET['success'])) {
-                        if($_GET['success'] == true) { ?>
+                    <?php if (isset($_GET['success'])) {
+                        if ($_GET['success'] == true) { ?>
                             <div class="alert alert-success" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
                                 Berhasil mengubah nilai!
@@ -197,8 +217,12 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                 <i class="bi bi-exclamation-circle"></i>
                                 Gagal mengubah nilai!
                             </div>
-                        <?php }
+                    <?php }
                     } ?>
+                    <?php
+                                    if (isset($_GET["details"])) {
+                                        include 'assets/php/conn.php';
+                            ?>
                     <div class="row">
                         <div class="col-12">
                             <div>
@@ -208,9 +232,9 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                                     $jam = date('H');
 
-                                    if($jam >= 5 && $jam < 12) {
+                                    if ($jam >= 5 && $jam < 12) {
                                         $waktu = 'Pagi';
-                                    } elseif($jam >= 12 && $jam < 18) {
+                                    } elseif ($jam >= 12 && $jam < 18) {
                                         $waktu = 'Siang';
                                     } else {
                                         $waktu = 'Malam';
@@ -234,8 +258,8 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                 $result = $conn->query($sql);
                                 $result = $result->fetch_assoc();
 
-                                if($result != null) {
-                                    echo '<h1>Daftar Anggota Kelompok '.$result['nama_kelompok'].'</h1>';
+                                if ($result != null) {
+                                    echo '<h1>Daftar Anggota Kelompok ' . $result['nama_kelompok'] . '</h1>';
                                 } else {
                                     echo '<h1> Data Belum Di Inputkan </h1>';
                                 }
@@ -294,42 +318,21 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                                             $nidn_target = $_SESSION['nidn'];
 
-                                            $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.nilai, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
+                                            $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.nilai, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.id_kelompok = '" . $_GET['details'] . "'";
 
                                             $result = $conn->query($sql);
 
-                                            if($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
                                                     echo '<tr>';
-                                                    echo '<td class="align-middle">'.$row['nim'].'</td>';
-                                                    echo '<td class="align-middle">'.$row['nama'].'</td>';
-                                                    echo '<td class="align-middle">'.$row['prodi'].'</td>';
-                                                    echo '<td class="align-middle">'.$row['fakultas'].'</td>';
-                                                    echo '<td class="align-middle">'.$row['jabatan'].'</td>';
-                                                    echo '<td><input type="text" style="width: 70px;" name="'.$row['nim'].'" class="form-control" placeholder="Nilai" value='.$row['nilai'].'></td>';
+                                                    echo '<td class="align-middle">' . $row['nim'] . '</td>';
+                                                    echo '<td class="align-middle">' . $row['nama'] . '</td>';
+                                                    echo '<td class="align-middle">' . $row['prodi'] . '</td>';
+                                                    echo '<td class="align-middle">' . $row['fakultas'] . '</td>';
+                                                    echo '<td class="align-middle">' . $row['jabatan'] . '</td>';
+                                                    echo '<td><input type="text" style="width: 70px;" name="' . $row['nim'] . '" class="form-control" placeholder="Nilai" value=' . $row['nilai'] . '></td>';
 
                                                     echo '<td class="align-middle">';
-                                                    function getGrade($nilai) {
-                                                        if($nilai >= 85) {
-                                                            return 'A';
-                                                        } elseif($nilai >= 80) {
-                                                            return 'A-';
-                                                        } elseif($nilai >= 75) {
-                                                            return 'B+';
-                                                        } elseif($nilai >= 70) {
-                                                            return 'B';
-                                                        } elseif($nilai >= 65) {
-                                                            return 'B-';
-                                                        } elseif($nilai >= 60) {
-                                                            return 'C+';
-                                                        } elseif($nilai >= 55) {
-                                                            return 'C';
-                                                        } elseif($nilai >= 45) {
-                                                            return 'D';
-                                                        } else {
-                                                            return 'E';
-                                                        }
-                                                    }
 
                                                     echo getGrade($row['nilai']);
                                                     echo '</td>';
@@ -344,9 +347,57 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         </tbody>
                                 </table>
                                 <button class="btn btn-success mt-1 float-end"> Simpan </button>
+                                <a href="./nilai.php?" class="btn btn-info btn-lg"> Kembali </a>
                                 </form>
                             </div>
                         </div>
+                        <?php
+                                    } else {
+                        ?>
+                        <div class="row">
+                                <div class="col-12">
+                                    <h1>Daftar Kelompok</h1>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Kelompok</th>
+                                                <th>Kode KKN</th>
+                                                <th>Nama KKN</th>
+                                                <th>Tema</th>
+                                                <th>Lokasi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            include 'assets/php/conn.php';
+
+
+                                            $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn WHERE kelompok_kkn.nidn = '".$_SESSION['nidn']."';";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<tr style="transform: rotate(0);">';
+                                                    echo '<td> <a href="nilai.php?details=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
+                                                    echo '<td>' . $row['kode'] . '</td>';
+                                                    echo '<td>' . $row['nama_kkn'] . '</td>';
+                                                    echo '<td>' . $row['tema'] . '</td>';
+                                                    echo '<td>' . $row['lokasi'] . '</td>';
+                                                    echo '</tr>';
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                            }
+                                            $conn->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php
+                                    }
+                        ?>
                     </div>
                     <!-- end row -->
 
@@ -379,13 +430,11 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
     </div>
     <!-- END wrapper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-        </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>

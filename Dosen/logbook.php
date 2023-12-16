@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
-    header("Location:../mahasiswa/logout.php");
+    header("Location:../logout.php");
 }
 ?>
 
@@ -71,7 +71,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
+                        <a href="../logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -261,7 +261,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         echo '<div class="card-body rounded shadow">';
                                         echo '<div class="row mb-2">';
                                         echo '<div class="col-1">';
-                                        if($row['acc_dosen'] == true && $row['acc_admin']) {
+                                        if($row['komentar_dosen']) {
                                             echo '<img src="assets/images/ok.webp" alt="Ok.png" width ="40">';
                                         } else {
                                             echo '<img src="assets/images/warning.png" alt="warning.png" width ="40">';
@@ -318,7 +318,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         </div>
                         <?php
                         $conn->close();
-                            } else {
+                            } elseif (isset($_GET['details'])) {
 
                                 ?>
                         <div class="row">
@@ -340,7 +340,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                                         $nidn_target = $_SESSION['nidn'];
 
-                                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
+                                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE kelompok_kkn.id_kelompok = '".$_GET['details']."'";
 
                                         $result = $conn->query($sql);
 
@@ -362,11 +362,59 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         ?>
                                     </tbody>
                                 </table>
+                                <a href="./logbook.php" class="btn btn-info btn-lg"> Kembali </a>
                             </div>
                         </div>
                         <?php
-                            }
+                            } else {
                             ?>
+
+<div class="row">
+                                <div class="col-12">
+                                    <h1>Daftar Kelompok</h1>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Kelompok</th>
+                                                <th>Kode KKN</th>
+                                                <th>Nama KKN</th>
+                                                <th>Tema</th>
+                                                <th>Lokasi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            include 'assets/php/conn.php';
+
+
+                                            $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn WHERE kelompok_kkn.nidn = '".$_SESSION['nidn']."';";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<tr style="transform: rotate(0);">';
+                                                    echo '<td> <a href="logbook.php?details=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
+                                                    echo '<td>' . $row['kode'] . '</td>';
+                                                    echo '<td>' . $row['nama_kkn'] . '</td>';
+                                                    echo '<td>' . $row['tema'] . '</td>';
+                                                    echo '<td>' . $row['lokasi'] . '</td>';
+                                                    echo '</tr>';
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                            }
+
+                                            $conn->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php
+                                    }
+                        ?>
+                         </div>
                 </div>
                 <!-- end row -->
 

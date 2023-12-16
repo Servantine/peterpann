@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
-    header("Location:../mahasiswa/logout.php");
+    header("Location:../logout.php");
 }
 ?>
 
@@ -66,7 +66,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="../mahasiswa/logout.php" class="dropdown-item notify-item">
+                        <a href="../logout.php" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>

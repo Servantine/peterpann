@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
-     header("Location:../mahasiswa/logout.php");
+     header("Location:../logout.php");
 }
 ?>
 
@@ -71,7 +71,7 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                               <div class="dropdown-divider"></div>
 
                               <!-- item-->
-                              <a href="../mahasiswa/logout.php"" class=" dropdown-item notify-item">
+                              <a href="../logout.php"" class=" dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -209,32 +209,18 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         </h4>
                                    </div>
                               </div>
-                              <div class="row">
-                                   <div class="col-12">
-                                        <?php
+                              <?php
+                                    if (isset($_GET["details"])) {
                                         include 'assets/php/conn.php';
-
-                                        $nidn_target = $_SESSION['nidn'];
-
-                                        $sql = "SELECT kelompok_kkn.nama_kelompok FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target' LIMIT 1";
-
-                                        $result = $conn->query($sql);
-                                        $result = $result->fetch_assoc();
-
-                                        if($result != null) {
-                                             echo '<h1>Daftar Anggota Kelompok '. $result['nama_kelompok'] .'</h1>';
-                                        } else {
-                                             echo '<h1> Data Belum Di Inputkan </h1>';
-                                        }
-
-                                        $conn->close();
-                                        ?>
-                                        
+                            ?>
+                            <div class="row">
+                                   <div class="col-12">
+                                        <h1>Daftar Anggota</h1>
                                         <table class="table">
                                              <thead>
                                                   <tr>
-                                                       <th>Nim</th>
-                                                       <th>Name</th>
+                                                       <th>NIM</th>
+                                                       <th>Nama Mahasiswa</th>
                                                        <th>Prodi</th>
                                                        <th>Fakultas</th>
                                                        <th>Jabatan</th>
@@ -244,32 +230,81 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                                   <?php
                                                   include 'assets/php/conn.php';
 
-                                                  $nidn_target = $_SESSION['nidn'];
+                                                  $kelompok_target = $_GET['details'];
 
-                                                  $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok WHERE kelompok_kkn.nidn = '$nidn_target'";
+                                                  $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan FROM mahasiswa JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim WHERE dtl_kelompok_kkn.id_kelompok  = '$kelompok_target'";
 
                                                   $result = $conn->query($sql);
 
-                                                  if($result->num_rows > 0) {
-                                                       while($row = $result->fetch_assoc()) {
+                                                  if ($result->num_rows > 0) {
+                                                       while ($row = $result->fetch_assoc()) {
                                                             echo '<tr>';
-                                                            echo '<td>'.$row['nim'].'</td>';
-                                                            echo '<td>'.$row['nama'].'</td>';
-                                                            echo '<td>'.$row['prodi'].'</td>';
-                                                            echo '<td>'.$row['fakultas'].'</td>';
-                                                            echo '<td>'.$row['jabatan'].'</td>';
+                                                            echo '<td>' . $row['nim'] . '</td>';
+                                                            echo '<td>' . $row['nama'] . '</td>';
+                                                            echo '<td>' . $row['prodi'] . '</td>';
+                                                            echo '<td>' . $row['fakultas'] . '</td>';
+                                                            echo '<td>' . $row['jabatan'] . '</td>';
                                                             echo '</tr>';
                                                        }
                                                   } else {
                                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
                                                   }
-
-                                                  $conn->close();
                                                   ?>
                                              </tbody>
                                         </table>
+                                        <a href="./kelompok.php" class="btn btn-info btn-lg"> Kembali </a>
                                    </div>
                               </div>
+
+                        <?php
+                                        $conn->close();
+                                    } else {
+
+                        ?>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1>Daftar Kelompok</h1>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Kelompok</th>
+                                                <th>Kode KKN</th>
+                                                <th>Nama KKN</th>
+                                                <th>Tema</th>
+                                                <th>Lokasi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            include 'assets/php/conn.php';
+
+
+                                            $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn WHERE kelompok_kkn.nidn = '".$_SESSION['nidn']."';";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<tr style="transform: rotate(0);">';
+                                                    echo '<td> <a href="kelompok.php?details=' . $row['id_kelompok'] . '" class="stretched-link">' . $row['nama_kelompok'] . '</td>';
+                                                    echo '<td>' . $row['kode'] . '</td>';
+                                                    echo '<td>' . $row['nama_kkn'] . '</td>';
+                                                    echo '<td>' . $row['tema'] . '</td>';
+                                                    echo '<td>' . $row['lokasi'] . '</td>';
+                                                    echo '</tr>';
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                            }
+                                            $conn->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php
+                                    }
+                        ?>
                          </div>
                          <!-- end row -->
 

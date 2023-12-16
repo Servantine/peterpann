@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-     header("Location:logout.php");
+     header("Location:./logout.php");
 }
 ?>
 
@@ -58,7 +58,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               </div>
 
                               <!-- item-->
-                              <a href="logout.php" class=" dropdown-item notify-item">
+                              <a href="/pemilik/akun" class="dropdown-item notify-item">
+                                   <i class="mdi mdi-settings-outline"></i>
+                                   <span>Akun</span>
+                              </a>
+
+                              <div class="dropdown-divider"></div>
+
+                              <!-- item-->
+                              <a href="./logout.php"" class=" dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -151,15 +159,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               </a>
                          </li>
                          <li class="">
-                              <a href="../Lppm/rencana.php" class="active-class active-txt">
-                                   <i class="bi bi-pencil-square"></i>
-                                   <span class=""> Rencana Kegiatan</span>
-                              </a>
-                         </li>
-                         <li class="">
                               <a href="../Lppm/laporan.php">
                                    <i class="bi bi-list-check"></i>
                                    <span class=""> Laporan Kegiatan</span>
+                              </a>
+                         </li>
+                         <li class="">
+                              <a href="../Lppm/rencana.php" class="active-class active-txt">
+                                   <i class="bi bi-pencil-square"></i>
+                                   <span class=""> Rencana Kegiatan</span>
                               </a>
                          </li>
                     </ul>
@@ -176,7 +184,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                <!-- Start Breadcrumb -->
                <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" style="background-color: transparent !important">
-                         <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                         <li class="breadcrumb-item"><a href="../Lppm/dashboard.php">LPPM</a></li>
                          <li class="breadcrumb-item active" aria-current="page">Rencana</li>
                     </ol>
                </nav>

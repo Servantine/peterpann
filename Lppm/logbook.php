@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-     header("Location:logout.php");
+     header("Location:./logout.php");
 }
 ?>
 
@@ -58,7 +58,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               </div>
 
                               <!-- item-->
-                              <a href="logout.php" class=" dropdown-item notify-item">
+                              <a href="/pemilik/akun" class="dropdown-item notify-item">
+                                   <i class="mdi mdi-settings-outline"></i>
+                                   <span>Akun</span>
+                              </a>
+
+                              <div class="dropdown-divider"></div>
+
+                              <!-- item-->
+                              <a href="./logout.php"" class=" dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>
@@ -151,15 +159,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                               </a>
                          </li>
                          <li class="">
-                              <a href="../Lppm/rencana.php">
-                                   <i class="bi bi-pencil-square"></i>
-                                   <span class=""> Rencana Kegiatan</span>
-                              </a>
-                         </li>
-                         <li class="">
                               <a href="../Lppm/laporan.php">
                                    <i class="bi bi-list-check"></i>
                                    <span class=""> Laporan Kegiatan</span>
+                              </a>
+                         </li>
+                         <li class="">
+                              <a href="../Lppm/rencana.php">
+                                   <i class="bi bi-pencil-square"></i>
+                                   <span class=""> Rencana Kegiatan</span>
                               </a>
                          </li>
                     </ul>
@@ -176,7 +184,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                <!-- Start Breadcrumb -->
                <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" style="background-color: transparent !important">
-                         <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                         <li class="breadcrumb-item"><a href="../Lppm/dashboard.php">LPPM</a></li>
                          <li class="breadcrumb-item active" aria-current="page">Logbook</li>
                     </ol>
                </nav>
@@ -336,7 +344,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     <?php
                                     include 'assets/php/conn.php';
 
-                                    $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.tema FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_dtl_kelompok_kkn = kelompok_kkn.id_kelompok INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn";
+                                    $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, dtl_kelompok_kkn.jabatan, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.tema FROM mahasiswa INNER JOIN dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn";
 
                                     $result = $conn->query($sql);
 

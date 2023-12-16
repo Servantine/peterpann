@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['nama'] == null) {
-     header("Location:../mahasiswa/logout.php");
+     header("Location:../logout.php");
  }
 ?>
 
@@ -55,7 +55,15 @@ if($_SESSION['nama'] == null) {
                               </div>
 
                               <!-- item-->
-                              <a href="../Mahasiswa/logout.php" class="dropdown-item notify-item">
+                              <a href="../Mahasiswa/akun" class="dropdown-item notify-item">
+                                   <i class="mdi mdi-settings-outline"></i>
+                                   <span>Akun</span>
+                              </a>
+
+                              <div class="dropdown-divider"></div>
+
+                              <!-- item-->
+                              <a href="../logout.php" class="dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
                               </a>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-    header("Location:logout.php");
+    header("Location:./logout.php");
 }
 ?>
 
@@ -58,7 +58,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
 
                         <!-- item-->
-                        <a href="logout.php" class=" dropdown-item notify-item">
+                        <a href="/pemilik/akun" class="dropdown-item notify-item">
+                            <i class="mdi mdi-settings-outline"></i>
+                            <span>Akun</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a href="./logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -151,15 +159,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Lppm/rencana.php">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class=""> Rencana Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Lppm/laporan.php">
                             <i class="bi bi-list-check"></i>
                             <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Lppm/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -176,7 +184,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
             <!-- Start Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent !important">
-                    <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                    <li class="breadcrumb-item"><a href="../Lppm/dashboard.php">LPPM</a></li>
                     <li class="breadcrumb-item active" aria-current="page">KKN</li>
                 </ol>
             </nav>
@@ -214,12 +222,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         if ($_GET['success'] == true) { ?>
                             <div class="alert alert-success" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
-                                Berhasil menambahkan data KKN!
+                                Berhasil menambahkan/update data KKN!
                             </div>
                         <?php } else { ?>
                             <div class="alert alert-danger" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
-                                Gagal menambahkan data KKN!
+                                Gagal menambahkan/update data KKN!
                             </div>
                     <?php }
                     } ?>
@@ -248,26 +256,26 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                 );
                             ?>
                                 <form action="./method/addkkn.php" method="post">
-                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>"/>
+                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
                                     <div class="form-group">
                                         <label for="kode_kkn">Kode KKN</label>
-                                        <input type="text" class="form-control" id="kode_kkn" name="kode_kkn" placeholder="">
+                                        <input type="text" class="form-control" id="kode_kkn" name="kode_kkn" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama_kkn">Nama KKN</label>
-                                        <input type="text" class="form-control" id="nama_kkn" name="nama_kkn" placeholder="">
+                                        <input type="text" class="form-control" id="nama_kkn" name="nama_kkn" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="tema_kkn">Tema KKN</label>
-                                        <input type="text" class="form-control" id="tema_kkn" name="tema_kkn" placeholder="">
+                                        <input type="text" class="form-control" id="tema_kkn" name="tema_kkn" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="mulai_kkn">Tanggal Mulai KKN</label>
-                                        <input type="date" class="form-control" id="mulai_kkn" name="mulai_kkn" placeholder="">
+                                        <input type="date" class="form-control" id="mulai_kkn" name="mulai_kkn" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="selesai_kkn">Tanggal Selesai KKN</label>
-                                        <input type="date" class="form-control" id="selesai_kkn" name="selesai_kkn" placeholder="">
+                                        <input type="date" class="form-control" id="selesai_kkn" name="selesai_kkn" placeholder="" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Kirim</button>
                                 </form>
@@ -275,69 +283,120 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
 
                     </div>
+
                 <?php
+                            } elseif (isset($_GET['update'])) {
+                ?>
+
+                    <?php
+                                include 'assets/php/conn.php';
+                                $sql = "SELECT * from kkn WHERE id_kkn = '".$_GET['update']."'";
+
+                                $result = $conn->query($sql);
+
+                                $id_lppm = $_SESSION['id_lppm'];
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                    ?>
+
+                            <form action="./method/updatekkn.php" method="post">
+                                <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
+                                <input type="hidden" name="id_kkn" value="<?php echo $_GET['update'] ?>" />
+                                <div class="form-group">
+                                    <label for="kode_kkn">Kode KKN</label>
+                                    <input type="text" class="form-control" id="kode_kkn" name="kode_kkn" placeholder="" value="<?php echo $row['kode'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_kkn">Nama KKN</label>
+                                    <input type="text" class="form-control" id="nama_kkn" name="nama_kkn" placeholder="" value="<?php echo $row['nama_kkn'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tema_kkn">Tema KKN</label>
+                                    <input type="text" class="form-control" id="tema_kkn" name="tema_kkn" placeholder="" value="<?php echo $row['tema'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mulai_kkn">Tanggal Mulai KKN</label>
+                                    <input type="date" class="form-control" id="mulai_kkn" name="mulai_kkn" placeholder="" value="<?php echo $row['tanggal_mulai'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="selesai_kkn">Tanggal Selesai KKN</label>
+                                    <input type="date" class="form-control" id="selesai_kkn" name="selesai_kkn" placeholder="" value="<?php echo $row['tanggal_selesai'] ?>" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kirim</button>
+                            </form>
+
+                    <?php
+                                    }
+                                }
+                    ?>
+                </div>
+
+            <?php
                                 $conn->close();
                             } else {
 
-                ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <h1>Daftar KKN</h1>
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Kode</th>
-                                        <th>Nama</th>
-                                        <th>Tema</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    include 'assets/php/conn.php';
+            ?>
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Daftar KKN</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Tema</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                include 'assets/php/conn.php';
 
-                                    $sql = "SELECT * from kkn";
+                                $sql = "SELECT * from kkn";
 
-                                    $result = $conn->query($sql);
+                                $result = $conn->query($sql);
 
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<tr style="transform: rotate(0);">';
-                                            echo '<td>' . $row['kode'] . '</td>';
-                                            echo '<td>' . $row['nama_kkn'] . '</td>';
-                                            echo '<td>' . $row['tema'] . '</td>';
-                                            echo '<td>' . $row['tanggal_mulai'] . '</td>';
-                                            echo '<td>' . $row['tanggal_selesai'] . '</td>';
-                                            echo '</tr>';
-                                        }
-                                    } else {
-                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<tr style="transform: rotate(0);">';
+                                        echo '<td>' . $row['kode'] . '</td>';
+                                        echo '<td>' . $row['nama_kkn'] . '</td>';
+                                        echo '<td>' . $row['tema'] . '</td>';
+                                        echo '<td>' . $row['tanggal_mulai'] . '</td>';
+                                        echo '<td>' . $row['tanggal_selesai'] . '</td>';
+                                        echo '<td> <a href="./kkn.php?update=' . $row['id_kkn'] . '" class="btn btn-warning"> Update KKN </a> </td>';
+                                        echo '</tr>';
                                     }
+                                } else {
+                                    echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                }
 
-                                    $conn->close();
-                                    ?>
-                                </tbody>
-                            </table>
-                            <a href="./kkn.php?add=true" class="btn btn-info btn-lg"> Tambah KKN </a>
-                        </div>
+                                $conn->close();
+                                ?>
+                            </tbody>
+                        </table>
+                        <a href="./kkn.php?add=true" class="btn btn-info btn-lg"> Tambah KKN </a>
                     </div>
-                <?php
-                            }
-                ?>
-
                 </div>
-                <!-- end row -->
-
-
+            <?php
+                            }
+            ?>
 
             </div>
-            <!-- end container-fluid -->
+            <!-- end row -->
 
 
 
-            <!-- Footer Start -->
-            <!-- {{-- <footer class="footer"> --}}
+        </div>
+        <!-- end container-fluid -->
+
+
+
+        <!-- Footer Start -->
+        <!-- {{-- <footer class="footer"> --}}
                 {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -346,10 +405,10 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                     </div>
                 </div> --}}
                 {{-- </footer> --}} -->
-            <!-- end Footer -->
+        <!-- end Footer -->
 
-        </div>
-        <!-- end content -->
+    </div>
+    <!-- end content -->
 
     </div>
     <!-- END content-page -->

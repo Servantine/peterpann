@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
-    header("Location:logout.php");
+    header("Location:./logout.php");
 }
 ?>
 
@@ -63,7 +63,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </div>
 
                         <!-- item-->
-                        <a href="logout.php" class=" dropdown-item notify-item">
+                        <a href="/pemilik/akun" class="dropdown-item notify-item">
+                            <i class="mdi mdi-settings-outline"></i>
+                            <span>Akun</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a href="./logout.php"" class=" dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>
@@ -158,15 +166,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Lppm/rencana.php">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class=""> Rencana Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Lppm/laporan.php">
                             <i class="bi bi-list-check"></i>
                             <span class=""> Laporan Kegiatan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Lppm/rencana.php">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -183,7 +191,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
             <!-- Start Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent !important">
-                    <li class="breadcrumb-item"><a href="/">LPPM</a></li>
+                    <li class="breadcrumb-item"><a href="../Lppm/dashboard.php">LPPM</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
                 </ol>
             </nav>
@@ -222,12 +230,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                         if ($_GET['success'] == true) { ?>
                             <div class="alert alert-success" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
-                                Berhasil menambahkan data dosen!
+                                Berhasil menambahkan/update data mahasiswa!
                             </div>
                         <?php } else { ?>
                             <div class="alert alert-danger" role="alert">
                                 <i class="bi bi-exclamation-circle"></i>
-                                Gagal menambahkan data dosen!
+                                Gagal menambahkan/update data mahasiswa!
                             </div>
                         <?php }
                     } ?>
@@ -259,49 +267,80 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
                                     <div class="form-group">
                                         <label for="nim">NIM</label>
-                                        <input type="text" class="form-control" id="nim" name="nim" placeholder="">
+                                        <input type="number" class="form-control" id="nim" name="nim" placeholder=""
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="prodi">Prodi</label>
-                                        <input type="text" class="form-control" id="prodi" name="prodi" placeholder="">
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder=""
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="fakultas">Fakultas</label>
-                                        <input type="text" class="form-control" id="fakultas" name="fakultas"
-                                            placeholder="">
+                                        <select class="form-control" id="fakultas" name="fakultas" onchange="fetchProdi()"
+                                            required>
+                                            <option value="Teologi">Teologi</option>
+                                            <option value="Arsitektur">Arsitektur</option>
+                                            <option value="Bioteknologi">Bioteknologi</option>
+                                            <option value="Bisnis">Bisnis</option>
+                                            <option value="Teknologi Informasi">Teknologi Informasi</option>
+                                            <option value="Kedokteran">Kedokteran</option>
+                                            <option value="Kependidikan dan Humaniora">Kependidikan dan Humaniora</option>
+                                        </select>
+                                    </div>
+                                    <script>
+                                        var prodiFromDb = null;
+                                    </script>
+                                    <div class="form-group">
+                                        <label for="prodi">Prodi</label>
+                                        <select class="form-control" id="prodi" name="prodi" required>
+                                            <option value="S-1 Teologi">S-1 Teologi</option>
+                                            <option value="S-1 Arsitektur">S-1 Arsitektur</option>
+                                            <option value="S-1 Desain Produk">S-1 Desain Produk</option>
+                                            <option value="S-1 Manajemen">S-1 Manajemen</option>
+                                            <option value="S-1 Akuntansi">S-1 Akuntansi</option>
+                                            <option value="S-1 Biologi">S-1 Biologi</option>
+                                            <option value="S-1 Informatika">S-1 Informatika</option>
+                                            <option value="S-1 Sistem Informasi">S-1 Sistem Informasi</option>
+                                            <option value="S-1 Kedokteran">S-1 Kedokteran</option>
+                                            <option value="S-1 Pendidikan Bahasa Inggris">S-1 Pendidikan Bahasa Inggris
+                                            </option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="angkatan">Angkatan</label>
-                                        <input type="text" class="form-control" id="angkatan" name="angkatan"
-                                            placeholder="">
+                                        <input type="number" class="form-control" id="angkatan" name="angkatan"
+                                            placeholder="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="kelompok">Kelompok</label>
-                                        <select class="form-control" id="kelompok" name="kelompok">
+                                        <label for="kkn">KKN</label>
+                                        <select class="form-control" id="kkn" name="kkn" required>
                                             <?php
                                             include 'assets/php/conn.php';
 
-                                            $sql = "SELECT id_kelompok, nama_kelompok FROM `kelompok_kkn` ORDER BY nama_kelompok;";
+                                            $sql = "SELECT id_kkn, nama_kkn FROM `kkn` ORDER BY nama_kkn;";
 
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
                                                 while ($row = $result->fetch_assoc()) {
-                                                    echo '<option value="' . $row['id_kelompok'] . '">' . $row['nama_kelompok'] . '</option>';
+                                                    echo '<option value="' . $row['id_kkn'] . '">' . $row['nama_kkn'] . '</option>';
                                                 }
                                             } else {
-                                                echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                                echo '<option value="">Tidak ada data KKN</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="kelompok">Kelompok</label>
+                                        <select class="form-control" id="kelompok" name="kelompok" required>
+                                            <!-- Ditambahkan Oleh JavaScript -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="jabatan">Jabatan</label>
-                                        <select class="form-control" id="jabatan" name="jabatan">
+                                        <select class="form-control" id="jabatan" name="jabatan" required>
                                             <option value="Ketua Kelompok">Ketua Kelompok</option>
                                             <option value="Anggota Kelompok">Anggota Kelompok</option>
                                         </select>
@@ -309,7 +348,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="">
+                                            placeholder="" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Kirim</button>
                                 </form>
@@ -317,73 +356,195 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                             </div>
 
                         </div>
+
                         <?php
-                        $conn->close();
+                            } elseif (isset($_GET['update'])) {
+
+                                ?>
+
+                        <?php
+                        include 'assets/php/conn.php';
+                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, mahasiswa.password, kelompok_kkn.nama_kelompok, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE mahasiswa.nim = '" . $_GET['update'] . "' ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
+
+                        $result = $conn->query($sql);
+
+                        $id_lppm = $_SESSION['id_lppm'];
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "Debug: " . $row['password']; 
+                                ?>
+
+                                <form action="./method/updatemahasiswa.php" method="post">
+                                    <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
+                                    <div class="form-group">
+                                        <label for="nim">NIM</label>
+                                        <input type="text" class="form-control" id="nim" name="nim" placeholder=""
+                                            value="<?php echo $row['nim'] ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Nama</label>
+                                        <input type="text" class="form-control" id="nama" name="nama" placeholder=""
+                                            value="<?php echo $row['nama'] ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fakultas">Fakultas</label>
+                                        <select class="form-control" id="fakultas" name="fakultas" onchange="fetchProdi()" required>
+                                            <?php
+                                            $fakultasOptions = array("Teologi", "Arsitektur", "Bioteknologi", "Bisnis", "Teknologi Informasi", "Kedokteran", "Kependidikan dan Humaniora");
+
+                                            foreach ($fakultasOptions as $fakultas) {
+                                                $selected = ($fakultas == $row['fakultas']) ? 'selected' : '';
+                                                echo "<option value=\"$fakultas\" $selected>$fakultas</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <script>
+                                        var prodiFromDb = "<?php echo $row['prodi']; ?>";
+                                    </script>
+                                    <div class="form-group">
+                                        <label for="prodi">Prodi</label>
+                                        <select class="form-control" id="prodi" name="prodi" required>
+                                            <?php
+                                            $prodiOptions = array(
+                                                "S-1 Teologi", "S-1 Arsitektur", "S-1 Desain Produk", "S-1 Manajemen", "S-1 Akuntansi",
+                                                "S-1 Biologi", "S-1 Informatika", "S-1 Sistem Informasi", "S-1 Kedokteran", "S-1 Pendidikan Bahasa Inggris"
+                                            );
+
+                                            foreach ($prodiOptions as $prodi) {
+                                                $selected = ($prodi == $row['prodi']) ? 'selected' : '';
+                                                echo "<option value=\"$prodi\" $selected>$prodi</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="angkatan">Angkatan</label>
+                                        <input type="number" class="form-control" id="angkatan" name="angkatan" placeholder=""
+                                            value="<?php echo $row['angkatan'] ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kkn">KKN</label>
+                                        <select class="form-control" id="kkn" name="kkn" required>
+                                            <?php
+                                            include 'assets/php/conn.php';
+
+                                            $sql = "SELECT id_kkn, nama_kkn FROM `kkn` ORDER BY nama_kkn;";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<option value="' . $row['id_kkn'] . '">' . $row['nama_kkn'] . '</option>';
+                                                }
+                                            } else {
+                                                echo '<option value="">Tidak ada data KKN</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <script>
+                                        var kelompokFromDb = "<?php echo $row['id_kelompok']; ?>"; // Pastikan ini adalah ID kelompok yang benar
+                                    </script>
+                                    <div class="form-group">
+                                        <label for="kelompok">Kelompok</label>
+                                        <select class="form-control" id="kelompok" name="kelompok" required>
+                                            <!-- Ditambahkan Oleh JavaScript -->
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="jabatan">Jabatan</label>
+                                        <select class="form-control" id="jabatan" name="jabatan" required>
+                                            <option value="Ketua Kelompok">Ketua Kelompok</option>
+                                            <option value="Anggota Kelompok">Anggota Kelompok</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" required>Password</label>
+                                        <?php echo $row['password']; ?>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder=""
+                                        value="<?php echo isset($row['password']) ? $row['password'] : '' ?>">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                </form>
+
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+
+                    <?php
+                    $conn->close();
                             } else {
 
                                 ?>
-                        <div class="row">
-                            <div class="col-12">
-                                <h1>Daftar Mahasiswa</h1>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>NIM</th>
-                                            <th>Nama</th>
-                                            <th>Prodi</th>
-                                            <th>Fakultas</th>
-                                            <th>Angkatan</th>
-                                            <th>Kelompok</th>
-                                            <th>Jabatan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        include 'assets/php/conn.php';
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Daftar Mahasiswa</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>NIM</th>
+                                        <th>Nama</th>
+                                        <th>Prodi</th>
+                                        <th>Fakultas</th>
+                                        <th>Angkatan</th>
+                                        <th>Kelompok</th>
+                                        <th>Jabatan</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    include 'assets/php/conn.php';
 
-                                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, kelompok_kkn.nama_kelompok, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
+                                    $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, kelompok_kkn.nama_kelompok, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
 
-                                        $result = $conn->query($sql);
+                                    $result = $conn->query($sql);
 
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo '<tr style="transform: rotate(0);">';
-                                                echo '<td>' . $row['nim'] . '</td>';
-                                                echo '<td>' . $row['nama'] . '</td>';
-                                                echo '<td>' . $row['prodi'] . '</td>';
-                                                echo '<td>' . $row['fakultas'] . '</td>';
-                                                echo '<td>' . $row['angkatan'] . '</td>';
-                                                echo '<td>' . $row['nama_kelompok'] . '</td>';
-                                                echo '<td>' . $row['jabatan'] . '</td>';
-                                                echo '</tr>';
-                                            }
-                                        } else {
-                                            echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<tr style="transform: rotate(0);">';
+                                            echo '<td>' . $row['nim'] . '</td>';
+                                            echo '<td>' . $row['nama'] . '</td>';
+                                            echo '<td>' . $row['prodi'] . '</td>';
+                                            echo '<td>' . $row['fakultas'] . '</td>';
+                                            echo '<td>' . $row['angkatan'] . '</td>';
+                                            echo '<td>' . $row['nama_kelompok'] . '</td>';
+                                            echo '<td>' . $row['jabatan'] . '</td>';
+                                            echo '<td> <a href="./mahasiswa.php?update=' . $row['nim'] . '" class="btn btn-warning"> Update Mahasiswa </a> </td>';
+                                            echo '</tr>';
                                         }
+                                    } else {
+                                        echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
+                                    }
 
-                                        $conn->close();
-                                        ?>
-                                    </tbody>
-                                </table>
-                                <a href="./mahasiswa.php?add=true" class="btn btn-info btn-lg"> Tambah Mahasiswa </a>
-                            </div>
+                                    $conn->close();
+                                    ?>
+                                </tbody>
+                            </table>
+                            <a href="./mahasiswa.php?add=true" class="btn btn-info btn-lg"> Tambah Mahasiswa </a>
                         </div>
-                        <?php
+                    </div>
+                    <?php
                             }
                             ?>
 
-                </div>
-                <!-- end row -->
-
-
-
             </div>
-            <!-- end container-fluid -->
+            <!-- end row -->
 
 
 
-            <!-- Footer Start -->
-            <!-- {{-- <footer class="footer"> --}}
+        </div>
+        <!-- end container-fluid -->
+
+
+
+        <!-- Footer Start -->
+        <!-- {{-- <footer class="footer"> --}}
                 {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -392,10 +553,10 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                     </div>
                 </div> --}}
                 {{-- </footer> --}} -->
-            <!-- end Footer -->
+        <!-- end Footer -->
 
-        </div>
-        <!-- end content -->
+    </div>
+    <!-- end content -->
 
     </div>
     <!-- END content-page -->
@@ -428,6 +589,58 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/app.min.js"></script>
     <script src="assets/js/gps.js"></script>
+    <!-- Fakultas & Prodi -->
+    <script>
+        function fetchProdi() {
+            var selectedFakultas = document.getElementById("fakultas").value;
+            var prodiOptions = getProdiOptions(selectedFakultas);
+            document.getElementById("prodi").innerHTML = prodiOptions;
+
+            if (prodiFromDb) {
+                $("#prodi").val(prodiFromDb);
+            }
+        }
+
+        function getProdiOptions(selectedFakultas) {
+            var prodiOptionsArray = {
+                "Teologi": ["S-1 Teologi"],
+                "Arsitektur": ["S-1 Arsitektur"],
+                "Bioteknologi": ["S-1 Biologi"],
+                "Bisnis": ["S-1 Manajemen", "S-1 Akuntansi"],
+                "Teknologi Informasi": ["S-1 Informatika", "S-1 Sistem Informasi"],
+                "Kedokteran": ["S-1 Kedokteran"],
+                "Kependidikan dan Humaniora": ["S-1 Pendidikan Bahasa Inggris"]
+            };
+
+            return prodiOptionsArray[selectedFakultas].map(function (prodi) {
+                return '<option value="' + prodi + '">' + prodi + '</option>';
+            }).join('');
+        }
+    </script>
+
+    <!-- KKN & Kelompok & Intansiasion -->
+    <script>
+        $(document).ready(function () {
+            fetchProdi();
+            fetchKelompok($("#kkn").val());
+
+            function fetchKelompok(selectedKkn) {
+                $.ajax({
+                    type: "POST",
+                    url: "method/getkelompok.php",
+                    data: { kkn: selectedKkn },
+                    success: function (response) {
+                        $("#kelompok").html(response);
+                    }
+                });
+            }
+
+            $("#kkn").change(function () {
+                var selectedKkn = $(this).val();
+                fetchKelompok(selectedKkn);
+            });
+        });
+    </script>
 
 </body>
 
