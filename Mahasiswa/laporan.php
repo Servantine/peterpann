@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['nama'] == null) {
+if ($_SESSION['nama'] == null) {
     header("Location:../logout.php");
 }
 ?>
@@ -16,10 +16,12 @@ if($_SESSION['nama'] == null) {
     <meta content="MoneyTrash!" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+    <link rel="shortcut icon"
+        href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
     <!-- App css -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -44,7 +46,8 @@ if($_SESSION['nama'] == null) {
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
-                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1" style="color: white;">
                             <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
@@ -53,7 +56,9 @@ if($_SESSION['nama'] == null) {
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome <?php echo $namaPendek; ?>!</h6>
+                            <h6 class="text-overflow m-0">Welcome
+                                <?php echo $namaPendek; ?>!
+                            </h6>
                         </div>
 
                         <!-- item-->
@@ -103,7 +108,9 @@ if($_SESSION['nama'] == null) {
                     <img src="assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
-                    <a href="#"><?php echo $namaPendek; ?></a>
+                    <a href="#">
+                        <?php echo $namaPendek; ?>
+                    </a>
                     <p class="text-muted m-0">
                         Mahasiswa
                     </p>
@@ -190,7 +197,8 @@ if($_SESSION['nama'] == null) {
                                     }
 
                                     echo $waktu;
-                                    ?>, <?php echo $_SESSION["nama"]; ?>
+                                    ?>,
+                                    <?php echo $_SESSION["nama"]; ?>
                                 </h4>
                             </div>
                         </div>
@@ -200,41 +208,38 @@ if($_SESSION['nama'] == null) {
                         <div class="col-12 col-sm-4">
                             <div class="card" style="max-width: 22rem;">
                                 <div class="card-body shadow">
-                                    <?php 
+                                    <?php
                                     include 'assets/php/conn.php';
                                     $nim_pengguna = $_SESSION['nim'];
 
-                                    $sql = "SELECT a.* FROM dtl_kelompok_kkn as a WHERE a.nim = $nim_pengguna";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $idkelompok = $row['id_kelompok'];
-                                    }
-                                    $sql = "SELECT * FROM kelompok_kkn WHERE id_kelompok = $idkelompok";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $idkkn = $row['id_kkn'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $tglmulai = $row['tanggal_mulai'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $tglselesai = $row['tanggal_selesai'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $namakkn = $row['nama_kkn'];
-                                    }
+                                    $sql = "SELECT kkn.nama_kkn, kkn.tanggal_mulai, kkn.tanggal_selesai, dtl_kelompok_kkn.jabatan
+                                    FROM dtl_kelompok_kkn
+                                    JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok
+                                    JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn
+                                    WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'
+                                    ";
 
-                                    
-                                    echo '<h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>';
-                                    echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn . '</b> Tahun 2023 Periode ';
-                                    echo  ' <b>'.  $tglmulai . ' </b>hingga<b> ' . $tglselesai . '</b></p>';
-                                    echo '<a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>';
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $namakkn = $row['nama_kkn'];
+                                            $tglmulai = $row['tanggal_mulai'];
+                                            $tglselesai = $row['tanggal_selesai'];
+                                            $jabatan = $row['jabatan'];
+                                        }
+
+                                        echo '<h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>';
+                                        echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn . '</b> Tahun 2023 Periode ';
+                                        echo ' <b>' . $tglmulai . ' </b>hingga<b> ' . $tglselesai . '</b></p>';
+                                        if ($jabatan === "Ketua Kelompok") {
+                                            echo '<a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>';
+                                        }
+                                    } else {
+                                        echo '<h1 class="card-title mt-2">Laporan Kegiatan Mahasiswa</h1>';
+                                        echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b> -Nama KKN- </b>Tahun 2023 Periode ';
+                                        echo '<b> -Tanggal Mulai- </b> hingga <b> -Tanggal Selesai- </b></p>';
+                                    }
                                     ?>
                                 </div>
                             </div>
@@ -356,11 +361,13 @@ if($_SESSION['nama'] == null) {
     <!-- END wrapper -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['nama'] == null) {
+if ($_SESSION['nama'] == null) {
     header("Location:../logout.php");
 }
 ?>
@@ -189,9 +189,9 @@ if($_SESSION['nama'] == null) {
 
                                     $jam = date('H');
 
-                                    if($jam >= 5 && $jam < 12) {
+                                    if ($jam >= 5 && $jam < 12) {
                                         $waktu = 'Pagi';
-                                    } elseif($jam >= 12 && $jam < 18) {
+                                    } elseif ($jam >= 12 && $jam < 18) {
                                         $waktu = 'Siang';
                                     } else {
                                         $waktu = 'Malam';
@@ -226,12 +226,12 @@ if($_SESSION['nama'] == null) {
                                     WHERE mahasiswa.nim = '$nim_pengguna';";
                         $result = $conn->query($sql);
 
-                        if($result->num_rows > 0) {
+                        if ($result->num_rows > 0) {
                             $row = $result->fetch_assoc();
                             $lokasiKelompokKKN = $row['lokasi'];
                             $alamatkelompokKKN = $row['alamat'];
-                            echo '<input type="hidden" id="lokasiKelompokKKN" value="'.$lokasiKelompokKKN.'">';
-                            echo '<input type="hidden" id="alamatKelompokKKN" value="'.$alamatkelompokKKN.'">';
+                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
+                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
                         } else {
                             echo '<div>Data kelompok KKN tidak ditemukan</div>';
                         }
@@ -295,25 +295,30 @@ if($_SESSION['nama'] == null) {
                                                     $nilai = $result['nilai'];
 
                                                     // Function to determine grade
-                                                    function getGrade($nilai) {
-                                                        if($nilai >= 85) {
-                                                            return 'A';
-                                                        } elseif($nilai >= 80) {
-                                                            return 'A-';
-                                                        } elseif($nilai >= 75) {
-                                                            return 'B+';
-                                                        } elseif($nilai >= 70) {
-                                                            return 'B';
-                                                        } elseif($nilai >= 65) {
-                                                            return 'B-';
-                                                        } elseif($nilai >= 60) {
-                                                            return 'C+';
-                                                        } elseif($nilai >= 55) {
-                                                            return 'C';
-                                                        } elseif($nilai >= 45) {
-                                                            return 'D';
+                                                    function getGrade($nilai)
+                                                    {
+                                                        if ($nilai == null) {
+                                                            return '-';
                                                         } else {
-                                                            return 'E';
+                                                            if ($nilai >= 85) {
+                                                                return 'A';
+                                                            } elseif ($nilai >= 80) {
+                                                                return 'A-';
+                                                            } elseif ($nilai >= 75) {
+                                                                return 'B+';
+                                                            } elseif ($nilai >= 70) {
+                                                                return 'B';
+                                                            } elseif ($nilai >= 65) {
+                                                                return 'B-';
+                                                            } elseif ($nilai >= 60) {
+                                                                return 'C+';
+                                                            } elseif ($nilai >= 55) {
+                                                                return 'C';
+                                                            } elseif ($nilai >= 45) {
+                                                                return 'D';
+                                                            } else {
+                                                                return 'E';
+                                                            }
                                                         }
                                                     }
 

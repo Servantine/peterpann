@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['nama'] == null) {
+if ($_SESSION['nama'] == null) {
     header("Location:../logout.php");
 }
 ?>
@@ -188,9 +188,9 @@ if($_SESSION['nama'] == null) {
 
                                     $jam = date('H');
 
-                                    if($jam >= 5 && $jam < 12) {
+                                    if ($jam >= 5 && $jam < 12) {
                                         $waktu = 'Pagi';
-                                    } elseif($jam >= 12 && $jam < 18) {
+                                    } elseif ($jam >= 12 && $jam < 18) {
                                         $waktu = 'Siang';
                                     } else {
                                         $waktu = 'Malam';
@@ -208,40 +208,38 @@ if($_SESSION['nama'] == null) {
                         <div class="col-12 col-sm-4">
                             <div class="card" style="max-width: 22rem;">
                                 <div class="card-body shadow">
-                                <?php 
+                                    <?php
                                     include 'assets/php/conn.php';
                                     $nim_pengguna = $_SESSION['nim'];
 
-                                    $sql = "SELECT a.* FROM dtl_kelompok_kkn as a WHERE a.nim = $nim_pengguna";
+                                    $sql = "SELECT kkn.nama_kkn, kkn.tanggal_mulai, kkn.tanggal_selesai, dtl_kelompok_kkn.jabatan
+                                    FROM dtl_kelompok_kkn
+                                    JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok
+                                    JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn
+                                    WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'
+                                    ";
+
                                     $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $idkelompok = $row['id_kelompok'];
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $namakkn = $row['nama_kkn'];
+                                            $tglmulai = $row['tanggal_mulai'];
+                                            $tglselesai = $row['tanggal_selesai'];
+                                            $jabatan = $row['jabatan'];
+                                        }
+
+                                        echo '<h1 class="card-title mt-2">Rencana Kegiatan Kelompok</h1>';
+                                        echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn . ' </b>Tahun 2023 Periode ';
+                                        echo '<b>' . $tglmulai . ' </b> hingga <b>' . $tglselesai . '</b></p>';
+                                        if ($jabatan === "Ketua Kelompok") {
+                                            echo '<a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>';
+                                        }
+                                    } else {
+                                        echo '<h1 class="card-title mt-2">Rencana Kegiatan Kelompok</h1>';
+                                        echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b> -Nama KKN- </b>Tahun 2023 Periode ';
+                                        echo '<b> -Tanggal Mulai- </b> hingga <b> -Tanggal Selesai- </b></p>';
                                     }
-                                    $sql = "SELECT * FROM kelompok_kkn WHERE id_kelompok = $idkelompok";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $idkkn = $row['id_kkn'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $tglmulai = $row['tanggal_mulai'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $tglselesai = $row['tanggal_selesai'];
-                                    }
-                                    $sql = "SELECT * FROM kkn WHERE id_kkn = $idkkn";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $namakkn = $row['nama_kkn'];
-                                    }
-                                    echo '<h1 class="card-title mt-2">Rencana Kegiatan Kelompok</h1>';
-                                    echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn .  ' </b>Tahun 2023 Periode ';
-                                    echo   '<b>' . $tglmulai . ' </b> hingga <b>' .$tglselesai . '</b></p>';
                                     ?>
-                                    <a href="#" class="btn btn-primary btn-block" id="buatLaporan">Buat laporan</a>
                                 </div>
                             </div>
                         </div>
@@ -274,8 +272,8 @@ if($_SESSION['nama'] == null) {
 
                                 $result = $conn->query($sql);
 
-                                if($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
                                         $nama_hari = $nama_hari_inggris[date('l', strtotime($row['tanggal']))];
 
                                         echo '<div class="row">';
@@ -284,27 +282,27 @@ if($_SESSION['nama'] == null) {
                                         echo '<div class="card-body rounded shadow">';
                                         echo '<div class="row mb-2">';
                                         echo '<div class="col-2 col-xl-1">';
-                                        if($row['acc_dosen'] == true) {
+                                        if ($row['acc_dosen'] == true) {
                                             echo '<img src="assets/images/ok.webp" alt="Ok.png" width ="40">';
                                         } else {
                                             echo '<img src="assets/images/warning.png" alt="warning.png" width ="40">';
                                         }
                                         echo '</div>';
                                         echo '<div class="col-10 col-xl-11">';
-                                        echo '<h1 class="card-title m-0 p-0">'.$nama_hari.'<br>'.date('j F Y', strtotime($row['tanggal'])).'</h1>';
+                                        echo '<h1 class="card-title m-0 p-0">' . $nama_hari . '<br>' . date('j F Y', strtotime($row['tanggal'])) . '</h1>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Judul Kegiatan:</p>';
-                                        echo '<p class="card-text">'.$row['judul_kegiatan'].'</p>';
+                                        echo '<p class="card-text">' . $row['judul_kegiatan'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Isi Kegiatan:</p>';
-                                        echo '<p class="card-text">'.$row['rencana_kegiatan'].'</p>';
+                                        echo '<p class="card-text">' . $row['rencana_kegiatan'] . '</p>';
                                         echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
-                                        echo '<p class="card-text">'.$row['komentar_dosen'].'</p>';
+                                        echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar LPPM :</p>';
-                                        echo '<p class="card-text">'.$row['komentar_lppm'].'</p>';
-                                        if($row['fileupload']) {
-                                            echo '<a href="assets/uploads/rencanaKegiatan/'.$row['judul_kegiatan'].'/'.$row['fileupload'].'" class="float-end btn btn-primary download" download>Download File</a>';
+                                        echo '<p class="card-text">' . $row['komentar_lppm'] . '</p>';
+                                        if ($row['fileupload']) {
+                                            echo '<a href="assets/uploads/rencanaKegiatan/' . $row['judul_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download" download>Download File</a>';
                                         }
                                         echo '</div>';
                                         echo '</div>';

@@ -214,26 +214,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                             </div>
                         </div>
                         <?php
-                        include 'assets/php/conn.php';
-
                         $nidn = $_SESSION['nidn'];
-
-                        $sql = "SELECT kelompok_kkn.lokasi, kelompok_kkn.alamat FROM kelompok_kkn INNER JOIN dsn_pembimbing ON kelompok_kkn.nidn = dsn_pembimbing.nidn
-                                    WHERE dsn_pembimbing.nidn = '$nidn';";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $lokasiKelompokKKN = $row['lokasi'];
-                            $alamatkelompokKKN = $row['alamat'];
-                            echo '<input type="hidden" id="lokasiKelompokKKN" value="' . $lokasiKelompokKKN . '">';
-                            echo '<input type="hidden" id="alamatKelompokKKN" value="' . $alamatkelompokKKN . '">';
-                        } else {
-                            echo '<div>Data kelompok KKN tidak ditemukan</div>';
-                        }
-
-                        // Menutup koneksi
-                        $conn->close();
+                        echo '<input type="hidden" id="nidn" value="' . $nidn . '">';
                         ?>
                     </div>
 
