@@ -22,10 +22,10 @@
         <div class="container">
             <div class="card">
                 <h2 class="mb-0">Login</h2>
-                <p>Silahkan Masukan Username dan Password</p>
+                <p>Silahkan Masukan Data Akun</p>
                 <form method="post" action="ceklogin.php">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Masukan NIM">
+                    <label for="username">NIM atau NIDN</label>
+                    <input type="text" id="username" name="username" placeholder="Masukan NIM atau NIDN">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Masukan Password" name="password" class="mb-3">
                     <?php

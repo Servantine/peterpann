@@ -225,7 +225,7 @@ if($_SESSION['nama'] == null) {
                                     'Sunday' => 'Minggu'
                                 );
 
-                                $nim_pengguna = '72210456';
+                                $nim_pengguna = $_SESSION['nim'];
 
                                 $sql = "SELECT laporan_kegiatan.*, rencana_kegiatan.judul_kegiatan FROM rencana_kegiatan JOIN laporan_kegiatan ON rencana_kegiatan.id_rencana_kegiatan = laporan_kegiatan.id_rencana_kegiatan JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'";
 

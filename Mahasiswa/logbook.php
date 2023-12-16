@@ -226,7 +226,7 @@ if($_SESSION['nama'] == null) {
                                     'Sunday' => 'Minggu'
                                 );
 
-                                $nim_pengguna = '72210456';
+                                $nim_pengguna = $_SESSION['nim'];
 
                                 $sql = "SELECT * FROM logbook WHERE nim = '$nim_pengguna' ORDER BY tanggal DESC";
                                 $result = $conn->query($sql);

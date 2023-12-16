@@ -16,10 +16,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
      <meta content="MoneyTrash!" name="author" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <!-- App favicon -->
-     <link rel="shortcut icon" href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
+     <link rel="shortcut icon"
+          href="https://lppm.ukdw.ac.id/wp-content/uploads/2023/02/logo-removebg-preview-300x300.png">
      <!-- App css -->
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
@@ -45,7 +47,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
           <div class="navbar-custom">
                <ul class="list-unstyled topnav-menu float-right mb-0">
                     <li class="dropdown notification-list">
-                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                         <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                              aria-haspopup="false" aria-expanded="false">
                               <img src="assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                               <span class="pro-user-name ml-1" style="color: white;">
                                    <?php echo $namaPendek; ?> <i class="mdi mdi-chevron-down"></i>
@@ -193,7 +196,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                         <i class="bi bi-exclamation-circle"></i>
                                         Gagal menambahkan komentar!
                                    </div>
-                         <?php }
+                              <?php }
                          } ?>
                          <div class="row">
                               <div class="col-12">
@@ -221,7 +224,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                               <?php
                               if (isset($_GET["details"])) {
                                    include 'assets/php/conn.php';
-                              ?>
+                                   ?>
                                    <div class="row">
                                         <div class="col-12">
                                              <!-- Cards go here -->
@@ -294,8 +297,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
                                                   // Menutup koneksi
                                                   $conn->close();
-                                             } else {
-                                                  ?>
+                              } else {
+                                   ?>
                                                   <div class="row">
                                                        <div class="col-12">
                                                             <h1>Daftar Kelompok</h1>
@@ -338,37 +341,38 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                                             </table>
                                                        </div>
                                                   </div>
-                                             <?php
-                                             }
-                                             ?>
+                                                  <?php
+                              }
+                              ?>
 
                                              <!-- Card Selesai -->
 
-                                             </div>
-                                             <?php
-                                             if (isset($_GET["details"])) {
-                                                  echo '<a href="./laporan.php?" class="btn btn-info btn-lg"> kembali </a>';
-                                             }
-                                             ?>
-
-                                             <!-- Pagination -->
-                                             <nav aria-label="Page navigation">
-                                                  <ul class="pagination justify-content-center mt-3">
-                                                       <li class="page-item" id="prev-page">
-                                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                       </li>
-                                                       <!-- Page indicators will be dynamically added here -->
-                                                       <li class="page-item" id="next-page">
-                                                            <a class="page-link" href="#">Next</a>
-                                                       </li>
-                                                  </ul>
-                                             </nav>
                                         </div>
-                                        <!-- end row -->
 
-                                        <!-- End of col -->
+                                        <!-- Pagination -->
+                                        <nav aria-label="Page navigation">
+                                             <ul class="pagination justify-content-center mt-3">
+                                                  <li class="page-item" id="prev-page">
+                                                       <a class="page-link" href="#" tabindex="-1"
+                                                            aria-disabled="true">Previous</a>
+                                                  </li>
+                                                  <!-- Page indicators will be dynamically added here -->
+                                                  <li class="page-item" id="next-page">
+                                                       <a class="page-link" href="#">Next</a>
+                                                  </li>
+                                             </ul>
+                                        </nav>
+                                        <?php
+                                        if (isset($_GET["details"])) {
+                                             echo '<a href="./laporan.php?" class="btn btn-info btn-lg"> kembali </a>';
+                                        }
+                                        ?>
                                    </div>
                                    <!-- end row -->
+
+                                   <!-- End of col -->
+                              </div>
+                              <!-- end row -->
 
                          </div>
                          <!-- end container-fluid -->
@@ -395,11 +399,15 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
           </div>
           <!-- END wrapper -->
 
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-          </script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+               integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+               crossorigin="anonymous">
+               </script>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-          </script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+               integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+               crossorigin="anonymous">
+               </script>
 
           <!-- Vendor js -->
           <script src="assets/js/vendor.min.js"></script>

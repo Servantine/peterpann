@@ -138,15 +138,15 @@ if($_SESSION['nama'] == null) {
                         </a>
                     </li>
                     <li class="">
-                        <a href="../Mahasiswa/rencana.php" class="active-class active-txt">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class=""> Rencana Kegiatan</span>
-                        </a>
-                    </li>
-                    <li class="">
                         <a href="../Mahasiswa/logbook.php">
                             <i class="bi bi-book"></i>
                             <span class=""> Logbook </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="../Mahasiswa/rencana.php" class="active-class active-txt">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class=""> Rencana Kegiatan</span>
                         </a>
                     </li>
                     <li class="">
@@ -233,7 +233,7 @@ if($_SESSION['nama'] == null) {
                                     'Sunday' => 'Minggu'
                                 );
 
-                                $nim_pengguna = '72210456';
+                                $nim_pengguna = $_SESSION['nim'];
 
                                 $sql = "SELECT DISTINCT rencana_kegiatan.*
                                             FROM rencana_kegiatan
@@ -282,7 +282,7 @@ if($_SESSION['nama'] == null) {
                                         echo '</div>';
                                     }
                                 } else {
-                                    echo 'Tidak ada data laporan kegiatan';
+                                    echo 'Tidak ada data rencana kegiatan';
                                 }
 
                                 // Menutup koneksi
