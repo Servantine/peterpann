@@ -231,7 +231,7 @@ if($_SESSION['nama'] == null) {
                                         $namakkn = $row['nama_kkn'];
                                     }
                                     echo '<h1 class="card-title mt-2">Logbook Harian Mahasiswa</h1>';
-                                    echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn .  ' </b>Tahun 2023 Periode';
+                                    echo '<p class="card-text">Kegiatan Kuliah Kerja Nyata <b>' . $namakkn .  ' </b>Tahun 2023 Periode ';
                                     echo   '<b>' . $tglmulai . ' </b> hingga <b>' .$tglselesai . '</b></p>';
                                     ?>
                                     <a href="#" class="btn btn-primary btn-block" id="buatLogbook">Buat Logbook</a>
