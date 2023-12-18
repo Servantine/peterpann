@@ -411,7 +411,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="nidn">NIDN</label>
+                                            <label for="nidn">Dosen Pendamping</label>
                                             <select class="form-control" id="nidn" name="nidn">
                                                 <?php
                                                 include 'assets/php/conn.php';
@@ -422,7 +422,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                                 if ($result->num_rows > 0) {
                                                     while ($row = $result->fetch_assoc()) {
-                                                        echo '<option value="' . $row['nidn'] . '">' . $row['nama_dosen'] . ' - ' . $row['nidn'] . '</option>';
+                                                        echo '<option value="' . $row['nidn'] . '">' . $row['nidn'] . ' - '  . $row['nama_dosen'] . '</option>';
                                                     }
                                                 } else {
                                                     echo '<tr><td colspan="4">Tidak ada data mahasiswa</td></tr>';
@@ -454,7 +454,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                             <th>Nama KKN</th>
                                             <th>Tema</th>
                                             <th>Lokasi</th>
-                                            <th>NIDN Pendamping</th>
+                                            <th>Pendamping</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -463,7 +463,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                         include 'assets/php/conn.php';
 
 
-                                        $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn;";
+                                        $sql = "SELECT kelompok_kkn.id_kelompok, kelompok_kkn.nama_kelompok, kelompok_kkn.lokasi, kkn.kode, kkn.nama_kkn, kkn.tema, kelompok_kkn.nidn, dsn_pembimbing.nama_dosen FROM kelompok_kkn INNER JOIN kkn ON kelompok_kkn.id_kkn = kkn.id_kkn INNER JOIN dsn_pembimbing ON kelompok_kkn.nidn = dsn_pembimbing.nidn ;";
 
                                         $result = $conn->query($sql);
 
@@ -475,7 +475,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                 echo '<td>' . $row['nama_kkn'] . '</td>';
                                                 echo '<td>' . $row['tema'] . '</td>';
                                                 echo '<td>' . $row['lokasi'] . '</td>';
-                                                echo '<td>' . $row['nidn'] . '</td>';
+                                                echo '<td>' . $row['nidn'] . ' - ' . $row['nama_dosen'] . '</td>';
                                                 echo '<td> <a href="./kelompok.php?update=' . $row['id_kelompok'] . '" class="btn btn-warning" style="z-index:2; position:relative"> Update Kelompok </a> </td>';
                                                 echo '</tr>';
                                             }

@@ -353,6 +353,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                         <form action="./method/updatedosen.php" method="post">
                                             <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
+                                            <input type="hidden" name="nidn_lama" value="<?php echo $row['nidn'] ?>" />
                                             <div class="form-group">
                                                 <label for="nidn">NIDN</label>
                                                 <input type="number" class="form-control" id="nidn" name="nidn" placeholder=""

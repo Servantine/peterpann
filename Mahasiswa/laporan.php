@@ -264,7 +264,7 @@ if ($_SESSION['nama'] == null) {
 
                                 $nim_pengguna = $_SESSION['nim'];
 
-                                $sql = "SELECT laporan_kegiatan.*, rencana_kegiatan.judul_kegiatan FROM rencana_kegiatan JOIN laporan_kegiatan ON rencana_kegiatan.id_rencana_kegiatan = laporan_kegiatan.id_rencana_kegiatan JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE dtl_kelompok_kkn.nim = '$nim_pengguna'";
+                                $sql = "SELECT laporan_kegiatan.*, rencana_kegiatan.judul_kegiatan FROM rencana_kegiatan INNER JOIN laporan_kegiatan ON rencana_kegiatan.id_rencana_kegiatan = laporan_kegiatan.id_rencana_kegiatan INNER JOIN dtl_kelompok_kkn ON laporan_kegiatan.id_kelompok = dtl_kelompok_kkn.id_kelompok INNER JOIN kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE dtl_kelompok_kkn.nim = '$nim_pengguna';";
 
                                 $result = $conn->query($sql);
 
@@ -291,13 +291,14 @@ if ($_SESSION['nama'] == null) {
                                         echo '<p class="card-text text-muted mb-0 pb-0">Judul Kegiatan:</p>';
                                         echo '<p class="card-text">' . $row['judul_kegiatan'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Isi Kegiatan:</p>';
-                                        echo '<p class="card-text">' . $row['laporan_kegiatan'] . '</p>';
-                                        echo '<hr class="my-3" style="border-width: 2px; border-color: black;">';
+                                        echo '<p class="card-text">' . $row['laporan_kegiatan'];
+                                        if ($row['fileupload']) {
+                                            echo '<a href="assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
+                                        }
+                                        echo '</p>';
+                                        echo '<hr class="my-3 mt-4" style="border-width: 2px; border-color: black;">';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
                                         echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
-                                        if ($row['fileupload']) {
-                                            echo '<a href="assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download" download>Download File</a>';
-                                        }
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</div>';

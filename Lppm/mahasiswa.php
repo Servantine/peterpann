@@ -364,7 +364,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                         <?php
                         include 'assets/php/conn.php';
-                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, mahasiswa.password, kelompok_kkn.nama_kelompok, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE mahasiswa.nim = '" . $_GET['update'] . "' ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
+                        $sql = "SELECT mahasiswa.nim, mahasiswa.nama, mahasiswa.prodi, mahasiswa.fakultas, mahasiswa.angkatan, mahasiswa.password, kelompok_kkn.nama_kelompok, kelompok_kkn.id_kelompok, kelompok_kkn.id_kkn, dtl_kelompok_kkn.jabatan from mahasiswa inner join dtl_kelompok_kkn ON mahasiswa.nim = dtl_kelompok_kkn.nim inner join kelompok_kkn ON dtl_kelompok_kkn.id_kelompok = kelompok_kkn.id_kelompok WHERE mahasiswa.nim = '" . $_GET['update'] . "' ORDER BY mahasiswa.nim, kelompok_kkn.nama_kelompok;";
 
                         $result = $conn->query($sql);
 
@@ -376,6 +376,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                 <form action="./method/updatemahasiswa.php" method="post">
                                     <input type="hidden" name="id_lppm" value="<?php echo $id_lppm ?>" />
+                                    <input type="hidden" name="nim_lama" value="<?php echo $row['nim'] ?>" />
                                     <div class="form-group">
                                         <label for="nim">NIM</label>
                                         <input type="text" class="form-control" id="nim" name="nim" placeholder=""
@@ -435,7 +436,8 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
 
                                             if ($result2->num_rows > 0) {
                                                 while ($row2 = $result2->fetch_assoc()) {
-                                                    echo '<option value="' . $row2['id_kkn'] . '">' . $row2['nama_kkn'] . '</option>';
+                                                    $selected = (isset($row['id_kkn']) && $row['id_kkn'] == $row2['id_kkn']) ? 'selected' : '';
+                                                    echo '<option value="' . $row2['id_kkn'] . '" ' . $selected . '>' . $row2['nama_kkn'] . '</option>';
                                                 }
                                             } else {
                                                 echo '<option value="">Tidak ada data KKN</option>';
@@ -445,7 +447,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                     </div>
 
                                     <script>
-                                        var kelompokFromDb = "<?php echo $row['id_kelompok']; ?>"; // Pastikan ini adalah ID kelompok yang benar
+                                        var kelompokFromDb = "<?php echo $row['id_kelompok']; ?>"; 
                                     </script>
                                     <div class="form-group">
                                         <label for="kelompok">Kelompok</label>
@@ -564,10 +566,6 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
     <!-- END wrapper -->
 
     <!-- Script -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
-        </script>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>
@@ -594,10 +592,6 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
             var selectedFakultas = document.getElementById("fakultas").value;
             var prodiOptions = getProdiOptions(selectedFakultas);
             document.getElementById("prodi").innerHTML = prodiOptions;
-
-            if (prodiFromDb) {
-                $("#prodi").val(prodiFromDb);
-            }
         }
 
         function getProdiOptions(selectedFakultas) {
@@ -649,7 +643,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                     success: function (hasLeader) {
                         var jabatanDropdown = $("#jabatan");
                         if (hasLeader) {
-                            jabatanDropdown.val("Anggota Kelompok"); 
+                            jabatanDropdown.val("Anggota Kelompok");
                             jabatanDropdown.find("option[value='Ketua Kelompok']").prop('disabled', true);
                         } else {
                             jabatanDropdown.find("option[value='Ketua Kelompok']").prop('disabled', false);
@@ -661,6 +655,12 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
             $("#kelompok").change(function () {
                 checkGroupLeader();
             });
+
+            $("#kelompok").val(kelompokFromDb).change();
+
+            if (prodiFromDb) {
+                $("#prodi").val(prodiFromDb).change();
+            }
         });
     </script>
 
