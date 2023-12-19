@@ -298,8 +298,8 @@ function getGrade($nilai)
                                         </table>
                                     </div>
 
-                                    <table class="table">
-                                        <form action="./method/nilai.php" method="post">
+                                    <form action="./method/nilai.php" method="post">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Nim</th>
@@ -344,9 +344,9 @@ function getGrade($nilai)
                                                 $conn->close();
                                                 ?>
                                             </tbody>
-                                    </table>
-                                    <button class="btn btn-success mt-1 float-end"> Simpan </button>
-                                    <a href="./nilai.php?" class="btn btn-info btn-lg"> Kembali </a>
+                                        </table>
+                                        <button class="btn btn-success mt-1 float-end"> Simpan </button>
+                                        <a href="./nilai.php?" class="btn btn-info btn-lg"> Kembali </a>
                                     </form>
                                 </div>
                             </div>

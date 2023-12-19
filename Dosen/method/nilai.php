@@ -1,13 +1,19 @@
 <?php
-    include("../../conn.php");
+include("../../conn.php");
 
-    foreach($_POST as $nim => $nilai) {
-        $sql = "UPDATE mahasiswa SET nilai = '".$nilai."' WHERE nim = '".$nim."'";
-    }
+foreach($_POST as $nim => $nilai) {
+    $sql = "UPDATE mahasiswa SET nilai = ? WHERE nim = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $nilai, $nim);
+    $stmt->execute();
+    $stmt->close();
+}
 
-    if ($conn->query($sql) === TRUE) {
-        header('Location: ../nilai.php?success=true');
-      } else {
-        header('Location: ../nilai.php?success=false');
-      }
+if ($conn->errno) {
+    header('Location: ../nilai.php?success=false');
+} else {
+    header('Location: ../nilai.php?success=true');
+}
+
+$conn->close();
 ?>
