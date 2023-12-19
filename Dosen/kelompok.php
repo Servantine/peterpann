@@ -63,14 +63,6 @@ if($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                               </div>
 
                               <!-- item-->
-                              <a href="/pemilik/akun" class="dropdown-item notify-item">
-                                   <i class="mdi mdi-settings-outline"></i>
-                                   <span>Akun</span>
-                              </a>
-
-                              <div class="dropdown-divider"></div>
-
-                              <!-- item-->
                               <a href="../logout.php"" class=" dropdown-item notify-item">
                                    <i class="mdi mdi-logout-variant"></i>
                                    <span>Logout</span>
