@@ -272,10 +272,10 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
                                                             echo '<p class="card-text text-muted mb-0 pb-0">Judul Rencana Kegiatan:</p>';
                                                             echo '<p class="card-text">' . $row['judul_kegiatan'];
                                                             if ($row['fileupload']) {
-                                                                 echo '<a href="../Mahasiswa/assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
+                                                                 echo '<a href="/Mahasiswa/assets/uploads/rencanaKegiatan/' . $row['judul_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
                                                             }
                                                             echo '</p>';
-                                                            echo '<hr class="my-3 mt-4" style="border-width: 2px; border-color: black;">';
+                                                            echo '<hr class="my-3 mt-5 pt-3" style="border-width: 2px; border-color: black;">';
                                                             echo '<div class="m-0 p-0">';
                                                             echo '<form action="./method/komentar_rencana.php" method="post">';
                                                             echo '<input type="hidden" id="id_rencana_kegiatan" name="id_rencana_kegiatan" value="' . $row["id_rencana_kegiatan"] . '">';

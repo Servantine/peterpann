@@ -295,7 +295,7 @@ if ($_SESSION['nama'] == null) {
                                             echo '<a href="assets/uploads/rencanaKegiatan/' . $row['judul_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
                                         }
                                         echo '</p>';
-                                        echo '<hr class="my-3 mt-4" style="border-width: 2px; border-color: black;">';
+                                        echo '<hr class="my-3 mt-5 pt-3" style="border-width: 2px; border-color: black;">';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar Pembimbing Kegiatan :</p>';
                                         echo '<p class="card-text">' . $row['komentar_dosen'] . '</p>';
                                         echo '<p class="card-text text-muted mb-0 pb-0">Komentar LPPM :</p>';

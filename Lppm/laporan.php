@@ -290,7 +290,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "lppm") {
                                                                  echo '<a href="../Mahasiswa/assets/uploads/laporanKegiatan/' . $row['id_rencana_kegiatan'] . '/' . $row['fileupload'] . '" class="float-end btn btn-primary download mt-1" download>Download File</a>';
                                                             }
                                                             echo '</p>';
-                                                            echo '<hr class="my-3 mt-4" style="border-width: 2px; border-color: black;">';
+                                                            echo '<hr class="my-3 mt-5 pt-3" style="border-width: 2px; border-color: black;">';
                                                             echo '<div class="m-0 p-0">';
                                                             echo '<form action="./method/komentar_laporan.php" method="post">';
                                                             echo '<input type="hidden" id="id_laporan_kegiatan" name="id_laporan_kegiatan" value="' . $row["id_laporan_kegiatan"] . '">';
