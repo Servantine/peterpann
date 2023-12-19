@@ -93,7 +93,7 @@ $(document).ready(function () {
     
                             <div class="mb-3 text-start">
                                 <label for="fileUpload" class="form-label">Upload File</label>
-                                <input type="file" class="form-control" id="fileUpload" name="fileUpload">
+                                <input type="file" class="form-control" id="fileUpload" name="fileUpload" accept=".doc, .docx, .pdf">
                             </div>
                         </form>`,
                     focusConfirm: false,
