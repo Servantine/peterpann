@@ -10,7 +10,7 @@ if ($_SESSION['nama'] == null || $_SESSION['status'] != "dosbing") {
 
 <head>
      <meta charset="utf-8" />
-     <title>Logbook</title>
+     <title>Laporan Kegiatan</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta content="MoneyTrash!" name="description" />
      <meta content="MoneyTrash!" name="author" />

@@ -37,7 +37,7 @@ function getGrade($nilai)
 
 <head>
     <meta charset="utf-8" />
-    <title>Kelompok</title>
+    <title>Nilai Mahasiswa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MoneyTrash!" name="description" />
     <meta content="MoneyTrash!" name="author" />
